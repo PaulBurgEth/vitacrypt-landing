@@ -163,21 +163,29 @@
 
         /* Privacy Glass & Mosaic Effects */
         .glass-engine {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            will-change: backdrop-filter, transform;
+            transform: translate3d(0, 0, 0);
+            /* Force Hardware Acceleration */
+            backface-visibility: hidden;
         }
 
-        /* Mobile Optimization: Remove heavy blur on small screens */
+        /* Mobile Optimization for Glass Engine */
         @media (max-width: 768px) {
             .glass-engine {
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                background: rgba(15, 23, 42, 0.8) !important;
-                /* Fallback solid/translucent color */
+                /* Fallback dark bg - nearly opaque to hide lack of blur */
+                background: rgba(15, 23, 42, 0.95);
+            }
+
+            /* LITE MODE: Kill all expensive blend modes/noise on mobile */
+            .mosaic-overlay {
+                display: none !important;
             }
         }
 
@@ -532,7 +540,7 @@
     </section>
 
     <!-- 2. Problem Statement -->
-    <section id="problem" class="py-12 md:py-24 bg-brand-light relative z-10">
+    <section id="problem" class="py-12 md:py-24 bg-brand-light relative z-10 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-4">
@@ -916,7 +924,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -1888,7 +1895,7 @@
             <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-6 mb-8"
                 x-data="{ submitted: false, email: '', loading: false }" @submit.prevent="loading = true; fetch('https://formsubmit.co/ajax/waitlist@vitacrypt.xyz', {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
@@ -2570,8 +2577,10 @@
             resize() {
                 this.width = this.canvas.offsetWidth;
                 this.height = this.canvas.offsetHeight;
-                // Aggressive Resolution Cap: Max 1.5x pixel density
-                const dpr = Math.min(window.devicePixelRatio, 1.5);
+
+                // OPTIMIZATION: Use full devicePixelRatio for sharpness as requested
+                // But we will offset the performance cost by reducing object count
+                const dpr = window.devicePixelRatio || 1;
                 this.canvas.width = this.width * dpr;
                 this.canvas.height = this.height * dpr;
                 this.ctx.scale(dpr, dpr);
@@ -2583,8 +2592,8 @@
 
             initParticles() {
                 this.particles = [];
-                // Aggressively reduced mobile count: 30 for mobile, 100 for desktop
-                this.particleCount = this.isMobile ? 30 : 100;
+                // OPTIMIZATION: Hard cap at 40 for mobile to ensure 60fps
+                this.particleCount = this.isMobile ? 40 : 100;
 
                 for (let i = 0; i < this.particleCount; i++) {
                     const isBioMarker = Math.random() < 0.20; // 20% Key Bio-Markers
@@ -2700,29 +2709,43 @@
 
                 // Neural: Spring physics + Synapses
                 else if (this.mode === 'neural') {
-                    // Gentle organice movement around targets
-                    const pulse = Math.sin(time * 0.002) * 2;
+                    // OPTIMIZATION: Disable vibration calculation on mobile
+                    const pulse = this.isMobile ? 0 : Math.sin(time * 0.002) * 2;
 
                     this.particles.forEach(p => {
-                        // Target with slight movement
-                        const tx = p.targetX + Math.cos(time * 0.001 + p.clusterIndex) * 5;
-                        const ty = p.targetY + Math.sin(time * 0.001 + p.clusterIndex) * 5;
+                        let tx, ty;
 
-                        const dx = tx - p.x;
-                        const dy = ty - p.y;
-                        p.vx = dx * 0.05; // Springy
-                        p.vy = dy * 0.05;
+                        if (this.isMobile) {
+                            // Static targets on mobile (Pre-computed Snap Logic)
+                            tx = p.targetX;
+                            ty = p.targetY;
 
-                        p.x += p.vx;
-                        p.y += p.vy;
+                            // Simple Lerp for stability and low CPU usage
+                            p.x += (tx - p.x) * 0.1;
+                            p.y += (ty - p.y) * 0.1;
+                        } else {
+                            // Target with slight movement (Desktop only)
+                            tx = p.targetX + Math.cos(time * 0.001 + p.clusterIndex) * 5;
+                            ty = p.targetY + Math.sin(time * 0.001 + p.clusterIndex) * 5;
+
+                            const dx = tx - p.x;
+                            const dy = ty - p.y;
+                            p.vx = dx * 0.05; // Springy
+                            p.vy = dy * 0.05;
+
+                            p.x += p.vx;
+                            p.y += p.vy;
+                        }
                     });
 
-                    // Update Synapses
-                    for (let i = this.synapses.length - 1; i >= 0; i--) {
-                        const s = this.synapses[i];
-                        s.progress += s.speed;
-                        if (s.progress >= 1) {
-                            this.synapses.splice(i, 1);
+                    // OPTIMIZATION: Disable Synapses completely on mobile
+                    if (!this.isMobile) {
+                        for (let i = this.synapses.length - 1; i >= 0; i--) {
+                            const s = this.synapses[i];
+                            s.progress += s.speed;
+                            if (s.progress >= 1) {
+                                this.synapses.splice(i, 1);
+                            }
                         }
                     }
                 }
@@ -2738,15 +2761,21 @@
                     this.ctx.lineWidth = this.isMobile ? 0.3 : 0.5;
                     this.ctx.globalAlpha = 0.3; // Faint lines
 
+                    // OPTIMIZATION: Limit networking logic
+                    // On mobile, the count is already low (40), so N^2 is 1600 iterations (fine)
+                    // But we skip synapse generation on mobile
+
                     for (let i = 0; i < this.particles.length; i++) {
                         for (let j = i + 1; j < this.particles.length; j++) {
                             const p1 = this.particles[i];
                             const p2 = this.particles[j];
                             const dx = p1.x - p2.x;
                             const dy = p1.y - p2.y;
-                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            // Pre-check distance squared to avoid sqrt if possible
+                            // But for drawing we need actual distance? No, just threshold
+                            const distSq = dx * dx + dy * dy;
 
-                            if (dist < 60) {
+                            if (distSq < 3600) { // 60 * 60
                                 // Draw Line
                                 this.ctx.beginPath();
                                 this.ctx.moveTo(p1.x, p1.y);
@@ -2754,7 +2783,8 @@
                                 this.ctx.stroke();
 
                                 // Chance to spawn synapse on this active link
-                                if (Math.random() < 0.0005) { // Adjustable rate
+                                // DISABLED ON MOBILE
+                                if (!this.isMobile && Math.random() < 0.0005) {
                                     this.synapses.push({
                                         p1: p1,
                                         p2: p2,
@@ -2766,17 +2796,19 @@
                         }
                     }
 
-                    // Draw Active Synapses (Light Pulses)
-                    this.ctx.globalAlpha = 1;
-                    this.ctx.fillStyle = '#ffffff'; // White hot data
-                    this.synapses.forEach(s => {
-                        const x = s.p1.x + (s.p2.x - s.p1.x) * s.progress;
-                        const y = s.p1.y + (s.p2.y - s.p1.y) * s.progress;
+                    // Draw Active Synapses (Light Pulses) - DISABLED ON MOBILE
+                    if (!this.isMobile) {
+                        this.ctx.globalAlpha = 1;
+                        this.ctx.fillStyle = '#ffffff';
+                        this.synapses.forEach(s => {
+                            const x = s.p1.x + (s.p2.x - s.p1.x) * s.progress;
+                            const y = s.p1.y + (s.p2.y - s.p1.y) * s.progress;
 
-                        this.ctx.beginPath();
-                        this.ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-                        this.ctx.fill();
-                    });
+                            this.ctx.beginPath();
+                            this.ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+                            this.ctx.fill();
+                        });
+                    }
                 }
 
                 // Draw Particles
