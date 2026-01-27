@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vitacrypt.xyz/sitemap.xml
