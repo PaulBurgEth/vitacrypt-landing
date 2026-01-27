@@ -8,6 +8,24 @@
     <title>VitaCrypt - Your Health, Fully Encrypted. Truly Yours.</title>
     <meta name="description"
         content="VitaCrypt integrates genetic, microbiome, and wearable data to deliver hyper-personalized health insights using FHE and zkSNARKs. Privacy guaranteed.">
+    <meta name="keywords"
+        content="Holistic Health Intelligence, Blind Computing, FHE-powered Wellness, Personal Health Profile, Encrypted Health Data">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "VitaCrypt",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/PreOrder"
+      },
+      "description": "The world's first privacy-first personalized health intelligence platform using FHE and Blind Computing."
+    }
+    </script>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -145,12 +163,22 @@
 
         /* Privacy Glass & Mosaic Effects */
         .glass-engine {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.5s ease;
+        }
+
+        /* Mobile Optimization: Remove heavy blur on small screens */
+        @media (max-width: 768px) {
+            .glass-engine {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: rgba(15, 23, 42, 0.8) !important;
+                /* Fallback solid/translucent color */
+            }
         }
 
         .active-glow {
@@ -228,13 +256,15 @@
     <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-20 opacity-30"></canvas>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-[1000] transition-all duration-300 backdrop-blur-[12px] bg-[rgba(10,15,25,0.8)]"
+        id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <div class="w-8 h-8 bg-brand-teal rounded-lg flex items-center justify-center text-white">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" role="img"
+                            aria-label="VitaCrypt Logo">
                             <use
                                 href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@latest/icons/shield-check.svg#shield-check">
                             </use>
@@ -353,7 +383,8 @@
         </div>
 
         <!-- Floating Nodes (Parallax) -->
-        <div class="absolute top-1/4 left-10 lg:left-1/4 animate-float opacity-30" data-speed="0.5">
+        <div class="absolute top-1/4 left-10 lg:left-1/4 animate-float opacity-30 will-change-transform"
+            data-speed="0.5">
             <svg class="w-16 h-16 text-brand-teal">
                 <use href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@latest/icons/dna-helix.svg#dna-helix">
                 </use>
@@ -384,7 +415,7 @@
                 <h1 class="font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl text-white leading-tight mb-6"
                     data-aos="fade-up" data-aos-delay="100">
                     Personal health intelligence <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-emerald-400">with
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3498db] to-[#9b59b6]">with
                         advanced encryption</span>
                 </h1>
 
@@ -427,6 +458,7 @@
                         </svg>
                         Powered by FHE & Blind Computing
                     </div>
+
                 </div>
             </div>
 
@@ -500,9 +532,9 @@
     </section>
 
     <!-- 2. Problem Statement -->
-    <section id="problem" class="py-24 bg-brand-light relative z-10">
+    <section id="problem" class="py-12 md:py-24 bg-brand-light relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-4">
                     The Problem: Your Health Data is Scattered & Exposed
                 </h2>
@@ -574,12 +606,12 @@
     </section>
 
     <!-- 2.5 New Comparison Section -->
-    <section id="comparison" class="py-24 bg-brand-light relative overflow-hidden">
+    <section id="comparison" class="py-12 md:py-24 bg-brand-light relative overflow-hidden">
         <div
             class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30">
         </div>
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-6">Why VitaCrypt Stands Alone
                 </h2>
             </div>
@@ -644,6 +676,20 @@
                                 <td class="p-6 text-center text-slate-900 font-medium bg-teal-50/30">User-controlled
                                     (Truly Yours)</td>
                             </tr>
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="p-6 font-medium text-slate-900 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-slate-400">
+                                        <use
+                                            href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@latest/icons/network.svg#network">
+                                        </use>
+                                    </svg>
+                                    Holistic Intelligence
+                                </td>
+                                <td class="p-6 text-center text-slate-500">Siloed data analysis</td>
+                                <td class="p-6 text-center text-slate-900 font-medium bg-teal-50/30">
+                                    Real-time bio-environmental analysis
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -652,16 +698,16 @@
     </section>
 
     <!-- 3. How It Works -->
-    <section id="how-it-works" class="py-24 bg-white text-slate-900 relative overflow-hidden">
+    <section id="how-it-works" class="py-12 md:py-24 bg-white text-slate-900 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-20" data-aos="fade-up">
                 <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-4">Secure, Intelligent,
                     Personalized</h2>
                 <p class="text-slate-600 max-w-2xl mx-auto">From raw data to encrypted insights in four secure
                     steps.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 relative">
                 <!-- Connecting Line (Desktop) -->
                 <div
                     class="hidden md:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-brand-teal/20 via-brand-indigo/20 to-brand-coral/20 -z-10">
@@ -726,7 +772,7 @@
             </div>
 
             <!-- Architecture Diagram -->
-            <div class="mt-20 relative" data-aos="zoom-in" data-aos-delay="400">
+            <div class="mt-10 md:mt-20 relative" data-aos="zoom-in" data-aos-delay="400">
                 <div class="max-w-4xl mx-auto">
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl relative overflow-hidden">
                         <div class="relative z-10">
@@ -734,7 +780,7 @@
                             </h3>
 
                             <div
-                                class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10 w-full max-w-5xl items-center mx-auto">
+                                class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 relative z-10 w-full max-w-5xl items-center mx-auto">
 
                                 <!-- Left: Inputs -->
                                 <div class="space-y-4">
@@ -877,14 +923,14 @@
 
 
     <!-- 5. Privacy & Security -->
-    <section id="privacy" class="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="privacy" class="py-12 md:py-24 bg-brand-dark relative overflow-hidden">
         <!-- Background Elements -->
         <div
             class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]">
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <div
                     class="inline-block px-4 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-brand-teal text-sm font-bold mb-4">
                     PRIVACY PRESERVED COMPUTING
@@ -895,7 +941,7 @@
                     data in its encrypted state. No decryption needed.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-20 max-w-4xl mx-auto">
                 <!-- Tech 1 -->
                 <div class="bg-white/5 border border-white/10 p-8 rounded-2xl text-center group hover:bg-white/10 transition-colors"
                     data-aos="fade-up" data-aos-delay="0">
@@ -939,7 +985,7 @@
     </section>
 
     <!-- 6. User Journeys (Bento Grid) -->
-    <section id="stories" class="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="stories" class="py-12 md:py-24 bg-brand-dark relative overflow-hidden">
         <!-- Background Noise/Gradient -->
         <div
             class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(13,148,136,0.1),transparent_70%)] opacity-40">
@@ -950,7 +996,7 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Header -->
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-brand-teal text-sm font-medium mb-6 backdrop-blur-md">
                     <svg class="w-4 h-4">
@@ -1639,11 +1685,11 @@
 
 
     <!-- 8. Science & Research -->
-    <section class="py-16 bg-white border-t border-slate-100">
+    <section class="py-8 md:py-16 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h3 class="text-slate-400 text-sm font-semibold tracking-wider uppercase mb-8">Built on Evidence-Based
                 Research</h3>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-16 opacity-70">
                 <div class="flex items-center gap-2 text-slate-600 font-bold text-lg">
                     <!-- PubMed: Book -->
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1677,10 +1723,12 @@
     </section>
 
 
+
+
     <!-- 9.5 Roadmap Section -->
-    <section id="roadmap" class="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="roadmap" class="py-12 md:py-24 bg-slate-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
                 <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-4">
                     VitaCrypt Roadmap
                 </h2>
@@ -1760,16 +1808,17 @@
                     <div class="relative flex flex-col md:flex-row items-center justify-between group"
                         data-aos="fade-up" data-aos-delay="200">
                         <div class="flex-1 md:text-right md:pr-12 pl-16 md:pl-0">
-                            <h3
-                                class="font-heading font-bold text-xl text-indigo-600 mb-2 flex items-center justify-end gap-2">
+                            <h3 class="font-heading font-bold text-xl text-indigo-600 mb-2">
                                 Phase 3: Deep Tech & FHE
-                                <span
-                                    class="bg-indigo-100 text-indigo-700 text-[10px] px-2 py-0.5 rounded-full border border-indigo-200">Key
-                                    Differentiator</span>
                             </h3>
                             <ul class="text-sm text-slate-600 space-y-2 inline-block text-left md:text-right">
-                                <li class="font-medium text-slate-900"><strong>Full FHE Integration:</strong> Real-world
-                                    Blind Computing. Data processed while encrypted.</li>
+                                <li class="font-medium text-indigo-600"><strong>Full FHE Integration:</strong>
+                                    Real-world
+                                    Blind Computing. Data processed while encrypted.
+                                    <span
+                                        class="ml-1 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-700 border border-indigo-200 uppercase tracking-wide">Key
+                                        Differentiator</span>
+                                </li>
                                 <li><strong>Ecosystem Expansion:</strong> Apple Watch & Oura integration.</li>
                                 <li><strong>Security Audit:</strong> External protocol verification.</li>
                             </ul>
@@ -1801,7 +1850,12 @@
                             <h3 class="font-heading font-bold text-xl text-slate-800 mb-2">Phase 4: Launch & Scale</h3>
                             <ul class="text-sm text-slate-600 space-y-2">
                                 <li><strong>Public Test #2 (Beta):</strong> Large-scale Waitlist beta.</li>
-                                <li><strong>Holistic Intelligence:</strong> Real-time bio-environmental analysis.</li>
+                                <li class="font-medium text-purple-600"><strong>Holistic Intelligence:</strong>
+                                    Real-time bio-environmental analysis.
+                                    <span
+                                        class="ml-1 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-600 border border-purple-200 uppercase tracking-wide">Key
+                                        Differentiator</span>
+                                </li>
                                 <li><strong>Community Governance:</strong> Evidence-based research voting.</li>
                             </ul>
                         </div>
@@ -1813,7 +1867,7 @@
     </section>
 
     <!-- 10. CTA Section -->
-    <section id="cta" class="py-32 relative overflow-hidden flex items-center justify-center bg-brand-dark">
+    <section id="cta" class="py-12 md:py-32 relative overflow-hidden flex items-center justify-center bg-brand-dark">
         <!-- Animated Gradient BG -->
         <div
             class="absolute inset-0 bg-gradient-to-br from-brand-teal via-emerald-800 to-brand-dark opacity-90 animate-gradient-x bg-[length:200%_200%]">
@@ -1831,7 +1885,7 @@
             </p>
 
             <!-- Waitlist Form -->
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4 mb-8"
+            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-6 mb-8"
                 x-data="{ submitted: false, email: '', loading: false }" @submit.prevent="loading = true; fetch('https://formsubmit.co/ajax/waitlist@vitacrypt.xyz', {
                     method: 'POST',
                     headers: { 
@@ -1885,7 +1939,8 @@
 
 
     <!-- Footer -->
-    <footer class="bg-brand-dark border-t border-white/10 pt-16 pb-8 text-slate-400">
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-white/10 pt-8 md:pt-16 pb-8 text-slate-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
@@ -2191,8 +2246,7 @@
     </style>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
             gsap.registerPlugin(ScrollTrigger);
@@ -2206,25 +2260,27 @@
                 if (iconsContainer) {
                     const icons = iconsContainer.querySelectorAll('div.rounded-lg');
 
-                    gsap.fromTo(icons,
-                        {
-                            y: -30,
-                            opacity: 0,
-                            scale: 0.8
-                        },
-                        {
-                            scrollTrigger: {
-                                trigger: card,
-                                start: "top 75%",
+                    if (icons.length > 0) {
+                        gsap.fromTo(icons,
+                            {
+                                y: -30,
+                                opacity: 0,
+                                scale: 0.8
                             },
-                            y: 0,
-                            opacity: 1,
-                            scale: 1,
-                            duration: 0.8,
-                            stagger: 0.15,
-                            ease: "power2.out"
-                        }
-                    );
+                            {
+                                scrollTrigger: {
+                                    trigger: card,
+                                    start: "top 75%",
+                                },
+                                y: 0,
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.8,
+                                stagger: 0.15,
+                                ease: "power2.out"
+                            }
+                        );
+                    }
                 }
 
                 // Privacy Core Pulse & "Processing" Effect
@@ -2279,12 +2335,14 @@
         });
 
         // Animated gradient background effect
-        gsap.to('.animate-gradient-x', {
-            backgroundPosition: '200% center',
-            duration: 4,
-            repeat: -1,
-            ease: 'none'
-        });
+        if (document.querySelector('.animate-gradient-x')) {
+            gsap.to('.animate-gradient-x', {
+                backgroundPosition: '200% center',
+                duration: 4,
+                repeat: -1,
+                ease: 'none'
+            });
+        }
     </script>
 
     <!-- Custom Particle System -->
@@ -2296,42 +2354,67 @@
                 this.color = color;
                 this.particles = [];
                 this.mode = 'generic'; // 'generic' or 'vitacrypt'
+                this.paused = false;
 
                 // Elements to track
                 this.parent = this.canvas.closest('.group');
                 this.icons = this.parent.querySelectorAll('.animate-float');
                 this.core = this.parent.querySelector('.flex-1');
+                this.isMobile = window.innerWidth < 768;
+                this.isVisible = false; // Start invisible, observer will toggle
 
                 this.resize();
-                window.addEventListener('resize', () => this.resize());
+                window.addEventListener('resize', () => {
+                    this.isMobile = window.innerWidth < 768;
+                    this.resize();
+                });
 
                 // Watch for mode changes via Alpine
                 this.observer = new MutationObserver(() => {
                     const btn = this.parent.querySelector('button');
-                    // Heuristic to check mode based on button state if Alpine API isn't directly exposed
-                    // Or we can check classes on the core
-                    const isVitaCrypt = this.core.querySelector('.absolute.inset-x-0').classList.contains('bg-white/10');
-                    this.mode = isVitaCrypt ? 'vitacrypt' : 'generic';
+                    if (this.core) {
+                        const indicator = this.core.querySelector('.absolute.inset-x-0');
+                        const isVitaCrypt = indicator && indicator.classList.contains('bg-white/10');
+                        this.mode = isVitaCrypt ? 'vitacrypt' : 'generic';
+                    }
                 });
                 this.observer.observe(this.parent, { attributes: true, subtree: true, attributeFilter: ['class'] });
 
-                this.animate();
+                // PERFORMANCE: Smart Pausing with IntersectionObserver
+                this.visibilityObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const wasVisible = this.isVisible;
+                        this.isVisible = entry.isIntersecting;
+
+                        // If we just became visible and weren't before, restart the loop
+                        if (this.isVisible && !wasVisible && !this.paused) {
+                            this.animate();
+                        }
+                    });
+                }, { threshold: 0.1 }); // Trigger when 10% visible
+                this.visibilityObserver.observe(this.canvas);
             }
 
             resize() {
-                this.canvas.width = this.canvas.offsetWidth * window.devicePixelRatio;
-                this.canvas.height = this.canvas.offsetHeight * window.devicePixelRatio;
-                this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                // Aggressive Resolution Cap: Max 1.5x pixel density to save performance
+                const dpr = Math.min(window.devicePixelRatio, 1.5);
+                this.canvas.width = this.canvas.offsetWidth * dpr;
+                this.canvas.height = this.canvas.offsetHeight * dpr;
+                this.ctx.scale(dpr, dpr);
             }
 
             spawn() {
-                // Determine spawn rate based on mode
-                const chance = this.mode === 'vitacrypt' ? 0.3 : 0.05;
-                if (Math.random() > chance) return;
+                // PERFORMANCE: Reduced spawn rates
+                // vitacrypt mode: was 0.3 -> now 0.15 (Desktop), 0.08 (Mobile)
+                // generic mode: was 0.05 -> now 0.03 (Desktop), 0.01 (Mobile)
+                let baseChance = this.mode === 'vitacrypt' ? 0.15 : 0.03;
+                if (this.isMobile) baseChance *= 0.5; // Half rate on mobile
+
+                if (Math.random() > baseChance) return;
 
                 // Pick a random source icon
                 const source = this.icons[Math.floor(Math.random() * this.icons.length)];
-                if (!source) return;
+                if (!source || !this.core) return;
 
                 const rect = source.getBoundingClientRect();
                 const parentRect = this.canvas.getBoundingClientRect();
@@ -2358,13 +2441,25 @@
             }
 
             animate() {
+                // PERFORMANCE: Stop loop if not visible or paused
+                if (!this.isVisible || this.paused) return;
+
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 this.spawn();
+                // Check mode logic...
+                // ... (rest of update logic)
+                this.updateAndDraw();
 
-                // Check mode again for responsiveness
-                // A better way might be to poll the Alpine state or use a CustomEvent
-                const isVitaCrypt = this.parent.querySelector('div[x-data]').__x.$data.mode === 'vitacrypt';
-                this.mode = isVitaCrypt ? 'vitacrypt' : 'generic';
+                requestAnimationFrame(() => this.animate());
+            }
+
+            updateAndDraw() {
+                // Check mode again for responsiveness - SAFELY
+                const alpineEl = this.parent.querySelector('div[x-data]');
+                if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
+                    const isVitaCrypt = alpineEl.__x.$data.mode === 'vitacrypt';
+                    this.mode = isVitaCrypt ? 'vitacrypt' : 'generic';
+                }
 
                 this.particles.forEach((p, i) => {
                     // Move towards target
@@ -2385,8 +2480,11 @@
                     p.y += dy * p.speed;
                     p.life -= 0.005;
 
+                    let r = this.mode === 'vitacrypt' ? 1.5 : 2;
+                    if (this.isMobile) r = 1; // Fixed small size for mobile
+
                     this.ctx.beginPath();
-                    this.ctx.arc(p.x, p.y, this.mode === 'vitacrypt' ? 1.5 : 2, 0, Math.PI * 2);
+                    this.ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
                     this.ctx.fillStyle = this.mode === 'vitacrypt' ? this.color : '#94a3b8';
                     this.ctx.globalAlpha = this.mode === 'vitacrypt' ? p.life : p.life * 0.3;
 
@@ -2400,16 +2498,34 @@
                     this.ctx.fill();
                     this.ctx.shadowBlur = 0; // reset
                 });
-
-                requestAnimationFrame(() => this.animate());
             }
         }
 
         // Initialize systems for each card
         document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const canvas = entry.target;
+                    let system = canvas._particleSystem;
+
+                    if (entry.isIntersecting) {
+                        if (!system) {
+                            const color = canvas.dataset.color;
+                            system = new ParticleSystem(canvas, color);
+                            canvas._particleSystem = system;
+                        } else {
+                            system.paused = false;
+                        }
+                    } else {
+                        if (system) {
+                            system.paused = true;
+                        }
+                    }
+                });
+            }, { rootMargin: '200px' });
+
             document.querySelectorAll('.particle-layer').forEach(canvas => {
-                const color = canvas.dataset.color;
-                new ParticleSystem(canvas, color);
+                observer.observe(canvas);
             });
         });
     </script>
@@ -2440,9 +2556,11 @@
                 this.particles = [];
                 this.synapses = []; // Active light pulses
                 this.particleCount = 100; // Standardized count
+                this.paused = false;
 
                 this.resizeObserver = new ResizeObserver(() => this.resize());
                 this.resizeObserver.observe(canvas);
+                this.isMobile = window.innerWidth < 768;
                 this.resize();
 
                 this.initParticles();
@@ -2452,9 +2570,11 @@
             resize() {
                 this.width = this.canvas.offsetWidth;
                 this.height = this.canvas.offsetHeight;
-                this.canvas.width = this.width * window.devicePixelRatio;
-                this.canvas.height = this.height * window.devicePixelRatio;
-                this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                // Aggressive Resolution Cap: Max 1.5x pixel density
+                const dpr = Math.min(window.devicePixelRatio, 1.5);
+                this.canvas.width = this.width * dpr;
+                this.canvas.height = this.height * dpr;
+                this.ctx.scale(dpr, dpr);
 
                 if (this.mode === 'neural') {
                     this.calculateTargetPositions();
@@ -2463,6 +2583,9 @@
 
             initParticles() {
                 this.particles = [];
+                // Aggressively reduced mobile count: 30 for mobile, 100 for desktop
+                this.particleCount = this.isMobile ? 30 : 100;
+
                 for (let i = 0; i < this.particleCount; i++) {
                     const isBioMarker = Math.random() < 0.20; // 20% Key Bio-Markers
                     this.particles.push({
@@ -2470,7 +2593,7 @@
                         y: Math.random() * this.height,
                         vx: (Math.random() - 0.5) * 0.5,
                         vy: (Math.random() - 0.5) * 0.5,
-                        size: isBioMarker ? (Math.random() * 2 + 2.5) : (Math.random() * 1.5 + 0.5),
+                        size: isBioMarker ? (this.isMobile ? 2 : (Math.random() * 2 + 2.5)) : (this.isMobile ? 1 : (Math.random() * 1.5 + 0.5)),
                         isBioMarker: isBioMarker,
                         targetX: null,
                         targetY: null,
@@ -2612,7 +2735,7 @@
                 // Draw Network Lines & Generate Synapses
                 if (this.mode === 'neural') {
                     this.ctx.strokeStyle = this.color;
-                    this.ctx.lineWidth = 0.5;
+                    this.ctx.lineWidth = this.isMobile ? 0.3 : 0.5;
                     this.ctx.globalAlpha = 0.3; // Faint lines
 
                     for (let i = 0; i < this.particles.length; i++) {
@@ -2689,8 +2812,10 @@
             }
 
             animate() {
-                this.update();
-                this.draw();
+                if (!this.paused) {
+                    this.update();
+                    this.draw();
+                }
                 requestAnimationFrame(() => this.animate());
             }
         }
@@ -2700,8 +2825,25 @@
         window.particleSystems = new WeakMap();
 
         window.registerParticleSystem = function (el) {
-            const system = new CoreParticleSystem(el);
-            window.particleSystems.set(el, system);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const system = window.particleSystems.get(el);
+
+                    if (entry.isIntersecting) {
+                        if (!system) {
+                            const newSys = new CoreParticleSystem(el);
+                            window.particleSystems.set(el, newSys);
+                        } else {
+                            system.paused = false;
+                        }
+                    } else {
+                        if (system) {
+                            system.paused = true;
+                        }
+                    }
+                });
+            }, { rootMargin: '100px' });
+            observer.observe(el);
         };
 
         window.updateParticleState = function (el, mode) {
@@ -2724,14 +2866,25 @@
             const particleColor = '#0D9488'; // Brand Teal
 
             // Adjust density: higher number = fewer particles
-            const density = 15000;
+            // Decreased density for better performance (was 15000, then 25000, now 40000)
+            const density = 40000;
+
+            let isPaused = false;
+            const bgObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isPaused = !entry.isIntersecting;
+                });
+            });
+            bgObserver.observe(canvas);
 
             const resize = () => {
                 w = window.innerWidth;
                 h = window.innerHeight;
-                canvas.width = w * window.devicePixelRatio;
-                canvas.height = h * window.devicePixelRatio;
-                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                // Aggressive Resolution Cap: Max 1.5x pixel density
+                const dpr = Math.min(window.devicePixelRatio, 1.5);
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                ctx.scale(dpr, dpr);
                 initParticles();
             };
 
@@ -2750,25 +2903,26 @@
             };
 
             const animate = () => {
-                ctx.clearRect(0, 0, w, h);
-                ctx.fillStyle = particleColor;
-                ctx.globalAlpha = 0.5;
+                if (!isPaused) {
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.fillStyle = particleColor;
+                    ctx.globalAlpha = 0.5;
 
-                particles.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
 
-                    // Wrap around
-                    if (p.x < 0) p.x = w;
-                    else if (p.x > w) p.x = 0;
-                    if (p.y < 0) p.y = h;
-                    else if (p.y > h) p.y = 0;
+                        // Wrap around
+                        if (p.x < 0) p.x = w;
+                        else if (p.x > w) p.x = 0;
+                        if (p.y < 0) p.y = h;
+                        else if (p.y > h) p.y = 0;
 
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
                 requestAnimationFrame(animate);
             };
 
