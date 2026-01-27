@@ -145,10 +145,32 @@
 
         /* Privacy Glass & Mosaic Effects */
         .glass-engine {
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .active-glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            50% {
+                border-color: currentColor;
+            }
+
+            /* Will inherit text color from parent/style */
+            100% {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
         }
 
         /* Simulated Pixel/Mosaic for "Blind Computing" */
@@ -203,7 +225,7 @@
     <div id="custom-cursor" class="cursor-glow hidden md:block"></div>
 
     <!-- Mouse Trail Canvas -->
-    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-30"></canvas>
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-20 opacity-30"></canvas>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
@@ -2413,13 +2435,11 @@
                 this.width = canvas.offsetWidth;
                 this.height = canvas.offsetHeight;
                 this.color = canvas.dataset.color || '#ffffff';
-                this.shape = canvas.dataset.shape || 'constellation'; // constellation | torus | hexagon
-                this.mode = 'generic'; // generic | pull | shape
+                // Unified Neural Constellation - Shape logic is now internal/shared
+                this.mode = 'idle'; // idle | pull | neural
                 this.particles = [];
-                // High density for Torus to make it look like a mesh
-                this.particleCount = this.shape === 'torus' ? 200 : 70;
-                this.rotationX = 0;
-                this.rotationY = 0;
+                this.synapses = []; // Active light pulses
+                this.particleCount = 100; // Standardized count
 
                 this.resizeObserver = new ResizeObserver(() => this.resize());
                 this.resizeObserver.observe(canvas);
@@ -2435,242 +2455,236 @@
                 this.canvas.width = this.width * window.devicePixelRatio;
                 this.canvas.height = this.height * window.devicePixelRatio;
                 this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+                if (this.mode === 'neural') {
+                    this.calculateTargetPositions();
+                }
             }
 
             initParticles() {
                 this.particles = [];
                 for (let i = 0; i < this.particleCount; i++) {
+                    const isBioMarker = Math.random() < 0.20; // 20% Key Bio-Markers
                     this.particles.push({
                         x: Math.random() * this.width,
                         y: Math.random() * this.height,
                         vx: (Math.random() - 0.5) * 0.5,
                         vy: (Math.random() - 0.5) * 0.5,
-                        size: Math.random() * 2 + 1,
+                        size: isBioMarker ? (Math.random() * 2 + 2.5) : (Math.random() * 1.5 + 0.5),
+                        isBioMarker: isBioMarker,
                         targetX: null,
                         targetY: null,
-                        baseX: 0, baseY: 0,
-                        // Torus Params
-                        theta: Math.random() * Math.PI * 2, // Tube angle
-                        phi: Math.random() * Math.PI * 2,   // Main ring angle
-                        z: 0
+                        clusterIndex: Math.floor(Math.random() * 3) // Assign to one of 3 cluster nodes
                     });
                 }
             }
 
             setMode(newMode) {
-                if (this.mode === 'shape' && newMode === 'vitacrypt') return;
-                if (this.mode === 'generic' && newMode === 'generic') return;
-
-                if (newMode === 'vitacrypt' && this.mode === 'generic') {
+                if (newMode === 'vitacrypt' && this.mode !== 'neural' && this.mode !== 'pull') {
                     this.triggerActiveIntelligence();
-                } else if (newMode === 'generic') {
-                    this.mode = 'generic';
+                }
+                else if (newMode === 'generic') {
+                    this.mode = 'idle';
+                    this.synapses = []; // Clear synapses
                 }
             }
 
             triggerActiveIntelligence() {
-                // Phase A: The Pull
+                // Sequence: Pull -> Shape (Neural) -> Beam
                 this.mode = 'pull';
+                this.calculateTargetPositions();
+
+                // Add active glow to container
+                const container = this.canvas.parentElement.querySelector('.glass-engine');
+                if (container) container.classList.add('active-glow');
+                // Ensure text color is set for border usage
+                if (container) container.style.color = this.color;
+
                 setTimeout(() => {
-                    this.calculateTargetPositions();
-                    this.mode = 'shape';
-                    this.triggerDOMBurst();
-                }, 200);
-            }
-
-            calculateTargetPositions() {
-                const centerX = this.width / 2;
-                const centerY = this.height / 2;
-
-                if (this.shape === 'constellation') {
-                    this.particles.forEach(p => {
-                        const angle = Math.random() * Math.PI * 2;
-                        const r = Math.random() * 80;
-                        p.targetX = centerX + r * Math.cos(angle);
-                        p.targetY = centerY + r * Math.sin(angle);
-                    });
-                }
-                else if (this.shape === 'hexagon') {
-                    const hexSize = 22;
-                    const cols = Math.floor(this.width / (hexSize * 1.5));
-                    const rows = Math.floor(this.height / (hexSize * 1.732));
-                    let i = 0;
-                    const startX = (this.width - cols * hexSize * 1.5) / 2;
-                    const startY = (this.height - rows * hexSize * 1.732) / 2;
-
-                    for (let r = 0; r < rows * 2; r++) {
-                        for (let c = 0; c < cols * 2; c++) {
-                            if (i >= this.particles.length) break;
-                            const xOffset = (r % 2) * (hexSize * 0.75);
-                            const x = startX + c * (hexSize * 1.5) + xOffset;
-                            const y = startY + r * (hexSize * 0.866);
-                            const dx = x - centerX; const dy = y - centerY;
-                            if (Math.sqrt(dx * dx + dy * dy) < 90) {
-                                this.particles[i].targetX = x;
-                                this.particles[i].targetY = y;
-                                i++;
-                            }
-                        }
-                    }
-                    for (; i < this.particles.length; i++) {
-                        this.particles[i].targetX = centerX;
-                        this.particles[i].targetY = centerY;
-                    }
-                }
-                // Torus targets are dynamic in update()
-            }
-
-            updateElenaTorus() {
-                const centerX = this.width / 2;
-                const centerY = this.height / 2;
-                // Dual axis rotation
-                this.rotationY += 0.01;
-                this.rotationX += 0.005;
-
-                const R = 35; // Major Radius
-                const r = 15; // Tube Radius
-
-                this.particles.forEach(p => {
-                    // 1. Base Torus Position
-                    // x = (R + r cos theta) cos phi
-                    // y = (R + r cos theta) sin phi
-                    // z = r sin theta
-                    const base_x = (R + r * Math.cos(p.theta)) * Math.cos(p.phi);
-                    const base_y = (R + r * Math.cos(p.theta)) * Math.sin(p.phi);
-                    const base_z = r * Math.sin(p.theta);
-
-                    // 2. Rotate around Y axis
-                    // x' = x cos A + z sin A
-                    // z' = -x sin A + z cos A
-                    const cosY = Math.cos(this.rotationY);
-                    const sinY = Math.sin(this.rotationY);
-                    let x1 = base_x * cosY + base_z * sinY;
-                    let y1 = base_y;
-                    let z1 = -base_x * sinY + base_z * cosY;
-
-                    // 3. Rotate around X axis (Tilt)
-                    // y' = y cos B - z sin B
-                    // z' = y sin B + z cos B
-                    const cosX = Math.cos(this.rotationX);
-                    const sinX = Math.sin(this.rotationX);
-                    let y2 = y1 * cosX - z1 * sinX;
-                    let z2 = y1 * sinX + z1 * cosX;
-
-                    p.targetX = centerX + x1;
-                    p.targetY = centerY + y2;
-                    p.z = z2; // Store for depth scale
-                });
+                    this.mode = 'neural';
+                    // Trigger scanner beam
+                    setTimeout(() => {
+                        this.triggerDOMBurst();
+                    }, 200);
+                }, 300);
             }
 
             triggerDOMBurst() {
                 const scanline = document.createElement('div');
                 scanline.className = 'animate-scanline-sweep';
                 this.canvas.parentElement.appendChild(scanline);
-
-                const container = this.canvas.parentElement.querySelector('.group\\/engine');
-                if (container) {
-                    container.classList.add('burst-glow');
-                    setTimeout(() => container.classList.remove('burst-glow'), 500);
-                }
                 setTimeout(() => scanline.remove(), 600);
             }
 
-            update() {
-                const centerX = this.width / 2;
-                const centerY = this.height / 2;
-                const time = Date.now();
-                const pulseScale = this.mode === 'shape' ? 1 + Math.sin(time * 0.002) * 0.05 : 1;
+            calculateTargetPositions() {
+                const cx = this.width / 2;
+                const cy = this.height / 2;
 
-                if (this.mode === 'shape' && this.shape === 'torus') {
-                    this.updateElenaTorus();
-                }
+                // Define 3 Cluster Nodes (Neural Network Hubs)
+                // Triangle formation around center
+                const nodes = [
+                    { x: cx, y: cy - 40 },           // Top
+                    { x: cx - 45, y: cy + 35 },      // Bottom Left
+                    { x: cx + 45, y: cy + 35 }       // Bottom Right
+                ];
 
                 this.particles.forEach(p => {
-                    if (this.mode === 'generic') {
-                        p.x += p.vx; p.y += p.vy;
-                        if (p.x < 0 || p.x > this.width) p.vx *= -1;
-                        if (p.y < 0 || p.y > this.height) p.vy *= -1;
-                        if (Math.random() < 0.05) {
-                            p.vx += (Math.random() - 0.5) * 0.1;
-                            p.vy += (Math.random() - 0.5) * 0.1;
-                        }
-                        p.vx = Math.max(-0.5, Math.min(0.5, p.vx));
-                        p.vy = Math.max(-0.5, Math.min(0.5, p.vy));
+                    const node = nodes[p.clusterIndex];
+                    // Random organic offset around the node
+                    const angle = Math.random() * Math.PI * 2;
+                    const r = Math.random() * 35; // Cluster radius
 
-                    } else if (this.mode === 'pull') {
-                        const dx = centerX - p.x;
-                        const dy = centerY - p.y;
-                        p.vx += dx * 0.01;
-                        p.vy += dy * 0.01;
+                    p.targetX = node.x + Math.cos(angle) * r;
+                    p.targetY = node.y + Math.sin(angle) * r;
+                });
+            }
+
+            update() {
+                const time = Date.now();
+
+                // Idle: Floating Gray Cloud
+                if (this.mode === 'idle') {
+                    this.particles.forEach(p => {
+                        p.vx += (Math.random() - 0.5) * 0.02;
+                        p.vy += (Math.random() - 0.5) * 0.02;
+                        p.vx *= 0.98;
+                        p.vy *= 0.98;
+
+                        // Gentle centering force
+                        const dx = this.width / 2 - p.x;
+                        const dy = this.height / 2 - p.y;
+                        p.vx += dx * 0.00005;
+                        p.vy += dy * 0.00005;
+
                         p.x += p.vx;
                         p.y += p.vy;
-                        p.vx *= 0.85; p.vy *= 0.85;
+                    });
 
-                    } else if (this.mode === 'shape') {
-                        if (p.targetX !== null) {
-                            const dx = p.targetX - centerX;
-                            const dy = p.targetY - centerY;
-                            const pulsedTargetX = centerX + dx * pulseScale;
-                            const pulsedTargetY = centerY + dy * pulseScale;
+                    // Remove glow class if present
+                    const container = this.canvas.parentElement.querySelector('.glass-engine');
+                    if (container) container.classList.remove('active-glow');
+                }
 
-                            p.x += (pulsedTargetX - p.x) * 0.15;
-                            p.y += (pulsedTargetY - p.y) * 0.15;
+                // Pull: Rapid acceleration to target
+                else if (this.mode === 'pull') {
+                    this.particles.forEach(p => {
+                        const dx = p.targetX - p.x;
+                        const dy = p.targetY - p.y;
+                        p.x += dx * 0.15;
+                        p.y += dy * 0.15;
+                    });
+                }
+
+                // Neural: Spring physics + Synapses
+                else if (this.mode === 'neural') {
+                    // Gentle organice movement around targets
+                    const pulse = Math.sin(time * 0.002) * 2;
+
+                    this.particles.forEach(p => {
+                        // Target with slight movement
+                        const tx = p.targetX + Math.cos(time * 0.001 + p.clusterIndex) * 5;
+                        const ty = p.targetY + Math.sin(time * 0.001 + p.clusterIndex) * 5;
+
+                        const dx = tx - p.x;
+                        const dy = ty - p.y;
+                        p.vx = dx * 0.05; // Springy
+                        p.vy = dy * 0.05;
+
+                        p.x += p.vx;
+                        p.y += p.vy;
+                    });
+
+                    // Update Synapses
+                    for (let i = this.synapses.length - 1; i >= 0; i--) {
+                        const s = this.synapses[i];
+                        s.progress += s.speed;
+                        if (s.progress >= 1) {
+                            this.synapses.splice(i, 1);
                         }
                     }
-                });
+                }
             }
 
             draw() {
                 this.ctx.clearRect(0, 0, this.width, this.height);
-                this.ctx.lineWidth = 0.5;
+                this.ctx.lineCap = 'round';
 
-                if (this.mode === 'shape') {
-                    if (this.shape === 'constellation') {
-                        this.ctx.strokeStyle = this.color;
-                        this.ctx.globalAlpha = 0.3;
-                        this.particles.forEach((p1, i) => {
-                            this.particles.slice(i + 1).forEach(p2 => {
-                                const dx = p1.x - p2.x;
-                                const dy = p1.y - p2.y;
-                                if (Math.sqrt(dx * dx + dy * dy) < 35) {
-                                    this.ctx.beginPath();
-                                    this.ctx.moveTo(p1.x, p1.y);
-                                    this.ctx.lineTo(p2.x, p2.y);
-                                    this.ctx.stroke();
+                // Draw Network Lines & Generate Synapses
+                if (this.mode === 'neural') {
+                    this.ctx.strokeStyle = this.color;
+                    this.ctx.lineWidth = 0.5;
+                    this.ctx.globalAlpha = 0.3; // Faint lines
+
+                    for (let i = 0; i < this.particles.length; i++) {
+                        for (let j = i + 1; j < this.particles.length; j++) {
+                            const p1 = this.particles[i];
+                            const p2 = this.particles[j];
+                            const dx = p1.x - p2.x;
+                            const dy = p1.y - p2.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < 60) {
+                                // Draw Line
+                                this.ctx.beginPath();
+                                this.ctx.moveTo(p1.x, p1.y);
+                                this.ctx.lineTo(p2.x, p2.y);
+                                this.ctx.stroke();
+
+                                // Chance to spawn synapse on this active link
+                                if (Math.random() < 0.0005) { // Adjustable rate
+                                    this.synapses.push({
+                                        p1: p1,
+                                        p2: p2,
+                                        progress: 0,
+                                        speed: 0.02 + Math.random() * 0.02
+                                    });
                                 }
-                            });
-                        });
-                    } else if (this.shape === 'torus') {
-                        // Wireframe effect for Torus: Connect close neighbors
-                        this.ctx.strokeStyle = this.color;
-                        this.ctx.globalAlpha = 0.15; // Subtle mesh
-                        this.particles.forEach((p1, i) => {
-                            this.particles.slice(i + 1).forEach(p2 => {
-                                const dx = p1.x - p2.x;
-                                const dy = p1.y - p2.y;
-                                // Check 3D distance approximation (ignore Z for perf or include it?)
-                                const dist = Math.sqrt(dx * dx + dy * dy);
-                                if (dist < 25) {
-                                    this.ctx.beginPath();
-                                    this.ctx.moveTo(p1.x, p1.y);
-                                    this.ctx.lineTo(p2.x, p2.y);
-                                    this.ctx.stroke();
-                                }
-                            });
-                        });
+                            }
+                        }
                     }
+
+                    // Draw Active Synapses (Light Pulses)
+                    this.ctx.globalAlpha = 1;
+                    this.ctx.fillStyle = '#ffffff'; // White hot data
+                    this.synapses.forEach(s => {
+                        const x = s.p1.x + (s.p2.x - s.p1.x) * s.progress;
+                        const y = s.p1.y + (s.p2.y - s.p1.y) * s.progress;
+
+                        this.ctx.beginPath();
+                        this.ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+                        this.ctx.fill();
+                    });
                 }
 
+                // Draw Particles
                 this.particles.forEach(p => {
                     this.ctx.beginPath();
-                    let r = p.size / 2;
-                    if (this.shape === 'torus') {
-                        r = Math.max(0.5, r + p.z * 0.05);
+
+                    let r = p.size;
+                    let opacity = 0.3;
+                    let color = '#94a3b8'; // Idle Gray
+
+                    if (this.mode === 'neural') {
+                        opacity = p.isBioMarker ? 1.0 : 0.6;
+                        color = this.color;
+
+                        // Active Glow
+                        this.ctx.shadowBlur = p.isBioMarker ? 8 : 0;
+                        this.ctx.shadowColor = this.color;
+                    } else if (this.mode === 'pull') {
+                        opacity = 0.8;
+                        color = this.color;
+                        this.ctx.shadowBlur = 0;
+                    } else {
+                        this.ctx.shadowBlur = 0;
                     }
+
                     this.ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                    this.ctx.fillStyle = this.color;
-                    this.ctx.globalAlpha = this.mode === 'generic' ? 0.3 : 0.8;
+                    this.ctx.fillStyle = color;
+                    this.ctx.globalAlpha = opacity;
                     this.ctx.fill();
+
+                    this.ctx.shadowBlur = 0; // Reset
                 });
             }
 
@@ -2680,43 +2694,7 @@
                 requestAnimationFrame(() => this.animate());
             }
         }
-                // Marcus Rigid Grid
-                // Just draw dots or connectors? User said "No lines needed - grid itself is focus"
-                // But later: "Draw thin (0.5px) lines connecting the nearest dots" for DAVID?
-                // "Card 3: Marcus... No lines needed"
-                // So NO LINES for Marcus.
-            } else if (this.shape === 'torus') {
-            // Elena: Spirograph
-            // Connect rings? Or just dots. "Visual: Spirograph / 3D Torus... Ring/Sphere"
-            // Let's draw faint lines between ring neighbors to show structure
-            this.ctx.strokeStyle = this.color;
-            this.ctx.globalAlpha = 0.2;
-            // Logic to connect ring neighbors is complex with array structure
-            // Just stick to dots for Elena as requested: "Particles should form... rings... Vibe: Cyclical"
-        }
-        }
 
-        // Draw Particles
-        this.particles.forEach(p => {
-            this.ctx.beginPath();
-            let r = p.size / 2;
-            // Depth scale for Elena
-            if (this.shape === 'torus') {
-                r = Math.max(0.5, r + p.z * 0.05);
-            }
-            this.ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-            this.ctx.fillStyle = this.color;
-            this.ctx.globalAlpha = this.mode === 'generic' ? 0.3 : 0.9;
-            this.ctx.fill();
-        });
-    }
-
-        animate() {
-            this.update();
-            this.draw();
-            requestAnimationFrame(() => this.animate());
-        }
-}
 
         // Global Registry for Alpine Interactions
         window.particleSystems = new WeakMap();
@@ -2733,6 +2711,71 @@
                 system.setMode(mode);
             }
         };
+    </script>
+    <!-- Global Background Particles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            let particles = [];
+            const particleColor = '#0D9488'; // Brand Teal
+
+            // Adjust density: higher number = fewer particles
+            const density = 15000;
+
+            const resize = () => {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w * window.devicePixelRatio;
+                canvas.height = h * window.devicePixelRatio;
+                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                initParticles();
+            };
+
+            const initParticles = () => {
+                particles = [];
+                const count = Math.floor((w * h) / density);
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        size: Math.random() * 1.5 + 0.5
+                    });
+                }
+            };
+
+            const animate = () => {
+                ctx.clearRect(0, 0, w, h);
+                ctx.fillStyle = particleColor;
+                ctx.globalAlpha = 0.5;
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Wrap around
+                    if (p.x < 0) p.x = w;
+                    else if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    else if (p.y > h) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            };
+
+            window.addEventListener('resize', resize);
+            resize();
+            animate();
+        });
     </script>
 </body>
 
