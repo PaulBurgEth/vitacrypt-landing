@@ -4,35 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Preload LCP Asset -->
+    <link rel="preload" href="https://grainy-gradients.vercel.app/noise.svg" as="image">
+
     <!-- Meta Tags for SEO -->
     <title>VitaCrypt - Personal Health Intelligence & Blind Computing (FHE)</title>
     <meta name="description"
         content="VitaCrypt is the privacy-first personalized health intelligence platform using blind computing (FHE) to secure your encrypted biological data.">
     <meta name="keywords"
         content="Blind Computing, FHE, Personal Health Intelligence, Encrypted Health Data, Zero Knowledge, DeSci">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "VitaCrypt",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "Web, iOS, Android",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/PreOrder"
-      },
-      "description": "The world's first privacy-first personalized health intelligence platform using FHE and Blind Computing."
-    }
-    </script>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vitacrypt-landing.vercel.app/">
+    <meta property="og:url" content="https://vitacrypt.xyz/">
+    <meta property="og:title" content="VitaCrypt | FHE Blind Computing">
+    <meta property="og:description"
+        content="Unlock health insights without sacrificing privacy. The first FHE-powered personal health intelligence platform.">
+    <meta property="og:image" content="https://vitacrypt.xyz/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://vitacrypt.xyz/favicon.png">
-    <link rel="apple-touch-icon" href="https://vitacrypt.xyz/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -42,11 +35,16 @@
       "name": "VitaCrypt",
       "url": "https://vitacrypt.xyz",
       "logo": "https://vitacrypt.xyz/logo.png",
+      "description": "VitaCrypt enables encrypted personal health intelligence using FHE blind computing.",
       "sameAs": [
-        "https://twitter.com/vitacrypt_xyz",
-        "https://discord.gg/vitacrypt"
+        "https://twitter.com/vitacrypt",
+        "https://linkedin.com/company/vitacrypt"
       ],
-      "description": "The DeSci privacy layer for your biological data."
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hello@vitacrypt.xyz"
+      }
     }
     </script>
 
@@ -59,11 +57,7 @@
         gtag('config', 'G-PLACEHOLDER');
     </script>
 
-    <meta property="og:title" content="VitaCrypt - Own Your Biological Data">
-    <meta property="og:description"
-        content="Secure, encrypt, and monetize your genomic data with zero-knowledge privacy.">
-    <meta property="og:image" content="https://vitacrypt-landing.vercel.app/og-image.jpg">
-    <link rel="canonical" href="https://vitacrypt-landing.vercel.app/">
+    <link rel="canonical" href="https://vitacrypt.xyz/">
 
     <!-- Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -321,8 +315,6 @@
                         class="text-sm font-medium text-slate-300 hover:text-white transition-colors">How It Works</a>
                     <a href="#privacy"
                         class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Privacy</a>
-                    <a href="#stories"
-                        class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Stories</a>
                     <a href="#proactive"
                         class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Holistic</a>
                     <a href="#roadmap"
@@ -348,7 +340,7 @@
                         </a>
                     </div>
 
-                    <a href="#cta"
+                    <a href="mailto:waitlist@vitacrypt.xyz"
                         class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-sm ml-2">
                         Join Waitlist
                     </a>
@@ -389,13 +381,11 @@
                             class="text-slate-300 hover:text-white font-medium">How It Works</a>
                         <a href="#privacy" @click="open = false"
                             class="text-slate-300 hover:text-white font-medium">Privacy</a>
-                        <a href="#stories" @click="open = false"
-                            class="text-slate-300 hover:text-white font-medium">Stories</a>
                         <a href="#proactive" @click="open = false"
                             class="text-slate-300 hover:text-white font-medium">Holistic</a>
                         <a href="#roadmap" @click="open = false"
                             class="text-slate-300 hover:text-white font-medium">Roadmap</a>
-                        <a href="#cta" @click="open = false"
+                        <a href="mailto:waitlist@vitacrypt.xyz" @click="open = false"
                             class="bg-brand-teal text-white px-4 py-2 rounded-lg font-medium inline-block mx-auto w-full max-w-xs">Join
                             Waitlist</a>
                     </div>
@@ -1779,7 +1769,7 @@
                         <span class="text-xs text-slate-500 font-medium">Phase 1 Active</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                        <div class="bg-brand-teal h-full rounded-full relative" style="width: 25%">
+                        <div class="bg-brand-teal h-full rounded-full relative w-1/4">
                             <div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite]"></div>
                         </div>
                     </div>
