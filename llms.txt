@@ -1,15 +1,6 @@
 # VitaCrypt
+> VitaCrypt enables encrypted personal health intelligence using FHE (Fully Homomorphic Encryption).
 
-## Mission
-VitaCrypt is the first DeSci (Decentralized Science) privacy layer built to secure your biological data. We empower users to own, encrypt, and monetize their genomic and health data without compromising privacy.
-
-## Key Features
-- **Zero-Knowledge Privacy**: Your data is encrypted before it leaves your device. We use advanced FHE (Fully Homomorphic Encryption) and ZK (Zero-Knowledge) proofs.
-- **Data Rewards**: Earn $VITA tokens for contributing anonymized data to medical research.
-- **Biological AI**: Get personalized health insights based on your unique DNA and lifestyle data.
-
-## Links
-- **Website**: https://vitacrypt.xyz
-- **Whitepaper**: https://vitacrypt.xyz/litepaper.pdf
-- **Waitlist**: https://vitacrypt.xyz/#waitlist
-- **Twitter**: https://twitter.com/vitacrypt_xyz
+## Core Concepts
+- **Blind Computing:** Processing data where the server never sees the raw inputs.
+- **FHE:** Compute on encrypted data without decryption.
