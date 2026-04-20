@@ -1,1 +1,7 @@
 .vercel
+
+# IDE/AI tools
+.claude/
+.DS_Store
+node_modules/
+*.log

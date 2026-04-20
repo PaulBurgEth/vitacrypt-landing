@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Inter:wght@400;500&display=swap');
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0f19;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  /* Background gradient */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 700px 500px at 20% 50%, rgba(13,148,136,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 400px at 80% 30%, rgba(244,63,94,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 600px 600px at 60% 80%, rgba(13,148,136,0.08) 0%, transparent 70%);
+  }
+
+  /* Grid lines */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Top accent bar */
+  .accent-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0d9488, #f43f5e, #0d9488);
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0 80px;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    object-fit: contain;
+    border: 1.5px solid rgba(13,148,136,0.4);
+    box-shadow: 0 0 24px rgba(13,148,136,0.3);
+  }
+
+  .logo-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+  }
+
+  .headline {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: #ffffff;
+    margin-bottom: 24px;
+    max-width: 850px;
+  }
+
+  .headline .teal { color: #2dd4bf; }
+
+  .tagline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: 40px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 12px;
+  }
+
+  .badge {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.3px;
+  }
+
+  .badge.teal {
+    border-color: rgba(13,148,136,0.5);
+    background: rgba(13,148,136,0.1);
+    color: #2dd4bf;
+  }
+
+  /* Right decorative element */
+  .right-deco {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 200px;
+    border: 1.5px solid rgba(13,148,136,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right-deco::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 1.5px solid rgba(244,63,94,0.2);
+    border-radius: 50%;
+  }
+
+  .right-deco::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 1.5px solid rgba(13,148,136,0.4);
+    border-radius: 50%;
+    background: rgba(13,148,136,0.05);
+  }
+
+  /* Bottom domain */
+  .domain {
+    position: absolute;
+    bottom: 28px;
+    right: 80px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="accent-bar"></div>
+
+  <div class="right-deco"></div>
+
+  <div class="content">
+    <div class="logo-row">
+      <img class="logo-img" src="./vitacrypt-logo-square.jpg" alt="VitaCrypt">
+      <span class="logo-name">VitaCrypt</span>
+    </div>
+
+    <h1 class="headline">Private Health Intelligence,<br><span class="teal">Powered by FHE</span></h1>
+
+    <p class="tagline">Your genetics, wearables &amp; environment — analysed by AI while staying fully encrypted.</p>
+
+    <div class="badges">
+      <span class="badge teal">Fully Homomorphic Encryption</span>
+      <span class="badge">Blind Computing</span>
+      <span class="badge">Join the Waitlist</span>
+    </div>
+  </div>
+
+  <span class="domain">vitacrypt.xyz</span>
+</body>
+</html>
