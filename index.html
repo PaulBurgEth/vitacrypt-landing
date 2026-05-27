@@ -1318,6 +1318,95 @@ h2.stitle .ac {
 .diff-banner .footnote em { font-style: italic; color: var(--ink-2); }
 .diff-banner + .diff-grid { margin-top: 20px; }
 
+/* ====================== LIVE RESEARCH (Pillar 3) ====================== */
+.research-corpora {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 48px;
+}
+@media (max-width: 900px) { .research-corpora { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .research-corpora { grid-template-columns: 1fr; } }
+.corpus {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  position: relative;
+  transition: border-color .25s ease, transform .25s ease;
+}
+.corpus:hover {
+  border-color: color-mix(in srgb, var(--teal) 40%, var(--line));
+  transform: translateY(-1px);
+}
+.corpus .nm {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.corpus .nm .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--teal) 60%, transparent);
+}
+.corpus .why {
+  font-size: 12px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  margin: 0;
+}
+.research-arch {
+  margin-top: 36px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 700px) { .research-arch { grid-template-columns: 1fr; gap: 14px; padding: 24px 22px; } }
+.research-arch .k {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  text-transform: uppercase;
+  padding-top: 4px;
+  border-right: 1px solid var(--line-soft);
+  padding-right: 24px;
+  min-height: 60px;
+}
+@media (max-width: 700px) { .research-arch .k { border-right: none; border-bottom: 1px solid var(--line-soft); padding-right: 0; padding-bottom: 10px; min-height: 0; } }
+.research-arch p {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin: 0;
+}
+.research-arch p strong { color: var(--ink); font-weight: 500; }
+.research-arch .out {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--ink-mute);
+}
+.research-arch .out a {
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
+  transition: border-color .2s ease;
+}
+.research-arch .out a:hover { border-bottom-color: var(--teal); }
+
 /* ====================== CASE STUDY ====================== */
 .case-wrap {
   margin-top: 56px;
@@ -3063,10 +3152,62 @@ html[data-palette="plasma"] {
   </div>
 </section>
 
+<!-- ========== LIVE RESEARCH (Pillar 3) ========== -->
+<section id="research">
+  <div class="wrap">
+    <div class="eyebrow">03 · Live science</div>
+    <h2 class="stitle">Live research watch — the part <span class="ac">static apps don't do.</span></h2>
+    <p class="lede">Most health apps tell you what was true in 2018. We tell you what was published this week. Recommendations re-evaluate every time a new paper, GWAS hit, or regulatory update lands in one of the corpora below.</p>
+
+    <div class="research-corpora">
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>PubMed</div>
+        <p class="why">~37M biomedical records · NLM open data · live queries</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>OpenAlex</div>
+        <p class="why">~250M scholarly works · open-access first ranking · full text where licensed</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>GWAS Catalog</div>
+        <p class="why">Variant-trait associations · curated genome-wide hits · EBI/NHGRI</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>ClinVar</div>
+        <p class="why">Variant-clinical-significance mapping · NCBI · daily updates</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>USPSTF</div>
+        <p class="why">US Preventive Services Task Force · grade A/B recommendations</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>WHO</div>
+        <p class="why">Global clinical guidance · WHO Guidelines · cohort & trial data</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>NICE</div>
+        <p class="why">UK National Institute for Health and Care Excellence · clinical pathways</p>
+      </div>
+      <div class="corpus">
+        <div class="nm"><span class="dot"></span>Cochrane</div>
+        <p class="why">~4,500 systematic reviews · evidence weighting · meta-analysis</p>
+      </div>
+    </div>
+
+    <div class="research-arch">
+      <div class="k">Architecture</div>
+      <div>
+        <p>An agent watches the public science for you — across all eight corpora above. <strong>The model only reads public papers.</strong> Your encrypted profile never reaches the model. The match between a paper's findings and your profile happens <strong>under FHE — cryptographically, not by sending your data anywhere.</strong></p>
+        <div class="out">Full source menu, model layer, and matching protocol in the <a href="litepaper.html#engine">litepaper →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== PIPELINE — combined arch + live demo ========== -->
 <section id="pipeline">
   <div class="wrap">
-    <div class="eyebrow">03 · The architecture · live</div>
+    <div class="eyebrow">04 · The architecture · live</div>
     <h2 class="stitle">Watch one insight emerge from data <span class="ac">no one can read.</span></h2>
     <p class="lede">Click any stage. The architecture, the encryption state, and the phone respond together. Auto-plays on first scroll.</p>
 
@@ -3194,7 +3335,7 @@ html[data-palette="plasma"] {
 <!-- ========== DIFFERENTIATION ========== -->
 <section id="diff">
   <div class="wrap">
-    <div class="eyebrow">04 · Versus the field</div>
+    <div class="eyebrow">05 · Versus the field</div>
     <h2 class="stitle">The intersection of <span class="ac">unified</span> and <span class="ac">truly private</span> is empty.</h2>
     <p class="lede">Keep your Oura. Keep your Apple Watch. Keep your Whoop. We connect to all of them — and add what they can't see. Three axes where the consumer health stack breaks down — and what we do instead.</p>
 
@@ -3260,7 +3401,7 @@ html[data-palette="plasma"] {
 <!-- ========== CASE ========== -->
 <section id="case">
   <div class="wrap">
-    <div class="eyebrow">05 · Case study</div>
+    <div class="eyebrow">06 · Case study</div>
     <h2 class="stitle">25, Los Angeles, breathing on the <span class="ac">97th</span> percentile.</h2>
     <p class="lede">A composite case from the litepaper. Values illustrative, methodology real.</p>
 
@@ -3352,7 +3493,7 @@ html[data-palette="plasma"] {
 <!-- ========== INSIGHTS GALLERY ========== -->
 <section id="insights">
   <div class="wrap">
-    <div class="eyebrow">06 · A week in the protocol</div>
+    <div class="eyebrow">07 · A week in the protocol</div>
     <h2 class="stitle">One person. Three different combinations. <span class="ac">Three different prescriptions.</span></h2>
     <p class="lede">A single living profile means the answer changes when the inputs change. Here is David — same biology, same person — across three moments of the same week. Each card is the action VitaCrypt actually puts in front of him.</p>
 
@@ -3537,7 +3678,7 @@ html[data-palette="plasma"] {
 <!-- ========== ROADMAP ========== -->
 <section id="roadmap">
   <div class="wrap-tight">
-    <div class="eyebrow">07 · Trajectory</div>
+    <div class="eyebrow">08 · Trajectory</div>
     <h2 class="stitle">A <span class="ac">measured</span> path to general availability.</h2>
     <p class="lede">Depth before breadth. Each phase compounds on the last.</p>
 
@@ -3573,7 +3714,7 @@ html[data-palette="plasma"] {
 <!-- ========== WHY NOW ========== -->
 <section id="why">
   <div class="wrap">
-    <div class="eyebrow">08 · Why now</div>
+    <div class="eyebrow">09 · Why now</div>
     <h2 class="stitle">Three curves met in the last <span class="ac">eighteen months.</span></h2>
     <p class="lede">Apple shipped homomorphic encryption (BFV) on every iOS 18 device in 2024 — the same crypto family we use. Zama's encrypted-genome ancestry benchmark hit <strong>96% accuracy in ~300s on a single CPU</strong> (Zama bounty&nbsp;#95, 1000 Genomes test set). And the 23andMe breach finished the job of teaching consumers that "we encrypt at rest" is not a privacy story.</p>
 
