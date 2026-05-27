@@ -539,9 +539,11 @@ footer {
       <a href="#arch">§02</a>
       <a href="#perf">§03</a>
       <a href="#integ">§04</a>
-      <a href="#engine">§05</a>
-      <a href="#valid">§06</a>
-      <a href="#open">§07</a>
+      <a href="#vs-wearables">§05</a>
+      <a href="#engine">§06</a>
+      <a href="#valid">§07</a>
+      <a href="#open">§08</a>
+      <a href="#refs">§09</a>
     </div>
     <a class="back" href="index.html">← Landing</a>
   </div>
@@ -594,7 +596,7 @@ footer {
 
     <div class="note warn">
       <div class="lbl">Honest scope</div>
-      <p>FHE protects data <em>in transit and at compute</em>. It does not protect against device compromise, against the user's own deliberate sharing, or against statistical inference from the small, structured outputs we return. The brief in §07 lists what we are still doing to harden against the last category.</p>
+      <p>FHE protects data <em>in transit and at compute</em>. It does not protect against device compromise, against the user's own deliberate sharing, or against statistical inference from the small, structured outputs we return. The brief in §08 lists what we are still doing to harden against the last category.</p>
     </div>
   </div>
 </section>
@@ -684,7 +686,7 @@ footer {
     <p>We avoid running FHE on every user interaction. The product surface is asynchronous by design: the user composes a query (or the system schedules a daily one), the server runs inference, and the result lands as a notification 3–10 minutes later. Interactive UI uses cached plaintext on the user's own device.</p>
 
     <h3>What 300s buys us</h3>
-    <p>The widely cited Zama benchmark for encrypted DNA ancestry inference at ~96% accuracy with sub-300-second latency is for a single-task, single-domain query on a representative SNP subset. Multi-layer inference (DNA × environment × wearable signal × microbiome) is multiplicatively heavier; our ~5-minute target reflects that. <em>Source verification pending — see §07.</em></p>
+    <p>The widely cited Zama benchmark for encrypted DNA ancestry inference at ~96% accuracy with sub-300-second latency is for a single-task, single-domain query on a representative SNP subset. Multi-layer inference (DNA × environment × wearable signal × microbiome) is multiplicatively heavier; our ~5-minute target reflects that. <em>Source verification pending — see §08.</em></p>
   </div>
 </section>
 
@@ -721,9 +723,59 @@ footer {
 </section>
 
 <!-- §05 -->
+<section id="vs-wearables">
+  <div class="wrap">
+    <div class="section-id"><span class="num">§05</span><span>Head-to-head vs popular wearables</span></div>
+    <h2>What we add — and where the privacy line gets crossed elsewhere.</h2>
+    <p>Every wearable on the market is a single-signal sensor plus a closed app. VitaCrypt is a synthesis layer that <em>uses</em> the sensor's data alongside DNA, microbiome, labs, environment, and survey context. The honest comparison below.</p>
+
+    <table class="spec-table vs-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Oura Ring 4</th>
+          <th>Whoop 5.0 MG</th>
+          <th>Apple Watch S10 / Ultra 2</th>
+          <th>Galaxy Ring</th>
+          <th>Eight Sleep Pod 4</th>
+          <th>VitaCrypt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="c1">Sensor (HRV / sleep / temp / HR)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓ (in-bed)</td><td>Reads from any/all via HealthKit / Health Connect</td></tr>
+        <tr><td class="c1">ECG</td><td>—</td><td>✓ (FDA-cleared, MG)</td><td>✓</td><td>—</td><td>—</td><td>Reads if the device captures it</td></tr>
+        <tr><td class="c1">CGM (Dexcom / Abbott)</td><td>Overlay only</td><td>—</td><td>3rd-party</td><td>—</td><td>—</td><td>Direct integration + overlay</td></tr>
+        <tr><td class="c1">DNA / genetics</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong> (upload + analysis)</td></tr>
+        <tr><td class="c1">Microbiome</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong> (upload)</td></tr>
+        <tr><td class="c1">Labs / hormones</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong> (BYO from Quest / Labcorp / Function / Superpower)</td></tr>
+        <tr><td class="c1">Live environment (PM2.5 / pollen / UV)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong> (AirNow + OpenWeather + Pollen API)</td></tr>
+        <tr><td class="c1">Validated surveys (PROMIS / PHQ-9 / GAD-7)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong></td></tr>
+        <tr><td class="c1">Live research lookup (PubMed / GWAS / ClinVar / USPSTF / WHO / NICE)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong></td></tr>
+        <tr><td class="c1">Cross-source insight engine</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>✓</strong> (the only one)</td></tr>
+        <tr><td class="c1">Data leaves device unencrypted</td><td>✓ (cloud)</td><td>✓ (cloud)</td><td>Mostly on-device</td><td>✓ (cloud)</td><td>Cloud-dependent</td><td><strong>Never</strong> — FHE end-to-end</td></tr>
+        <tr><td class="c1">Data shared / sold for research</td><td>Per ToS</td><td>Aggregated</td><td>Mostly no</td><td>Per Samsung ToS</td><td>Cloud-dependent</td><td><strong>Never</strong> — we don't hold the keys</td></tr>
+        <tr><td class="c1">HIPAA-covered?</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td><strong>No — but cryptographically equivalent</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>The five things that matter</h3>
+    <ol>
+      <li><strong>None of them have DNA, microbiome, labs, environment, or live research.</strong> Every device in this category is a sensor company. VitaCrypt is a synthesis layer.</li>
+      <li><strong>Every one of them stores your data unencrypted on their cloud.</strong> Not a moral judgment — it's how their compute works. They have to see it to analyse it. We don't.</li>
+      <li><strong>Several actively monetise that data.</strong> Oura runs data-sharing agreements with academic and pharmaceutical partners. Whoop offers aggregated population-level data for research and commercial purposes. Fitbit (Google) ranked among the most permissive sharing terms in <a href="https://www.nature.com/articles/s41746-025-01757-1" target="_blank" rel="noopener">npj Digital Medicine's 2025 wearable-privacy systematic analysis</a>.</li>
+      <li><strong>None of them are HIPAA-covered.</strong> HIPAA applies to providers, insurers, and clearinghouses. Consumer wearables are categorically outside (<a href="https://athletechnews.com/wearables-hipaa-regulations-whoop-oura/" target="_blank" rel="noopener">Athletech News, 2024</a>).</li>
+      <li><strong>The legislative trend is favourable.</strong> <strong>HIPRA</strong> — the Health Information Privacy Reform Act, introduced by Senator Cassidy on <strong>November 4, 2025</strong> — would extend HIPAA-like protections to Apple Watch / Oura / Whoop data. Lawmakers are <em>currently drafting</em> the protection VitaCrypt already provides cryptographically.</li>
+    </ol>
+
+    <h3>Positioning</h3>
+    <p><strong>We don't replace, we connect.</strong> Keep your Oura. Keep your Apple Watch. Keep your Whoop. We pull what they read and add what they can't see — DNA, microbiome, labs, environment, validated surveys, live science. The encryption is the price of admission, not the product.</p>
+  </div>
+</section>
+
+<!-- §06 -->
 <section id="engine">
   <div class="wrap">
-    <div class="section-id"><span class="num">§05</span><span>The recommendation engine</span></div>
+    <div class="section-id"><span class="num">§06</span><span>The recommendation engine</span></div>
     <h2>From ciphertext patterns to <span class="ac">cited next actions.</span></h2>
 
     <h3>Inference model</h3>
@@ -733,20 +785,51 @@ footer {
       <li><strong>FHE-compiled linear / logistic regressors</strong> — for risk scoring on continuous biometric inputs.</li>
       <li><strong>A small set of hand-curated decision rules</strong> — encoded as FHE-friendly boolean circuits, derived from systematic reviews.</li>
     </ul>
-    <p>Output is a vector of action proposals, each with a confidence score and a reference into the citation pool. The citation pool itself is a pre-cleared index over PubMed and Cochrane records, computed in plaintext at indexing time; the lookup that maps from inference to citation happens on-device after decryption.</p>
+    <p>Output is a vector of action proposals, each with a confidence score and a reference into the citation pool. The citation pool itself is a pre-cleared index over the corpora listed below, computed in plaintext at indexing time; the lookup that maps from inference to citation happens on-device after decryption.</p>
 
-    <h3>Citation pipeline</h3>
-    <p>Every action surfaced to the user carries a citation count. The numbers on the landing — "37M+ records cross-referenced" — refer to the size of the upstream PubMed corpus we query against, not the number of papers behind any single recommendation. PubMed sits at ~37M indexed records per the NLM open-data portal; Cochrane Library hosts ~4,500 systematic reviews. We index against both. uery at indexing time, not the count of studies behind any single recommendation. <em>This phrasing is being tightened — see §07.</em></p>
+    <h3>Research-agent (model layer)</h3>
+    <p>A separate, non-FHE component watches the public scientific literature for new findings relevant to the action proposals our inference model generates. <strong>This is a vendor-agnostic architectural choice, not an LLM endorsement.</strong></p>
+    <ul>
+      <li><strong>Model class:</strong> a frontier generalist LLM grounded in biomedical RAG over the corpora listed below. Our preferred posture is <strong>self-hosted open-weight</strong> (Llama 3.x / Mistral / Qwen class) — provider-free, no third-party API sees a single user-derived token. Hosted frontier models are an acceptable bootstrap option but not the long-term choice. Per <a href="https://arxiv.org/abs/2408.13833" target="_blank" rel="noopener">arXiv 2408.13833 (2024)</a>, fine-tuned biomedical LLMs (Meditron, Med42, OpenBioLLM) do not consistently outperform frontier generalist LLMs grounded in biomedical RAG — so we do not train or fine-tune a proprietary medical model either.</li>
+      <li><strong>What the model reads:</strong> public papers and curated open biomedical corpora — never the user's profile. The model has no access to ciphertext or plaintext user data.</li>
+      <li><strong>How findings reach the user:</strong> the agent emits structured tags (e.g. <code>variant=MTHFR-C677T</code>, <code>exposure=PM2.5-chronic</code>). Profile-vs-tag matching happens under FHE — a cheap circuit, not transformer inference.</li>
+      <li><strong>What we explicitly do NOT claim:</strong> "encrypted LLM inference." No production-grade FHE-compiled transformer exists today. Nillion (MPC) and Apple Swift HE (BFV primitives) are not yet a single-user LLM substitute. We will revisit if/when the landscape changes.</li>
+    </ul>
+
+    <h3>Citation pipeline — full source menu</h3>
+    <p>Every action surfaced to the user carries a citation count. The "37M+ records cross-referenced" figure on the landing refers to the size of the upstream PubMed corpus we query against, not the number of papers behind any single recommendation. PubMed sits at ~37M indexed records per the NLM open-data portal; Cochrane Library hosts ~4,500 systematic reviews. The full MVP source menu:</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr><th>Source</th><th>Content</th><th>License / Cost</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="c1">PubMed</td><td>~37M biomedical citations</td><td>NLM open data, free API</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">OpenAlex</td><td>~250M scholarly works, citations graph</td><td>CC0 — fully open</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">Semantic Scholar</td><td>~200M papers, embeddings, AI-curated TLDRs</td><td>Free academic API (Allen AI)</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">Cochrane Library</td><td>~4,500 systematic reviews + meta-analyses</td><td>Subscription content; abstracts open</td><td><span class="badge q">MVP (abstracts)</span></td></tr>
+        <tr><td class="c1">GWAS Catalog</td><td>Variant-trait associations from genome-wide studies</td><td>EBI/NHGRI open</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">ClinVar</td><td>Variant-clinical-significance interpretations</td><td>NCBI open, daily updates</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">ClinGen</td><td>Curated gene-disease validity, dosage sensitivity</td><td>NIH open</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">Open Targets</td><td>Drug-target-disease associations</td><td>Open (EMBL-EBI / GSK / Wellcome)</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">OpenFDA</td><td>Drug labels, adverse events, recalls</td><td>FDA open API</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">USPSTF</td><td>Preventive services recommendations (grade A/B)</td><td>Free public API</td><td><span class="badge live">Live</span></td></tr>
+        <tr><td class="c1">WHO Guidelines</td><td>Global clinical guidance, cohort & trial data</td><td>Free, attribution required</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">NICE</td><td>UK clinical pathway recommendations</td><td>Free for non-commercial use</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">CDC data</td><td>Surveillance + environmental exposure baselines</td><td>Free public API</td><td><span class="badge q">MVP</span></td></tr>
+        <tr><td class="c1">NIH ODS</td><td>Office of Dietary Supplements fact sheets</td><td>Free, attribution required</td><td><span class="badge q">MVP</span></td></tr>
+      </tbody>
+    </table>
 
     <h3>What the output never includes</h3>
-    <p>Free-form natural language from the user's encrypted profile. We do not generate LLM completions over ciphertext at MVP scale — FHE-friendly transformer inference exists in research but is not yet production-viable. All copy presented to the user is composed on-device from short templated insight slots.</p>
+    <p>Free-form natural language generated from the user's encrypted profile. We do not run LLM completions over ciphertext at MVP scale — FHE-friendly transformer inference exists in research but is not yet production-viable. All copy presented to the user is composed on-device from short templated insight slots, with tags sourced from the research-agent layer above.</p>
   </div>
 </section>
 
-<!-- §06 -->
+<!-- §07 -->
 <section id="valid">
   <div class="wrap">
-    <div class="section-id"><span class="num">§06</span><span>Validation plan</span></div>
+    <div class="section-id"><span class="num">§07</span><span>Validation plan</span></div>
     <h2>How we will know it works.</h2>
     <p>FHE preserves the privacy of inputs. It does not, by itself, guarantee that the recommendations on the other side are clinically useful. Validation is a separate problem, addressed in three stages:</p>
 
@@ -761,10 +844,10 @@ footer {
   </div>
 </section>
 
-<!-- §07 -->
+<!-- §08 -->
 <section id="open">
   <div class="wrap">
-    <div class="section-id"><span class="num">§07</span><span>Open technical questions</span></div>
+    <div class="section-id"><span class="num">§08</span><span>Open technical questions</span></div>
     <h2>Where we are still resolving the story in public.</h2>
     <p>The honest answer to "is the architecture on the landing exactly what is on GitHub" is: <strong>directionally yes, in detail not yet.</strong> The MVP is in development. The list below tracks every claim on the landing we are independently verifying before lock.</p>
 
@@ -828,10 +911,10 @@ footer {
   </div>
 </section>
 
-<!-- §08 -->
+<!-- §09 -->
 <section id="refs">
   <div class="wrap">
-    <div class="section-id"><span class="num">§08</span><span>References &amp; further reading</span></div>
+    <div class="section-id"><span class="num">§09</span><span>References &amp; further reading</span></div>
     <ul class="refs">
       <li><strong>[1]</strong> Zama — <em>Concrete ML</em> documentation. github.com/zama-ai/concrete-ml. Production FHE toolchain targeted by our compute layer.</li>
       <li><strong>[2]</strong> Chillotti, Gama, Georgieva, Izabachène — <em>TFHE: Fast Fully Homomorphic Encryption over the Torus.</em> Journal of Cryptology, 2020.</li>
@@ -844,7 +927,7 @@ footer {
       <li><strong>[9]</strong> Android — <em>StrongBox keystore.</em> source.android.com/security.</li>
     </ul>
     <p style="margin-top: 18px; font-size: 13px; color: var(--ink-faint);">
-      This is v0.1.0. Items marked <em>pending verification</em> are tracked in §07 and the linked <a href="../../RESEARCH_BRIEF.md">research brief</a>. Numbers and stack-specific claims will be locked once independent verification completes.
+      This is v0.1.0. Items marked <em>pending verification</em> are tracked in §08 and the linked <a href="../../RESEARCH_BRIEF.md">research brief</a>. Numbers and stack-specific claims will be locked once independent verification completes.
     </p>
   </div>
 </section>
