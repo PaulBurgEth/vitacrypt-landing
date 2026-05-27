@@ -1247,6 +1247,77 @@ h2.stitle .ac {
   display: none;
 }
 
+/* Wearables panel — "What only VitaCrypt does" */
+.diff-banner {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-top: 40px;
+}
+.diff-banner .hd {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.diff-banner .hd::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line-soft);
+}
+.diff-banner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .diff-banner-grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
+@media (max-width: 540px) { .diff-banner-grid { grid-template-columns: 1fr; } }
+.diff-banner-grid .item h4 {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 0 0 6px 0;
+  color: var(--ink);
+}
+.diff-banner-grid .item h4 .ix {
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-right: 8px;
+}
+.diff-banner-grid .item p {
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  margin: 0;
+}
+.diff-banner .footnote {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  line-height: 1.55;
+}
+.diff-banner .footnote .k {
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+.diff-banner .footnote em { font-style: italic; color: var(--ink-2); }
+.diff-banner + .diff-grid { margin-top: 20px; }
+
 /* ====================== CASE STUDY ====================== */
 .case-wrap {
   margin-top: 56px;
@@ -3126,6 +3197,31 @@ html[data-palette="plasma"] {
     <div class="eyebrow">04 · Versus the field</div>
     <h2 class="stitle">The intersection of <span class="ac">unified</span> and <span class="ac">truly private</span> is empty.</h2>
     <p class="lede">Keep your Oura. Keep your Apple Watch. Keep your Whoop. We connect to all of them — and add what they can't see. Three axes where the consumer health stack breaks down — and what we do instead.</p>
+
+    <div class="diff-banner">
+      <div class="hd">What only VitaCrypt adds — beyond your wearable</div>
+      <div class="diff-banner-grid">
+        <div class="item">
+          <h4><span class="ix">01</span>DNA &amp; genetics</h4>
+          <p>Upload 23andMe / AncestryDNA / Nebula WGS — analyzed on-device, never sent.</p>
+        </div>
+        <div class="item">
+          <h4><span class="ix">02</span>Microbiome</h4>
+          <p>Upload Tiny Health, Viome, or uBiome — gut signal in context with everything else.</p>
+        </div>
+        <div class="item">
+          <h4><span class="ix">03</span>Labs &amp; hormones</h4>
+          <p>Bring your own from Quest, Labcorp, Function, Superpower. We don't resell tests.</p>
+        </div>
+        <div class="item">
+          <h4><span class="ix">04</span>Live environment</h4>
+          <p>PM2.5, pollen, UV from AirNow / OpenWeather / Pollen API at your exact location.</p>
+        </div>
+      </div>
+      <div class="footnote">
+        <span class="k">Privacy moat</span>And the only one in this category where data never leaves your device unencrypted. <em>npj Digital Medicine</em> (2025) flagged Oura, Whoop, and Fitbit for permissive data-sharing terms.
+      </div>
+    </div>
 
     <div class="diff-grid">
       <div class="diff-card">
