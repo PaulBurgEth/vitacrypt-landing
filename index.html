@@ -351,6 +351,16 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
   line-height: 1.5;
 }
 .hero p.lead strong { color: var(--ink); font-weight: 500; }
+.hero p.lead-punch {
+  font-size: clamp(20px, 1.75vw, 24px);
+  color: var(--ink-2);
+  max-width: 54ch;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.hero p.lead-punch em { color: var(--teal); font-style: normal; font-weight: 600; }
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .btn {
@@ -2642,6 +2652,10 @@ html[data-palette="plasma"] {
 
       <h1>Your biology, <span class="accent">read by no one.</span></h1>
 
+      <p class="lead lead-punch">
+        Every wearable reads one signal. We read <em>all of them</em> — plus your DNA, your environment, and the latest science — without ever seeing your data.
+      </p>
+
       <p class="lead">
         VitaCrypt unifies your <strong>genetics, microbiome, wearables, labs, and environment</strong> into a single living health profile — encrypted on your device under a key only you hold, analyzed on a blind server that <strong>never sees plaintext</strong>. Targeting the Zama Concrete ML / TFHE stack.
       </p>
@@ -2813,7 +2827,7 @@ html[data-palette="plasma"] {
 
 <!-- ========== FACTS ========== -->
 <div class="facts">
-  <div class="fact"><div class="num">6</div><div class="lbl">Layers unified · DNA · microbiome · wearable · lab · environment · survey</div></div>
+  <div class="fact"><div class="num">6</div><div class="lbl">Layers unified · DNA · microbiome · wearable · lab · environment · PROMIS survey</div></div>
   <div class="fact"><div class="num">TFHE</div><div class="lbl">Compute on ciphertext · Zama Concrete ML target stack</div></div>
   <div class="fact"><div class="num">0</div><div class="lbl">Bytes ever decrypted on VitaCrypt infrastructure</div></div>
   <div class="fact"><div class="num">37M<span class="unit">+</span></div><div class="lbl">PubMed records + Cochrane reviews cross-referenced</div></div>
@@ -2858,7 +2872,7 @@ html[data-palette="plasma"] {
   <div class="wrap">
     <div class="eyebrow">02 · The data fabric</div>
     <h2 class="stitle">Six streams of biology, fused into <span class="ac">one living profile.</span></h2>
-    <p class="lede">Encryption is one pillar; the other is the scope of what we unify. Wearable APIs, open environmental data, lab results, microbiome assays, genetic reports, and self-reported context — all pulled together on the device, in your possession, before anything is encrypted or transmitted.</p>
+    <p class="lede">Encryption is one pillar; the other is the scope of what we unify. Wearable APIs (unified via <strong>Terra API</strong>), open environmental data, lab results, microbiome assays, genetic reports, and NIH-validated <strong>PROMIS</strong> short-forms — all pulled together on the device, in your possession, before anything is encrypted or transmitted.</p>
 
     <div class="fabric-wrap">
       <div class="fabric-grid">
@@ -2956,13 +2970,13 @@ html[data-palette="plasma"] {
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11v-2a4 4 0 1 1 8 0v2M7 6.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.1"/></svg>
             </span>
           </div>
-          <h4>Lifestyle &amp; survey</h4>
-          <p class="why">Stress, sleep quality, mood, diet logs, supplement stack, work load. The user's <strong>own annotation</strong> of why this week looks the way it does — context the data alone won't surface.</p>
+          <h4>Lifestyle &amp; PROMIS</h4>
+          <p class="why">Stress, sleep quality, mood, diet logs, supplement stack, work load — captured via NIH-validated <strong>PROMIS</strong> short-forms. The user's <strong>own annotation</strong> of why this week looks the way it does — context the data alone won't surface.</p>
           <div class="sources">
             <span class="src">Daily check-in</span>
             <span class="src">Symptom diary</span>
             <span class="src">Supplement log</span>
-            <span class="src">Mood survey</span>
+            <span class="src">PROMIS short-form</span>
           </div>
         </div>
       </div>
@@ -3002,7 +3016,7 @@ html[data-palette="plasma"] {
           <div class="stage-tag"><span class="box" id="stTagBox">01</span> <span id="stTagText">COLLECT</span></div>
           <h3 id="stTitle">A unified profile, drawn from every source.</h3>
           <div class="summary" id="stSummary">
-            Wearables, DNA, microbiome, labs, environment, and surveys ingest on-device into a single living profile. <strong>Nothing has left the device yet.</strong>
+            Wearables (via Terra API), DNA, microbiome, labs, environment, and PROMIS surveys ingest on-device into a single living profile. <strong>Nothing has left the device yet.</strong>
           </div>
           <div class="what">
             <div class="lbl">What this looks like in practice</div>
@@ -3111,7 +3125,7 @@ html[data-palette="plasma"] {
   <div class="wrap">
     <div class="eyebrow">04 · Versus the field</div>
     <h2 class="stitle">The intersection of <span class="ac">unified</span> and <span class="ac">truly private</span> is empty.</h2>
-    <p class="lede">Three axes where the consumer health stack breaks down — and what we do instead.</p>
+    <p class="lede">Keep your Oura. Keep your Apple Watch. Keep your Whoop. We connect to all of them — and add what they can't see. Three axes where the consumer health stack breaks down — and what we do instead.</p>
 
     <div class="diff-grid">
       <div class="diff-card">
@@ -3127,10 +3141,10 @@ html[data-palette="plasma"] {
       <div class="diff-card">
         <div class="ix">02 · DATA SCOPE</div>
         <h3>One slice doesn't see the pattern.</h3>
-        <p>Wearables know sleep. DNA kits know genes. Labs know markers. No single tool fuses five layers against your local environment in real time.</p>
+        <p>Wearables know sleep. DNA kits know genes. Labs know markers. No single tool fuses six layers against your local environment in real time.</p>
         <div class="vs">
           <div class="row them"><span class="k">Others</span><span>One silo (wearable / DNA / labs).</span></div>
-          <div class="row us"><span class="k">VitaCrypt</span><span>Five layers, unified, contextualized.</span></div>
+          <div class="row us"><span class="k">VitaCrypt</span><span>Six layers, unified, contextualized.</span></div>
         </div>
       </div>
 
@@ -3523,6 +3537,7 @@ html[data-palette="plasma"] {
         <ul>
           <li><a href="#thesis">Thesis</a></li>
           <li><a href="#pipeline">Walkthrough</a></li>
+          <li><a href="#research">Live research</a></li>
           <li><a href="#case">Case study</a></li>
           <li><a href="#roadmap">Roadmap</a></li>
         </ul>
@@ -3547,7 +3562,7 @@ html[data-palette="plasma"] {
     </div>
     <div class="bottom">
       <span>© 2026 VITACRYPT · ALL RIGHTS RESERVED</span>
-      <span>ARCHITECTURE DESIGNED FOR HIPAA/GDPR ALIGNMENT · TARGETING ZAMA CONCRETE ML · PRE-MVP</span>
+      <span>ARCHITECTURE DESIGNED FOR HIPAA/GDPR ALIGNMENT · HIPRA-AWARE · TARGETING ZAMA CONCRETE ML · PRE-MVP</span>
     </div>
   </div>
 </footer>
@@ -3570,7 +3585,7 @@ const stages = [
     headLabel: 'STAGE 01 / COLLECT',
     tagBox: '01', tagText: 'COLLECT',
     title: 'A unified profile, drawn from every source.',
-    summary: 'Wearables, DNA, microbiome, labs, environment, and surveys ingest on-device into a single living profile. <strong>Nothing has left the device yet.</strong>',
+    summary: 'Wearables (via Terra API), DNA, microbiome, labs, environment, and PROMIS surveys ingest on-device into a single living profile. <strong>Nothing has left the device yet.</strong>',
     what: [
       'Upload 23andMe / AncestryDNA reports',
       'Connect Apple Watch or Oura ring',
