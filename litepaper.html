@@ -2,7 +2,7 @@
 <html lang="en" data-palette="royal">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#070B1F">
 <meta name="color-scheme" content="dark light">
 
@@ -14,10 +14,11 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://vitacrypt.xyz/litepaper.html">
 
-<!-- Favicon suite -->
+<!-- Favicon suite (WebP-first, JPEG fallback for older browsers) -->
+<link rel="icon" type="image/webp" href="/img/vitacrypt-logo-square.webp">
 <link rel="icon" type="image/jpeg" href="/img/vitacrypt-logo-square.jpg">
-<link rel="shortcut icon" type="image/jpeg" href="/img/vitacrypt-logo-square.jpg">
-<link rel="apple-touch-icon" sizes="180x180" href="/img/vitacrypt-logo-square.jpg">
+<link rel="shortcut icon" type="image/webp" href="/img/vitacrypt-logo-square.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/vitacrypt-logo-square.webp">
 <meta name="apple-mobile-web-app-title" content="VitaCrypt Litepaper">
 <meta name="application-name" content="VitaCrypt">
 
@@ -100,6 +101,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
@@ -530,7 +532,10 @@ footer {
 <nav class="top">
   <div class="inner">
     <a class="brand" href="index.html">
-      <img src="assets/vitacrypt-logo-square.jpg" alt="">
+      <picture>
+        <source type="image/webp" srcset="img/vitacrypt-logo-square.webp">
+        <img src="img/vitacrypt-logo-square.jpg" alt="VitaCrypt" width="32" height="32" decoding="async">
+      </picture>
       <span class="word">VitaCrypt</span>
       <span class="tag">brief · v0.1.0</span>
     </a>

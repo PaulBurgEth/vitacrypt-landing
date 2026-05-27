@@ -2,23 +2,24 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#06080C">
 <meta name="color-scheme" content="dark light">
 
 <!-- Primary SEO -->
 <title>VitaCrypt — Encrypted Health Intelligence (FHE Blind Computing)</title>
-<meta name="description" content="VitaCrypt unifies genetics, wearables, microbiome, environment, and live science (PubMed, GWAS, ClinVar) into one private health profile — analyzed under fully homomorphic encryption (FHE) on a blind server that never sees your plaintext.">
+<meta name="description" content="VitaCrypt unifies genetics, wearables, microbiome, environment & live science into one private health profile — analyzed under FHE on a blind server.">
 <meta name="keywords" content="VitaCrypt, FHE, fully homomorphic encryption, blind computing, encrypted health data, personal health intelligence, private genetics, live research watch, PubMed, Zama Concrete ML, TFHE, DeSci, longevity">
 <meta name="author" content="VitaCrypt">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="googlebot" content="index, follow">
 <link rel="canonical" href="https://vitacrypt.xyz/">
 
-<!-- Favicon suite -->
+<!-- Favicon suite (WebP-first, JPEG fallback for older browsers) -->
+<link rel="icon" type="image/webp" href="/img/vitacrypt-logo-square.webp">
 <link rel="icon" type="image/jpeg" href="/img/vitacrypt-logo-square.jpg">
-<link rel="shortcut icon" type="image/jpeg" href="/img/vitacrypt-logo-square.jpg">
-<link rel="apple-touch-icon" sizes="180x180" href="/img/vitacrypt-logo-square.jpg">
+<link rel="shortcut icon" type="image/webp" href="/img/vitacrypt-logo-square.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/vitacrypt-logo-square.webp">
 <meta name="apple-mobile-web-app-title" content="VitaCrypt">
 <meta name="application-name" content="VitaCrypt">
 
@@ -125,6 +126,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
@@ -2779,7 +2781,10 @@ html[data-palette="plasma"] {
 <nav class="top">
   <div class="wrap inner">
     <a class="brand" href="#">
-      <img src="assets/vitacrypt-logo-square.jpg" alt="">
+      <picture>
+        <source type="image/webp" srcset="img/vitacrypt-logo-square.webp">
+        <img src="img/vitacrypt-logo-square.jpg" alt="VitaCrypt" width="32" height="32" decoding="async">
+      </picture>
       <span class="word">VitaCrypt</span>
       <span class="tag">MVP</span>
     </a>
@@ -3764,7 +3769,10 @@ html[data-palette="plasma"] {
     <div class="fgrid">
       <div class="brand-col">
         <div class="lockup">
-          <img src="assets/vitacrypt-logo-square.jpg" alt="">
+          <picture>
+            <source type="image/webp" srcset="img/vitacrypt-logo-square.webp">
+            <img src="img/vitacrypt-logo-square.jpg" alt="VitaCrypt" width="32" height="32" loading="lazy" decoding="async">
+          </picture>
           <span>VitaCrypt</span>
         </div>
         <p>Private health intelligence on encrypted biology. Encrypted on your device under a key only you hold; analyzed on a blind server. Targeting the Zama Concrete ML / TFHE stack.</p>
