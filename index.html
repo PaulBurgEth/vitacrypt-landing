@@ -2769,6 +2769,113 @@ footer .bottom {
 /* A7: odometer on .facts .num — tabular numerals already; JS animates textContent */
 .fact .num { font-variant-numeric: tabular-nums; }
 
+/* ====================== COMMIT 5A.2: HAMBURGER DRAWER ====================== */
+.burger {
+  display: none;
+  width: 36px; height: 36px;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-mute);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.burger:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  z-index: 79;
+}
+.drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+.mobile-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(320px, 86vw);
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: 80;
+  visibility: hidden;
+}
+.mobile-drawer.open { transform: translateX(0); visibility: visible; }
+.mobile-drawer header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-drawer .drawer-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.mobile-drawer .drawer-close {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-mute);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mobile-drawer .drawer-close:hover { color: var(--ink); border-color: var(--ink-faint); }
+.mobile-drawer .drawer-nav {
+  flex: 1;
+  display: flex; flex-direction: column;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+.mobile-drawer .drawer-nav a {
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+}
+.mobile-drawer .drawer-nav a:hover {
+  background: var(--bg-2);
+  border-left-color: var(--teal);
+}
+.mobile-drawer .drawer-foot {
+  padding: 16px 22px 22px;
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mobile-drawer .drawer-theme-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-mute);
+  font-size: 13px;
+  background: transparent;
+  cursor: pointer;
+  width: max-content;
+  transition: all 0.2s;
+}
+.mobile-drawer .drawer-theme-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+.mobile-drawer .drawer-cta { justify-content: center; text-align: center; }
+body.drawer-open { overflow: hidden; }
+
+@media (max-width: 768px) {
+  .burger { display: inline-flex; }
+  nav.top .right > .cta-pill { display: none; }
+  nav.top .right > .t-toggle { display: none; }
+}
+
 /* ====================== COMMIT 4B: MOBILE LAYOUT TRANSFORMS ====================== */
 .mob-secnav { display: none; }
 .more-btn { display: none; }
@@ -2973,9 +3080,49 @@ footer .bottom {
         </svg>
       </button>
       <a class="cta-pill" href="mailto:waitlist@vitacrypt.xyz">Join waitlist</a>
+      <button class="burger" id="burgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+          <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="0" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- ========== MOBILE DRAWER ========== -->
+<div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <header>
+    <span id="drawerTitle" class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+  <nav class="drawer-nav" aria-label="Sections">
+    <a href="#thesis" data-drawer-link>01 · Thesis</a>
+    <a href="#fabric" data-drawer-link>02 · Data fabric</a>
+    <a href="#research" data-drawer-link>03 · Live science</a>
+    <a href="#pipeline" data-drawer-link>04 · Walkthrough</a>
+    <a href="#case" data-drawer-link>06 · Case study</a>
+    <a href="#roadmap" data-drawer-link>08 · Roadmap</a>
+    <a href="#why" data-drawer-link>09 · Why now</a>
+    <a href="litepaper.html" data-drawer-link>Read litepaper →</a>
+  </nav>
+  <footer class="drawer-foot">
+    <button id="drawerThemeToggle" class="drawer-theme-btn" aria-label="Toggle theme">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M11.5 8.5a4.5 4.5 0 0 1-6-6 4.5 4.5 0 1 0 6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Toggle theme</span>
+    </button>
+    <a class="cta-pill drawer-cta" href="mailto:marketing@vitacrypt.xyz">Join waitlist</a>
+  </footer>
+</aside>
 
 <!-- ========== HERO ========== -->
 <header class="hero">
@@ -4311,6 +4458,69 @@ if (heroProfile) {
 (function mobileUI(){
   const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
   const PIPE_AUTOPLAY_PAUSE_MS = 8000;
+
+  // 5A.2: Hamburger drawer
+  const burger = document.getElementById('burgerBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+  const drawerLinks = document.querySelectorAll('[data-drawer-link]');
+
+  if (burger && drawer && backdrop) {
+    let prevFocus = null;
+
+    function getFocusable() {
+      return drawer.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    }
+    function openDrawer() {
+      prevFocus = document.activeElement;
+      drawer.classList.add('open');
+      backdrop.classList.add('open');
+      document.body.classList.add('drawer-open');
+      burger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      backdrop.setAttribute('aria-hidden', 'false');
+      // focus first focusable element
+      const focusables = getFocusable();
+      if (focusables.length) setTimeout(() => focusables[0].focus(), 100);
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.body.classList.remove('drawer-open');
+      burger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      backdrop.setAttribute('aria-hidden', 'true');
+      if (prevFocus && prevFocus.focus) prevFocus.focus();
+    }
+
+    burger.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+    drawerLinks.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Esc to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+    });
+
+    // Focus trap
+    drawer.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !drawer.classList.contains('open')) return;
+      const focusables = Array.from(getFocusable());
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    // Drawer theme toggle reuses main toggle
+    if (drawerThemeToggle && tBtn) {
+      drawerThemeToggle.addEventListener('click', () => tBtn.click());
+    }
+  }
 
   // M1: hero carousel dots
   const sideStack = document.querySelector('.hero-stage .side-stack');
