@@ -2769,6 +2769,182 @@ footer .bottom {
 /* A7: odometer on .facts .num — tabular numerals already; JS animates textContent */
 .fact .num { font-variant-numeric: tabular-nums; }
 
+/* ====================== COMMIT 5A.4: WAITLIST FORM MODAL ====================== */
+.form-modal {
+  position: fixed; inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 90;
+  padding: 24px;
+}
+.form-modal.open { display: flex; }
+.form-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.65);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.form-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 36px 80px -20px rgba(0,0,0,0.6);
+  z-index: 1;
+}
+.form-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.form-eyebrow {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.form-card h3 {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.form-close {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-mute);
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.form-close:hover { color: var(--ink); border-color: var(--ink-faint); }
+.form-intro {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
+}
+.form-fields {
+  display: flex; flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.form-field {
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.form-optional {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  transition: all 0.15s;
+  width: 100%;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--ink-faint);
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-glow);
+}
+.form-field textarea {
+  resize: vertical;
+  min-height: 70px;
+  font-family: inherit;
+}
+.form-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2395A0CC' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: var(--ink-mute);
+  line-height: 1.45;
+  cursor: pointer;
+}
+.form-consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  margin-top: 2px;
+  accent-color: var(--teal);
+}
+.form-honey {
+  position: absolute; left: -9999px;
+  width: 1px; height: 1px;
+  opacity: 0;
+}
+.form-submit { width: 100%; justify-content: center; }
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.form-status {
+  margin-top: 12px;
+  font-size: 13px;
+  text-align: center;
+  min-height: 18px;
+}
+.form-status.error { color: var(--rose); }
+.form-status.success { color: var(--teal); }
+.form-fallback {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.form-fallback a { color: var(--teal); }
+.form-fallback a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .form-modal { padding: 0; align-items: stretch; }
+  .form-card {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    padding: 24px 22px 32px;
+  }
+}
+
 /* ====================== COMMIT 5A.2: HAMBURGER DRAWER ====================== */
 .burger {
   display: none;
@@ -3079,7 +3255,7 @@ body.drawer-open { overflow: hidden; }
           <path d="M11.5 8.5a4.5 4.5 0 0 1-6-6 4.5 4.5 0 1 0 6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
-      <a class="cta-pill" href="mailto:waitlist@vitacrypt.xyz">Join waitlist</a>
+      <a class="cta-pill" href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist">Join waitlist</a>
       <button class="burger" id="burgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
         <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
           <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -3120,7 +3296,7 @@ body.drawer-open { overflow: hidden; }
       </svg>
       <span>Toggle theme</span>
     </button>
-    <a class="cta-pill drawer-cta" href="mailto:marketing@vitacrypt.xyz">Join waitlist</a>
+    <a class="cta-pill drawer-cta" href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist">Join waitlist</a>
   </footer>
 </aside>
 
@@ -3144,7 +3320,7 @@ body.drawer-open { overflow: hidden; }
       </p>
 
       <div class="hero-cta">
-        <a href="mailto:waitlist@vitacrypt.xyz" class="btn btn-glow">
+        <a href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist" class="btn btn-glow">
           Join the waitlist
           <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -4082,7 +4258,7 @@ body.drawer-open { overflow: hidden; }
     <h2>If your biology is going to be <span class="ac">read,</span> it should be by something that can't <span class="ac">see.</span></h2>
     <p>VitaCrypt opens to its first design partners in Q4 2026. Investors and prospective partners — reach out directly.</p>
     <div class="hero-cta">
-      <a href="mailto:waitlist@vitacrypt.xyz" class="btn btn-glow">
+      <a href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist" class="btn btn-glow">
         Request access
         <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -4119,7 +4295,7 @@ body.drawer-open { overflow: hidden; }
         <h5>Resources</h5>
         <ul>
           <li><a href="litepaper.html">Litepaper</a></li>
-          <li><a href="mailto:waitlist@vitacrypt.xyz">Waitlist</a></li>
+          <li><a href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist">Waitlist</a></li>
           <li><a href="https://x.com/vita_crypt">X / Twitter</a></li>
           <li><a href="https://t.me/vita_crypt">Telegram</a></li>
         </ul>
@@ -4139,6 +4315,74 @@ body.drawer-open { overflow: hidden; }
     </div>
   </div>
 </footer>
+
+<!-- ========== MOBILE STICKY SECTION NAV ========== -->
+<nav class="mob-secnav" aria-label="Sections">
+  <button data-target="thesis">01</button>
+  <button data-target="fabric">02</button>
+  <button data-target="research">03</button>
+  <button data-target="pipeline">04</button>
+  <button data-target="diff">05</button>
+  <button data-target="case">06</button>
+  <button data-target="insights">07</button>
+  <button data-target="roadmap">08</button>
+  <button data-target="why">09</button>
+</nav>
+
+<!-- ========== WAITLIST FORM MODAL ========== -->
+<div class="form-modal" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="formTitle" aria-hidden="true">
+  <div class="form-backdrop" id="formBackdrop"></div>
+  <form class="form-card" id="waitlistForm" novalidate>
+    <header class="form-head">
+      <div>
+        <span class="form-eyebrow">VitaCrypt access</span>
+        <h3 id="formTitle">Join the waitlist</h3>
+      </div>
+      <button type="button" class="form-close" id="formClose" aria-label="Close form">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+    <p class="form-intro">Tell us who you are. We respond within 48 hours.</p>
+    <div class="form-fields">
+      <label class="form-field">
+        <span class="form-label">Name</span>
+        <input name="name" type="text" required maxlength="100" autocomplete="name" placeholder="Your full name">
+      </label>
+      <label class="form-field">
+        <span class="form-label">Email</span>
+        <input name="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@domain.com">
+      </label>
+      <label class="form-field">
+        <span class="form-label">I am a…</span>
+        <select name="audience" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="investor">Investor</option>
+          <option value="user">User / patient</option>
+          <option value="press">Press / journalist</option>
+          <option value="partner">Partner (lab / clinic / academic)</option>
+        </select>
+      </label>
+      <label class="form-field">
+        <span class="form-label">Message <span class="form-optional">(optional)</span></span>
+        <textarea name="message" maxlength="500" rows="3" placeholder="What brings you here?"></textarea>
+      </label>
+      <label class="form-consent">
+        <input name="consent" type="checkbox" required>
+        <span>I consent to VitaCrypt receiving and reviewing this message. We do not share, sell, or store it beyond our internal review.</span>
+      </label>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" class="form-honey" aria-hidden="true">
+    </div>
+    <button type="submit" class="btn btn-glow form-submit" id="formSubmit">
+      Send
+      <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="form-status" id="formStatus" aria-live="polite"></p>
+    <p class="form-fallback">Prefer email? <a href="mailto:marketing@vitacrypt.xyz">marketing@vitacrypt.xyz</a></p>
+  </form>
+</div>
 
 <script>
 // ====================== GLOBAL UTILS (commit 4C) ======================
@@ -4519,6 +4763,119 @@ if (heroProfile) {
     // Drawer theme toggle reuses main toggle
     if (drawerThemeToggle && tBtn) {
       drawerThemeToggle.addEventListener('click', () => tBtn.click());
+    }
+  }
+
+  // 5A.4: Waitlist form modal
+  const modal = document.getElementById('waitlistModal');
+  const form = document.getElementById('waitlistForm');
+  const formBackdrop = document.getElementById('formBackdrop');
+  const formClose = document.getElementById('formClose');
+  const formStatus = document.getElementById('formStatus');
+  const formSubmit = document.getElementById('formSubmit');
+  const formTriggers = document.querySelectorAll('[data-action="open-waitlist"]');
+
+  if (modal && form) {
+    let prevFocus = null;
+    function getFormFocusable() {
+      return modal.querySelectorAll('input, select, textarea, button, a');
+    }
+    function openForm(e) {
+      if (e) e.preventDefault();
+      prevFocus = document.activeElement;
+      // close drawer if open
+      if (drawer && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        document.body.classList.remove('drawer-open');
+        if (burger) burger.setAttribute('aria-expanded', 'false');
+      }
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('drawer-open'); // reuse scroll lock
+      // update URL hash for deeplink (no scroll)
+      if (location.hash !== '#waitlist') history.replaceState(null, '', '#waitlist');
+      // focus first input
+      setTimeout(() => form.querySelector('input[name="name"]')?.focus(), 100);
+    }
+    function closeForm() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('drawer-open');
+      if (location.hash === '#waitlist') history.replaceState(null, '', location.pathname);
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+      formSubmit.disabled = false;
+      if (prevFocus && prevFocus.focus) prevFocus.focus();
+    }
+
+    formTriggers.forEach(t => t.addEventListener('click', openForm));
+    formClose.addEventListener('click', closeForm);
+    formBackdrop.addEventListener('click', closeForm);
+
+    // Esc to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeForm();
+    });
+
+    // Focus trap inside form
+    form.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !modal.classList.contains('open')) return;
+      const focusables = Array.from(getFormFocusable()).filter(el => !el.disabled && el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    // Submit handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Native validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      formStatus.textContent = 'Sending…';
+      formStatus.className = 'form-status';
+      formSubmit.disabled = true;
+
+      const fd = new FormData(form);
+      const payload = {
+        name: fd.get('name'),
+        email: fd.get('email'),
+        audience: fd.get('audience'),
+        message: fd.get('message') || '',
+        consent: fd.get('consent') === 'on',
+        company: fd.get('company') || ''
+      };
+
+      try {
+        const r = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          throw new Error(data.error || `HTTP ${r.status}`);
+        }
+        formStatus.textContent = "Thanks. We'll reach out within 48h.";
+        formStatus.className = 'form-status success';
+        form.reset();
+        setTimeout(closeForm, 2400);
+      } catch (err) {
+        console.error('Waitlist submit failed:', err);
+        formStatus.textContent = 'Submission failed. Please email marketing@vitacrypt.xyz';
+        formStatus.className = 'form-status error';
+        formSubmit.disabled = false;
+      }
+    });
+
+    // Deeplink: #waitlist opens form on load
+    if (location.hash === '#waitlist') {
+      setTimeout(() => openForm(), 300);
     }
   }
 
@@ -4920,19 +5277,6 @@ const DESKTOP_MQ = matchMedia('(min-width: 1024px) and (hover: hover)');
   requestAnimationFrame(frame);
 })();
 </script>
-
-<!-- ========== MOBILE STICKY SECTION NAV ========== -->
-<nav class="mob-secnav" aria-label="Sections">
-  <button data-target="thesis">01</button>
-  <button data-target="fabric">02</button>
-  <button data-target="research">03</button>
-  <button data-target="pipeline">04</button>
-  <button data-target="diff">05</button>
-  <button data-target="case">06</button>
-  <button data-target="insights">07</button>
-  <button data-target="roadmap">08</button>
-  <button data-target="why">09</button>
-</nav>
 
 </body>
 </html>
