@@ -187,7 +187,30 @@ nav.top .back {
   font-size: 12.5px; color: var(--ink-mute); transition: all 0.2s;
 }
 nav.top .back:hover { color: var(--ink); border-color: var(--ink-faint); text-decoration: none; }
-@media (max-width: 900px) { nav.top .toc { display: none; } }
+@media (max-width: 900px) {
+  nav.top .toc {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    backdrop-filter: saturate(1.4) blur(14px);
+    border-top: 1px solid var(--line);
+    padding: 8px 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    z-index: 70;
+    gap: 2px;
+  }
+  nav.top .toc::-webkit-scrollbar { display: none; }
+  nav.top .toc a {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+  body { padding-bottom: 56px; }
+}
 
 /* DOC HEAD */
 .doc-head {
