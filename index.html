@@ -3252,7 +3252,7 @@ body.drawer-open { overflow: hidden; }
       </p>
 
       <p class="lead">
-        VitaCrypt unifies your <strong>genetics, microbiome, wearables, labs, and environment</strong> into a single living health profile — encrypted on your device under a key only you hold, analyzed on a blind server that <strong>never sees plaintext</strong>. Targeting the Zama Concrete ML / TFHE stack.
+        VitaCrypt encrypts your DNA, wearable, and environment signals under a key only you hold. A blind server analyzes them on ciphertext alone. Microbiome and lab connections follow in 2027.
       </p>
 
       <div class="hero-cta">
@@ -3430,19 +3430,19 @@ body.drawer-open { overflow: hidden; }
   <div class="fact"><div class="num">6</div><div class="lbl">Layers unified · DNA · microbiome · wearable · lab · environment · PROMIS survey</div></div>
   <div class="fact"><div class="num">TFHE</div><div class="lbl">Compute on ciphertext · Zama Concrete ML target stack</div></div>
   <div class="fact"><div class="num">0</div><div class="lbl">Bytes ever decrypted on VitaCrypt infrastructure</div></div>
-  <div class="fact"><div class="num">37M<span class="unit">+</span></div><div class="lbl">PubMed records + Cochrane reviews cross-referenced</div></div>
+  <div class="fact"><div class="num">~40M</div><div class="lbl">Records indexed across PubMed &amp; Cochrane · cross-referenced per recommendation</div></div>
 </div>
 
 <!-- ========== THESIS ========== -->
 <section id="thesis">
   <div class="wrap">
     <div class="eyebrow">01 · Thesis</div>
-    <h2 class="stitle">Health intelligence forces a false choice between <span class="ac">useful</span> and <span class="ac">private.</span></h2>
+    <h2 class="stitle">Most health apps see your raw data. We don't.</h2>
 
     <div class="thesis-grid">
       <div>
         <p class="clamp-mob">The most valuable signals about your health — your DNA, your microbiome, your bloodwork — are the ones you should trust the fewest companies with. Today the deal is binary: hand over plaintext biology, or live with advice tuned to the median human who doesn't exist.</p>
-        <p class="clamp-mob"><strong>Fully Homomorphic Encryption changes the bargain.</strong> Your phone encrypts under a key only you hold (iOS&nbsp;Keychain&nbsp;/&nbsp;Android&nbsp;Keystore). Our compute servers run analysis directly on the ciphertext — mathematically indistinguishable from noise without your key. Apple shipped this same primitive (BFV) on every iOS&nbsp;18 device. The cryptography just became consumer-grade.</p>
+        <p class="clamp-mob"><strong>Fully Homomorphic Encryption changes the bargain.</strong> Your phone encrypts under a key only you hold (iOS&nbsp;Keychain / Android&nbsp;Keystore). Our compute servers run analysis directly on the ciphertext. Without your key, the data is mathematically indistinguishable from noise.<sup><a href="litepaper.html#crypto">1</a></sup></p>
       </div>
       <div class="right">
         <h4>The four failures we replace</h4>
@@ -3471,7 +3471,7 @@ body.drawer-open { overflow: hidden; }
 <section id="fabric">
   <div class="wrap">
     <div class="eyebrow">02 · The data fabric</div>
-    <h2 class="stitle">Six streams of biology, fused into <span class="ac">one living profile.</span></h2>
+    <h2 class="stitle">Six streams of biology. One queryable profile.</h2>
     <p class="lede">Encryption is one pillar; the other is the scope of what we unify. Wearable APIs (unified via <strong>Terra API</strong>), open environmental data, lab results, microbiome assays, genetic reports, and NIH-validated <strong>PROMIS</strong> short-forms — all pulled together on the device, in your possession, before anything is encrypted or transmitted.</p>
 
     <div class="fabric-wrap">
@@ -3596,13 +3596,13 @@ body.drawer-open { overflow: hidden; }
 <section id="research">
   <div class="wrap">
     <div class="eyebrow">03 · Live science</div>
-    <h2 class="stitle">Live research watch — the part <span class="ac">static apps don't do.</span></h2>
+    <h2 class="stitle">Every recommendation cites its source.</h2>
     <p class="lede">Most health apps tell you what was true in 2018. We tell you what was published this week. Recommendations re-evaluate every time a new paper, GWAS hit, or regulatory update lands in one of the corpora below.</p>
 
     <div class="research-corpora">
       <div class="corpus">
         <div class="nm"><span class="dot"></span>PubMed</div>
-        <p class="why">~37M biomedical records · NLM open data · live queries</p>
+        <p class="why">~40M indexed records · NLM open data · queried live</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>OpenAlex</div>
@@ -3648,7 +3648,7 @@ body.drawer-open { overflow: hidden; }
 <section id="pipeline">
   <div class="wrap">
     <div class="eyebrow">04 · The architecture · live</div>
-    <h2 class="stitle">Watch one insight emerge from data <span class="ac">no one can read.</span></h2>
+    <h2 class="stitle">Walk through the architecture.</h2>
     <p class="lede">Click any stage. The architecture, the encryption state, and the phone respond together. Auto-plays on first scroll.</p>
 
     <div class="pipe-wrap">
@@ -3776,7 +3776,7 @@ body.drawer-open { overflow: hidden; }
 <section id="diff">
   <div class="wrap">
     <div class="eyebrow">05 · Versus the field</div>
-    <h2 class="stitle">The intersection of <span class="ac">unified</span> and <span class="ac">truly private</span> is empty.</h2>
+    <h2 class="stitle">Unified health profiles always meant centralized databases. Until now.</h2>
     <p class="lede">Keep your Oura. Keep your Apple Watch. Keep your Whoop. We connect to all of them — and add what they can't see. Three axes where the consumer health stack breaks down — and what we do instead.</p>
 
     <div class="diff-banner">
@@ -3842,7 +3842,7 @@ body.drawer-open { overflow: hidden; }
 <section id="case">
   <div class="wrap">
     <div class="eyebrow">06 · Case study</div>
-    <h2 class="stitle">25, Los Angeles, breathing on the <span class="ac">97th</span> percentile.</h2>
+    <h2 class="stitle">25, Los Angeles, breathing on the 97th percentile.</h2>
     <p class="lede">A composite case from the litepaper. Values illustrative, methodology real.</p>
 
     <div class="case-wrap">
@@ -3934,7 +3934,7 @@ body.drawer-open { overflow: hidden; }
 <section id="insights">
   <div class="wrap">
     <div class="eyebrow">07 · A week in the protocol</div>
-    <h2 class="stitle">One person. Three different combinations. <span class="ac">Three different prescriptions.</span></h2>
+    <h2 class="stitle">One person. Three combinations. Three prescriptions.</h2>
     <p class="lede">A single living profile means the answer changes when the inputs change. Here is David — same biology, same person — across three moments of the same week. Each card is the action VitaCrypt actually puts in front of him.</p>
 
     <div class="gallery-banner">
@@ -3984,7 +3984,7 @@ body.drawer-open { overflow: hidden; }
           <span class="when">Tue · 06:42</span>
           <span class="who">Air × MTHFR × HRV</span>
         </div>
-        <h4>Your air, your folate cycle, your <span class="ac">HRV are one story.</span></h4>
+        <h4>Your air, your folate cycle, your HRV are one story.</h4>
 
         <div class="signal-meter">
           <div class="signals">
@@ -4027,7 +4027,7 @@ body.drawer-open { overflow: hidden; }
           <span class="when">Thu · 19:15</span>
           <span class="who">Caffeine × CYP1A2 × debt</span>
         </div>
-        <h4>Your espresso clears <span class="ac">8 hours slower</span> than the average human.</h4>
+        <h4>Your espresso clears 8 hours slower than the average human.</h4>
 
         <div class="signal-meter">
           <div class="signals">
@@ -4070,7 +4070,7 @@ body.drawer-open { overflow: hidden; }
           <span class="when">Sun · 09:30</span>
           <span class="who">Training × ApoE × ApoB</span>
         </div>
-        <h4>Your weekly load is helping your heart <span class="ac">more than your brain.</span></h4>
+        <h4>Your weekly load is helping your heart more than your brain.</h4>
 
         <div class="signal-meter">
           <div class="signals">
@@ -4119,7 +4119,7 @@ body.drawer-open { overflow: hidden; }
 <section id="roadmap">
   <div class="wrap-tight">
     <div class="eyebrow">08 · Trajectory</div>
-    <h2 class="stitle">A <span class="ac">measured</span> path to general availability.</h2>
+    <h2 class="stitle">A measured path to general availability.</h2>
     <p class="lede">Depth before breadth. Each phase compounds on the last.</p>
 
     <div class="roadmap-grid">
@@ -4155,8 +4155,8 @@ body.drawer-open { overflow: hidden; }
 <section id="why">
   <div class="wrap">
     <div class="eyebrow">09 · Why now</div>
-    <h2 class="stitle">Three curves met in the last <span class="ac">eighteen months.</span></h2>
-    <p class="lede">Apple shipped homomorphic encryption (BFV) on every iOS 18 device in 2024 — the same crypto family we use. Zama's encrypted-genome ancestry benchmark hit <strong>96% accuracy in ~300s on a single CPU</strong> (Zama bounty&nbsp;#95, 1000 Genomes test set). And the 23andMe breach finished the job of teaching consumers that "we encrypt at rest" is not a privacy story.</p>
+    <h2 class="stitle">Three curves met in the last eighteen months.</h2>
+    <p class="lede">Zama's encrypted-DNA benchmark hit <strong>96% ancestry-classification accuracy in ~5 minutes</strong> on chromosome 22 (<a href="https://github.com/zama-ai/bounty-program/issues/95">bounty #95</a>, July 2024). Mobile FHE client SDKs (iOS, May 2025) made client-side encryption practical for consumer apps. And the 23andMe breach finished the job of teaching consumers that &quot;we encrypt at rest&quot; is not a privacy story.</p>
 
     <div class="kpi-grid">
       <div class="kpi">
@@ -4186,7 +4186,7 @@ body.drawer-open { overflow: hidden; }
 <!-- ========== FINAL ========== -->
 <section class="final">
   <div class="wrap-tight">
-    <h2>If your biology is going to be <span class="ac">read,</span> it should be by something that can't <span class="ac">see.</span></h2>
+    <h2>If your biology is going to be read, it should be by something that can't see.</h2>
     <p>VitaCrypt opens to its first design partners in Q4 2026. Investors and prospective partners — reach out directly.</p>
     <div class="hero-cta">
       <a href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist" class="btn btn-glow">
