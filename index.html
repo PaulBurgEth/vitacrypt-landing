@@ -252,7 +252,7 @@ nav.top .tabs a.demo-link {
 nav.top .tabs a.demo-link .pulse {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--teal); box-shadow: 0 0 8px var(--teal);
-  animation: pulse 1.8s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
 }
 nav.top .right { display: flex; align-items: center; gap: 8px; }
 .t-toggle {
@@ -276,9 +276,9 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
 }
 .cta-pill:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -6px var(--teal-glow); }
 
-@keyframes pulse {
+@keyframes heartbeat {
   0%, 100% { opacity: 0.55; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.15); }
+  50%      { opacity: 1;    transform: scale(1.15); }
 }
 
 /* ====================== HERO ====================== */
@@ -324,7 +324,7 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
 .hero .status .dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--teal); box-shadow: 0 0 12px var(--teal);
-  animation: pulse 2s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
 }
 .hero .status strong { color: var(--ink); font-weight: 600; }
 
@@ -750,7 +750,7 @@ h2.stitle .ac {
 .pipe-head .ttl::before {
   content: ''; width: 8px; height: 8px; border-radius: 50%;
   background: var(--teal); box-shadow: 0 0 10px var(--teal);
-  animation: pulse 1.8s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
 }
 .pipe-tabs {
   display: flex; gap: 2px;
@@ -2293,7 +2293,7 @@ footer .bottom {
 .hero-card .hc-head .live-dot::before {
   content: ''; width: 5px; height: 5px; border-radius: 50%;
   background: var(--teal); box-shadow: 0 0 6px var(--teal);
-  animation: pulse 1.8s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
 }
 
 /* Profile card */
@@ -2381,7 +2381,7 @@ footer .bottom {
   right: -2px; top: -1px;
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--teal); box-shadow: 0 0 6px var(--teal);
-  animation: pulse 1.6s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
 }
 .hero-card.profile.in .src-bar .fill { right: var(--gap, 6%); }
 
@@ -2610,6 +2610,111 @@ footer .bottom {
   border-color: color-mix(in srgb, var(--teal-deep) 80%, var(--line));
 }
 .gallery-banner .vs .arrow { color: var(--ink-faint); }
+
+/* ====================== COMMIT 4C: PREMIUM ANIMATIONS ====================== */
+/* E3: hero typewriter — h1 ghost + caret */
+.hero h1 { position: relative; }
+.hero h1 .h1-ghost {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.22em;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  opacity: 0.4;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 1em;
+  transition: opacity 0.5s ease, height 0.5s ease, margin 0.5s ease;
+}
+.hero h1.typed .h1-ghost { opacity: 0; height: 0; margin: 0; }
+.hero h1 .h1-cursor {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.85em;
+  background: var(--teal);
+  vertical-align: -0.08em;
+  margin-left: 0.06em;
+  animation: caretBlink 1s steps(2, end) infinite;
+}
+.hero h1.typed .h1-cursor { opacity: 0; animation: none; }
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* A1: ciphertext dissolve caption near phone */
+.dissolve {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-top: 8px;
+  transition: color 0.4s;
+}
+.dissolve.cipher { color: var(--teal); opacity: 0.75; }
+
+/* A2: living waveform under hero */
+.hero-wave {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 96px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: calc(0.35 + var(--hr-pulse, 0) * 0.25);
+}
+.hero-wave path {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 1.1;
+  opacity: 0.45;
+}
+.hero-wave path.echo {
+  stroke: var(--indigo);
+  opacity: 0.25;
+}
+
+/* A3: section decryption scanline (one-shot) */
+.decrypt-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.decrypt-sweep::after {
+  content: '9F3B C24E 7AD1 8802 F15C B43E AA90 6B2D E14A 0C81 7E22 4F0B AC73 5601 E88A 12FD B6C0 4D29 71F4 8E32';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  opacity: 0;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--teal-glow) 90%, transparent) 45%,
+    color-mix(in srgb, var(--teal-glow) 90%, transparent) 55%,
+    transparent 100%);
+  pointer-events: none;
+  transform: translateY(-100%);
+  white-space: pre-wrap;
+  word-break: break-all;
+  padding: 20px 22px;
+  z-index: 4;
+  animation: scanSweep 1100ms ease-out forwards;
+  mix-blend-mode: screen;
+}
+@keyframes scanSweep {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(130%); opacity: 0; }
+}
+
+/* A7: odometer on .facts .num — tabular numerals already; JS animates textContent */
+.fact .num { font-variant-numeric: tabular-nums; }
 
 /* ====================== COMMIT 4B: MOBILE LAYOUT TRANSFORMS ====================== */
 .mob-secnav { display: none; }
@@ -2849,6 +2954,7 @@ footer .bottom {
         <span>6 data layers unified</span>
         <span>Evidence-cited</span>
       </div>
+      <span class="dissolve" id="dissolveCap" aria-hidden="true">0× encrypted · 9F3B C24E 7AD1 8802 F15C</span>
     </div>
 
     <!-- Phone + unified profile + ciphertext stream stage -->
@@ -3004,6 +3110,10 @@ footer .bottom {
 
     </div><!-- /hero-stage -->
   </div><!-- /wrap inner -->
+  <svg class="hero-wave" id="heroWave" viewBox="0 0 1440 96" preserveAspectRatio="none" aria-hidden="true">
+    <path class="echo" d="M0,48 L1440,48"></path>
+    <path d="M0,48 L1440,48"></path>
+  </svg>
 </header>
 
 <!-- ========== FACTS ========== -->
@@ -3829,6 +3939,11 @@ footer .bottom {
 </footer>
 
 <script>
+// ====================== GLOBAL UTILS (commit 4C) ======================
+const HEX = '0123456789ABCDEF';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function randHex(){ return HEX[Math.floor(Math.random()*16)]; }
+
 // THEME
 const root = document.documentElement;
 const tBtn = document.getElementById('themeToggle');
@@ -4025,12 +4140,22 @@ const pipeObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 pipeObs.observe(document.getElementById('pipeline'));
 
-// Reveal on scroll
+// Reveal on scroll — extended with A3 scanline + A7 odometer (commit 4C)
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('in');
       revealObs.unobserve(e.target);
+      // A3: one-shot decryption scanline
+      if (!RM && !e.target.dataset.swept) {
+        e.target.dataset.swept = '1';
+        e.target.classList.add('decrypt-sweep');
+        setTimeout(() => e.target.classList.remove('decrypt-sweep'), 1300);
+      }
+      // A7: odometer on .facts numbers
+      if (!RM && e.target.classList.contains('facts')) {
+        e.target.querySelectorAll('.num').forEach(n => animateOdometer(n));
+      }
     }
   });
 }, { threshold: 0.12 });
@@ -4038,6 +4163,37 @@ document.querySelectorAll('section, .facts, .case-wrap').forEach(el => {
   el.classList.add('reveal');
   revealObs.observe(el);
 });
+
+// A7: odometer counter — count from 0 to target on viewport entry
+function animateOdometer(node){
+  if (node.dataset.counted) return;
+  node.dataset.counted = '1';
+  // Capture original innerHTML to preserve <span class="unit">+</span> etc.
+  const original = node.innerHTML;
+  // Extract leading numeric value (e.g., "6", "37M", "TFHE", "0")
+  const text = node.textContent.trim();
+  const m = text.match(/^([\d.]+)([MKBmkb]?)/);
+  if (!m) return;  // skip non-numeric like "TFHE"
+  const raw = m[1];
+  const suffix = m[2] || '';
+  const target = parseFloat(raw);
+  if (!isFinite(target) || target === 0) return;
+  // Preserve any trailing <span> content (e.g., "+" unit)
+  const tailMatch = original.match(/(<span[^>]*>.*?<\/span>)$/);
+  const tail = tailMatch ? tailMatch[1] : '';
+  const decimals = (raw.split('.')[1] || '').length;
+  const duration = 900;
+  const start = performance.now();
+  function step(now){
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out-cubic
+    const v = (target * eased).toFixed(decimals);
+    node.innerHTML = v + suffix + tail;
+    if (t < 1) requestAnimationFrame(step);
+    else node.innerHTML = original;  // restore exact original
+  }
+  requestAnimationFrame(step);
+}
 
 // HERO PROFILE — animate source bars when in view
 const heroProfile = document.getElementById('heroProfile');
@@ -4181,6 +4337,138 @@ if (heroProfile) {
       if (t) secObs.observe(t);
     });
   }
+})();
+
+// ====================== PREMIUM ANIMATIONS (commit 4C) ======================
+
+// E1: heartbeat tempo — single rAF cycle drives --hr-pulse var (0..1, ~1Hz sin)
+(function heartbeat(){
+  if (RM) { root.style.setProperty('--hr-pulse', '0.5'); return; }
+  let inView = true;
+  const hero = document.querySelector('header.hero');
+  if (hero) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { inView = e.isIntersecting; });
+    }, { threshold: 0 });
+    obs.observe(hero);
+  }
+  function tick(t){
+    if (inView && !document.hidden) {
+      const p = (Math.sin(t / 480) + 1) / 2; // ~1.3Hz, comfortable breathing
+      root.style.setProperty('--hr-pulse', p.toFixed(3));
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// E3: hero h1 typewriter with decrypting ghost
+(function heroTypewriter(){
+  const h1 = document.querySelector('header.hero h1');
+  if (!h1) return;
+  if (RM) return;
+  const html = h1.innerHTML;
+  const plain = h1.textContent.trim();
+  const cipherText = Array.from(plain).map(c => c === ' ' ? ' ' : randHex()).join('');
+  // Build wrappers: ghost line above + cursor at insertion point
+  h1.innerHTML = '<span class="h1-ghost">' + cipherText + '</span><span class="h1-typed"></span><span class="h1-cursor"></span>';
+  const typedEl = h1.querySelector('.h1-typed');
+  const ghostEl = h1.querySelector('.h1-ghost');
+  let i = 0;
+  const total = plain.length;
+  function step(){
+    if (i > total) return;
+    // Type plaintext char-by-char (raw — no HTML)
+    typedEl.textContent = plain.slice(0, i);
+    // Scramble remaining ghost chars
+    const remaining = total - i;
+    const ghostFrag = Array.from({ length: remaining }, () => randHex()).join('');
+    ghostEl.textContent = ghostFrag;
+    i++;
+    if (i <= total) {
+      setTimeout(step, 28);
+    } else {
+      // Restore the original HTML (with .accent span), tag as typed
+      h1.innerHTML = '<span class="h1-ghost">' + cipherText + '</span>' + html;
+      h1.classList.add('typed');
+    }
+  }
+  // Slight delay so layout settles
+  setTimeout(step, 200);
+})();
+
+// A1: dissolve caption — periodic hex scramble of trailing chars
+(function dissolveCap(){
+  const el = document.getElementById('dissolveCap');
+  if (!el) return;
+  if (RM) return;
+  const raw = el.textContent;
+  let timer = null;
+  let inView = false;
+  function mutate(){
+    const chars = raw.split('');
+    // pick 2-3 random hex-eligible positions and replace
+    const targets = new Set();
+    let safety = 0;
+    while (targets.size < 3 && safety++ < 30) {
+      const idx = Math.floor(Math.random() * chars.length);
+      if (/[0-9A-F]/.test(chars[idx])) targets.add(idx);
+    }
+    targets.forEach(i => { chars[i] = randHex(); });
+    el.textContent = chars.join('');
+  }
+  function start(){
+    if (timer || !inView || document.hidden) return;
+    el.classList.add('cipher');
+    timer = setInterval(mutate, 280);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { inView = e.isIntersecting; inView ? start() : stop(); });
+  }, { threshold: 0.5 });
+  obs.observe(el);
+  document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+})();
+
+// A2: living waveform — rAF morphs two SVG paths in hero
+(function heroWaveform(){
+  const svg = document.getElementById('heroWave');
+  if (!svg) return;
+  if (RM) return;
+  const paths = svg.querySelectorAll('path');
+  if (paths.length < 2) return;
+  const W = 1440, H = 96, MID = H / 2, POINTS = 80;
+  let inView = true;
+  const hero = document.querySelector('header.hero');
+  if (hero) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { inView = e.isIntersecting; });
+    }, { threshold: 0 });
+    obs.observe(hero);
+  }
+  function buildPath(phase, amp, freq){
+    let d = 'M 0 ' + MID;
+    for (let i = 1; i <= POINTS; i++){
+      const x = (i / POINTS) * W;
+      const y = MID + Math.sin(i / POINTS * Math.PI * 2 * freq + phase) * amp;
+      d += ' L ' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+  function tick(t){
+    if (inView && !document.hidden) {
+      const hr = parseFloat(getComputedStyle(root).getPropertyValue('--hr-pulse')) || 0.5;
+      const amp1 = 10 + hr * 14;
+      const amp2 = 6 + hr * 8;
+      paths[1].setAttribute('d', buildPath(t / 900, amp1, 3));
+      paths[0].setAttribute('d', buildPath(t / 1300 + 1.4, amp2, 2.2));
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 })();
 </script>
 
