@@ -430,8 +430,11 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
     0 0 0 4px #11151D,
     0 24px 60px -12px var(--teal-glow);
   overflow: hidden;
-  transform: rotateX(8deg) rotateY(-12deg) rotateZ(2deg);
+  transform: rotateX(calc(8deg + var(--phone-rx, 0deg)))
+             rotateY(calc(-12deg + var(--phone-ry, 0deg)))
+             rotateZ(2deg);
   transform-style: preserve-3d;
+  transition: transform 0.18s ease-out;
 }
 .phone .screen {
   position: absolute; inset: 6px;
@@ -2611,6 +2614,56 @@ footer .bottom {
 }
 .gallery-banner .vs .arrow { color: var(--ink-faint); }
 
+/* ====================== COMMIT 4D: DESKTOP POLISH ====================== */
+/* A4: magnetic cursor on .btn-glow (gated to desktop via JS) */
+.btn-glow {
+  transform: translate(var(--mag-x, 0), var(--mag-y, 0));
+  transition: transform 0.22s ease-out, box-shadow 0.25s ease;
+}
+
+/* A5: hue-shift on scoped decorative elements only */
+@media (min-width: 1024px) {
+  .cipher-stream,
+  .src-bar .fill,
+  .arch-arrow .line {
+    filter: hue-rotate(var(--accent-shift, 0deg));
+    transition: filter 0.6s ease;
+  }
+}
+
+/* A6: phone parallax — CSS vars consumed by .phone transform (defined above) */
+
+/* E2: theme scramble overlay */
+.theme-scramble-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+  text-align: center;
+  padding: 32px;
+}
+.theme-scramble-overlay.show { opacity: 1; pointer-events: auto; }
+
+/* E4: lattice noise canvas inside .pipe-arch — desktop only */
+.lattice-canvas {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .lattice-canvas {
+    display: block;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
 /* ====================== COMMIT 4C: PREMIUM ANIMATIONS ====================== */
 /* E3: hero typewriter — h1 ghost + caret */
 .hero h1 { position: relative; }
@@ -4469,6 +4522,190 @@ if (heroProfile) {
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+})();
+
+// ====================== DESKTOP POLISH (commit 4D) ======================
+
+const DESKTOP_MQ = matchMedia('(min-width: 1024px) and (hover: hover)');
+
+// A4: magnetic cursor on .btn-glow
+(function magneticCTA(){
+  if (RM) return;
+  function bindBtn(btn){
+    if (btn.dataset.mag) return;
+    btn.dataset.mag = '1';
+    const R = 60; // capture radius beyond button
+    const MAX = 7; // max px translate
+    function onMove(e){
+      if (!DESKTOP_MQ.matches) return;
+      const r = btn.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+      const maxR = Math.max(r.width, r.height) / 2 + R;
+      if (dist > maxR) { btn.style.setProperty('--mag-x', '0px'); btn.style.setProperty('--mag-y', '0px'); return; }
+      const k = Math.min(1, (maxR - dist) / maxR) * MAX;
+      btn.style.setProperty('--mag-x', (dx / maxR * k).toFixed(2) + 'px');
+      btn.style.setProperty('--mag-y', (dy / maxR * k).toFixed(2) + 'px');
+    }
+    function onLeave(){
+      btn.style.setProperty('--mag-x', '0px');
+      btn.style.setProperty('--mag-y', '0px');
+    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+    btn.addEventListener('mouseleave', onLeave);
+  }
+  document.querySelectorAll('.btn-glow').forEach(bindBtn);
+})();
+
+// A5: hue-shift on scoped decorative elements (desktop scroll-bound)
+(function hueShift(){
+  if (RM) return;
+  let raf = 0;
+  function update(){
+    raf = 0;
+    if (!DESKTOP_MQ.matches) {
+      root.style.setProperty('--accent-shift', '0deg');
+      return;
+    }
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    const t = Math.max(0, Math.min(1, window.scrollY / max));
+    const shift = (t * 14).toFixed(1) + 'deg'; // 0 → 14deg sweep
+    root.style.setProperty('--accent-shift', shift);
+  }
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+})();
+
+// A6: phone 3D parallax — mouse on desktop, scroll on mobile
+(function phoneParallax(){
+  if (RM) return;
+  const stage = document.querySelector('.hero-stage');
+  if (!stage) return;
+  if (DESKTOP_MQ.matches) {
+    stage.addEventListener('mousemove', (e) => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      // x left→right maps to ry (-3deg..+3deg); y top→bottom maps to rx (+2deg..-2deg)
+      root.style.setProperty('--phone-ry', (x * 6).toFixed(2) + 'deg');
+      root.style.setProperty('--phone-rx', (-y * 4).toFixed(2) + 'deg');
+    }, { passive: true });
+    stage.addEventListener('mouseleave', () => {
+      root.style.setProperty('--phone-ry', '0deg');
+      root.style.setProperty('--phone-rx', '0deg');
+    });
+  } else {
+    // mobile: bind to scroll position relative to hero
+    let raf = 0;
+    function update(){
+      raf = 0;
+      const r = stage.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const t = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2)));
+      root.style.setProperty('--phone-rx', (t * 3).toFixed(2) + 'deg');
+    }
+    window.addEventListener('scroll', () => { if (raf) return; raf = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+})();
+
+// E2: theme-toggle scramble overlay
+(function themeScramble(){
+  if (RM) return;
+  const btn = tBtn; // from THEME block above
+  if (!btn) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'theme-scramble-overlay';
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(overlay);
+  // Intercept by capturing click before existing listener? simpler: re-bind & re-emit
+  // We replace the existing flow: stop default toggle, run scramble, then toggle, then reverse.
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  newBtn.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    const next = cur === 'light' ? 'dark' : 'light';
+    const message = 're-encrypting view ' + Array.from({length:12},randHex).join('');
+    overlay.textContent = message;
+    overlay.classList.add('show');
+    // scramble characters 18×
+    let n = 0;
+    const id = setInterval(() => {
+      n++;
+      overlay.textContent = 're-encrypting view ' + Array.from({length:12},randHex).join('');
+      if (n === 8) {
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('vc-theme-d', next);
+      }
+      if (n > 16) {
+        clearInterval(id);
+        overlay.classList.remove('show');
+      }
+    }, 32);
+  });
+})();
+
+// E4: lattice noise canvas in pipeline arch (desktop only)
+(function latticeNoise(){
+  if (RM) return;
+  if (!DESKTOP_MQ.matches) return;
+  const arch = document.querySelector('.pipe-arch');
+  if (!arch) return;
+  const ct = arch.querySelector('.ct') || arch.querySelector('.arch-stage');
+  if (!ct) return;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'lattice-canvas';
+  canvas.width = 200; canvas.height = 120;
+  canvas.style.position = 'absolute';
+  canvas.style.left = '50%';
+  canvas.style.top = '52%';
+  canvas.style.transform = 'translate(-50%, -50%)';
+  canvas.style.width = '200px';
+  canvas.style.height = '120px';
+  canvas.style.zIndex = '2';
+  ct.style.position = ct.style.position || 'relative';
+  ct.appendChild(canvas);
+  const cx = canvas.getContext('2d');
+  const N = 70;
+  const dots = Array.from({length: N}, () => ({
+    x: Math.random() * 200,
+    y: Math.random() * 120,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: 0.6 + Math.random() * 1.4
+  }));
+  let inView = true;
+  let last = 0;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { inView = e.isIntersecting; });
+  }, { threshold: 0.1 });
+  obs.observe(arch);
+  function frame(t){
+    if (inView && !document.hidden && t - last > 33) {
+      last = t;
+      cx.clearRect(0, 0, 200, 120);
+      const teal = getComputedStyle(root).getPropertyValue('--teal').trim() || '#6B8AFF';
+      cx.fillStyle = teal;
+      cx.globalAlpha = 0.4;
+      for (let d of dots) {
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0 || d.x > 200) d.vx *= -1;
+        if (d.y < 0 || d.y > 120) d.vy *= -1;
+        cx.beginPath();
+        cx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        cx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 </script>
 
