@@ -126,8 +126,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
 
 <style>
 :root {
@@ -385,7 +385,7 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
   box-shadow: 0 16px 36px -12px rgba(45, 212, 191, 0.45);
 }
 .btn-glow:hover {
-  transform: translateY(-2px);
+  --lift: -2px;
   box-shadow: 0 22px 48px -12px rgba(45, 212, 191, 0.7), 0 0 0 4px var(--teal-glow);
 }
 .btn-ghost {
@@ -414,14 +414,6 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
 }
 
 /* ====================== HERO DEVICE (phone) ====================== */
-.hero-device {
-  position: relative;
-  width: 100%;
-  max-width: 460px;
-  margin: 0 auto;
-  aspect-ratio: 9 / 18.5;
-  perspective: 1400px;
-}
 .phone {
   position: absolute;
   inset: 0;
@@ -613,27 +605,6 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
 .phone-tabbar .tb.active .ic {
   background: var(--teal); box-shadow: 0 0 8px var(--teal);
 }
-
-/* Floating annotations around the device */
-.hero-annot {
-  position: absolute;
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--ink-mute);
-  text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px;
-  z-index: 2;
-}
-.hero-annot .line {
-  width: 28px; height: 1px;
-  background: linear-gradient(90deg, var(--teal), transparent);
-}
-.hero-annot.left { left: -120px; top: 18%; }
-.hero-annot.left .line { background: linear-gradient(90deg, transparent, var(--teal)); }
-.hero-annot.right { right: -130px; bottom: 22%; flex-direction: row-reverse; }
-.hero-annot .text strong { color: var(--ink); font-weight: 500; display: block; font-size: 11px; }
-@media (max-width: 1200px) { .hero-annot { display: none; } }
 
 /* ====================== FACTS RIBBON ====================== */
 .facts {
@@ -2163,47 +2134,6 @@ footer .bottom {
   white-space: nowrap;
 }
 
-.gal-card .contrast {
-  align-self: stretch;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.gal-card .contrast .side {
-  padding: 14px 14px 16px;
-  font-size: 12px;
-  line-height: 1.45;
-}
-.gal-card .contrast .side.them {
-  background: var(--bg-2);
-  border-right: 1px solid var(--line);
-}
-.gal-card .contrast .side.us {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--teal-glow) 60%, var(--surface)) 0%, var(--surface) 100%);
-}
-.gal-card .contrast .lbl {
-  font-family: 'Geist Mono', monospace;
-  font-size: 8.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  color: var(--ink-faint);
-}
-.gal-card .contrast .side.us .lbl { color: var(--teal); }
-.gal-card .contrast .advice {
-  color: var(--ink-mute);
-  font-size: 12.5px;
-  line-height: 1.55;
-}
-.gal-card .contrast .side.us .advice {
-  color: var(--ink-2);
-}
-.gal-card .contrast .side.us .advice strong { color: var(--ink); font-weight: 500; }
-.gal-card .contrast .side.us .advice .em-teal { color: var(--teal); font-weight: 500; }
-
 .gal-card .outcome {
   align-self: stretch;
   display: flex; justify-content: space-between; align-items: baseline;
@@ -2622,9 +2552,9 @@ footer .bottom {
 .gallery-banner .vs .arrow { color: var(--ink-faint); }
 
 /* ====================== COMMIT 4D: DESKTOP POLISH ====================== */
-/* A4: magnetic cursor on .btn-glow (gated to desktop via JS) */
+/* A4: magnetic cursor on .btn-glow (gated to desktop via JS); --lift folds in :hover rise */
 .btn-glow {
-  transform: translate(var(--mag-x, 0), var(--mag-y, 0));
+  transform: translate(var(--mag-x, 0px), calc(var(--mag-y, 0px) + var(--lift, 0px)));
   transition: transform 0.22s ease-out, box-shadow 0.25s ease;
 }
 
@@ -3006,7 +2936,6 @@ body.drawer-open { overflow: hidden; }
   .hero p.lead-punch{ order: 5; margin: 0; }
   .hero p.lead      { order: 6; margin: 0; }
   .hero-quick       { order: 7; margin-top: 0; }
-  .hero .dissolve   { order: 8; }
 
   /* M1: hero side-stack → horizontal scroll-snap carousel */
   .hero-stage {
@@ -3162,6 +3091,10 @@ body.drawer-open { overflow: hidden; }
   #thesis .thesis-grid > div:first-child { margin-bottom: 8px; }
   /* button label replaces the inner h4 to avoid redundancy */
   #thesis .thesis-grid .right h4 { display: none; }
+
+  /* 5C.3 perf: drop backdrop-blur on scroll-repainting fixed bars (mobile paint cost) */
+  nav.top { backdrop-filter: none; -webkit-backdrop-filter: none; background: color-mix(in srgb, var(--bg) 94%, transparent); }
+  .mob-secnav { backdrop-filter: none; -webkit-backdrop-filter: none; background: color-mix(in srgb, var(--bg) 96%, transparent); }
 
   /* M7: sticky bottom section nav */
   body { padding-bottom: 56px; }
@@ -4387,16 +4320,32 @@ const HEX = '0123456789ABCDEF';
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function randHex(){ return HEX[Math.floor(Math.random()*16)]; }
 
-// THEME
+// THEME (single handler; optional "re-encrypt" scramble overlay when motion allowed)
 const root = document.documentElement;
 const tBtn = document.getElementById('themeToggle');
 const stored = localStorage.getItem('vc-theme-d');
 if (stored) { root.setAttribute('data-theme', stored); }
-tBtn.addEventListener('click', () => {
+let themeOverlay = null;
+function setTheme(next){ root.setAttribute('data-theme', next); localStorage.setItem('vc-theme-d', next); }
+function toggleTheme(){
   const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  root.setAttribute('data-theme', next);
-  localStorage.setItem('vc-theme-d', next);
-});
+  if (RM) { setTheme(next); return; }
+  if (!themeOverlay){
+    themeOverlay = document.createElement('div');
+    themeOverlay.className = 'theme-scramble-overlay';
+    themeOverlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(themeOverlay);
+  }
+  themeOverlay.classList.add('show');
+  let n = 0;
+  const id = setInterval(() => {
+    n++;
+    themeOverlay.textContent = 're-encrypting view ' + Array.from({length:12}, randHex).join('');
+    if (n === 8) setTheme(next);
+    if (n > 16) { clearInterval(id); themeOverlay.classList.remove('show'); }
+  }, 32);
+}
+tBtn.addEventListener('click', toggleTheme);
 
 // PIPELINE STAGES
 const stages = [
@@ -4960,33 +4909,38 @@ const DESKTOP_MQ = matchMedia('(min-width: 1024px) and (hover: hover)');
 // A4: magnetic cursor on .btn-glow
 (function magneticCTA(){
   if (RM) return;
-  function bindBtn(btn){
-    if (btn.dataset.mag) return;
-    btn.dataset.mag = '1';
-    const R = 60; // capture radius beyond button
-    const MAX = 7; // max px translate
-    function onMove(e){
-      if (!DESKTOP_MQ.matches) return;
+  const R = 60, MAX = 7;           // capture radius beyond button, max px pull
+  const btns = Array.from(document.querySelectorAll('.btn-glow'));
+  if (!btns.length) return;
+  let active = new Set();
+  let ticking = false, lastE = null;
+  function reset(btn){ btn.style.removeProperty('--mag-x'); btn.style.removeProperty('--mag-y'); }
+  function process(){
+    ticking = false;
+    if (!lastE || !DESKTOP_MQ.matches) return;
+    const e = lastE;
+    for (const btn of btns){
+      // skip offscreen/hidden buttons (e.g. modal CTA, drawer CTA when closed)
+      if (btn.offsetParent === null) { if (active.has(btn)) { reset(btn); active.delete(btn); } continue; }
       const r = btn.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-      const dist = Math.hypot(dx, dy);
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
       const maxR = Math.max(r.width, r.height) / 2 + R;
-      if (dist > maxR) { btn.style.setProperty('--mag-x', '0px'); btn.style.setProperty('--mag-y', '0px'); return; }
-      const k = Math.min(1, (maxR - dist) / maxR) * MAX;
-      btn.style.setProperty('--mag-x', (dx / maxR * k).toFixed(2) + 'px');
-      btn.style.setProperty('--mag-y', (dy / maxR * k).toFixed(2) + 'px');
+      if (Math.hypot(dx, dy) > maxR) {
+        if (active.has(btn)) { reset(btn); active.delete(btn); }
+      } else {
+        const k = Math.min(1, (maxR - Math.hypot(dx, dy)) / maxR) * MAX;
+        btn.style.setProperty('--mag-x', (dx / maxR * k).toFixed(2) + 'px');
+        btn.style.setProperty('--mag-y', (dy / maxR * k).toFixed(2) + 'px');
+        active.add(btn);
+      }
     }
-    function onLeave(){
-      btn.style.setProperty('--mag-x', '0px');
-      btn.style.setProperty('--mag-y', '0px');
-    }
-    window.addEventListener('mousemove', onMove, { passive: true });
-    btn.addEventListener('mouseleave', onLeave);
   }
-  document.querySelectorAll('.btn-glow').forEach(bindBtn);
+  // single delegated listener; rAF-throttled; reads rects only inside the frame
+  window.addEventListener('mousemove', (e) => {
+    lastE = e;
+    if (!ticking) { ticking = true; requestAnimationFrame(process); }
+  }, { passive: true });
 })();
 
 // A5: hue-shift on scoped decorative elements (desktop scroll-bound)
@@ -5013,41 +4967,6 @@ const DESKTOP_MQ = matchMedia('(min-width: 1024px) and (hover: hover)');
 })();
 
 // E2: theme-toggle scramble overlay
-(function themeScramble(){
-  if (RM) return;
-  const btn = tBtn; // from THEME block above
-  if (!btn) return;
-  const overlay = document.createElement('div');
-  overlay.className = 'theme-scramble-overlay';
-  overlay.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(overlay);
-  // Intercept by capturing click before existing listener? simpler: re-bind & re-emit
-  // We replace the existing flow: stop default toggle, run scramble, then toggle, then reverse.
-  const newBtn = btn.cloneNode(true);
-  btn.parentNode.replaceChild(newBtn, btn);
-  newBtn.addEventListener('click', () => {
-    const cur = root.getAttribute('data-theme');
-    const next = cur === 'light' ? 'dark' : 'light';
-    const message = 're-encrypting view ' + Array.from({length:12},randHex).join('');
-    overlay.textContent = message;
-    overlay.classList.add('show');
-    // scramble characters 18×
-    let n = 0;
-    const id = setInterval(() => {
-      n++;
-      overlay.textContent = 're-encrypting view ' + Array.from({length:12},randHex).join('');
-      if (n === 8) {
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('vc-theme-d', next);
-      }
-      if (n > 16) {
-        clearInterval(id);
-        overlay.classList.remove('show');
-      }
-    }, 32);
-  });
-})();
-
 </script>
 
 </body>
