@@ -70,3 +70,21 @@ site. Findings actioned across commits 5C.1–5C.4.
 - missing consent → 400
 - `GET /docs/round-5/RESEARCH_FINDINGS.md` → 404 (internal notes not deployed)
 - `document.fonts.status` → "loaded"; hero h1 renders in Geist; no console errors
+
+## Round 5E — platform.html corrected (deep-dive, not a copy)
+
+5D v1 was wrong: it copied the whole landing into platform.html + a divergent
+navbar. Rebuilt 5E as genuine раскрытие:
+- Each pillar = NET-NEW content (mechanics + honest MVP-vs-roadmap scope +
+  evidence with real citations), not the landing's components.
+- Live demo / David case stay on the home page; platform links to them
+  (index.html#pipeline, #case) — no duplication.
+- Nav made identical to the main page (cross-page hrefs); mobile drawer keeps
+  in-page pillar links.
+- Removed the orphaned pipeline JS (stages/applyStage/startAutoplay/pipeObs +
+  dead M4 swipe block) so there is no observe(null); other hero-bound JS already
+  guards null.
+- New scoped CSS: vc-steps, vc-table+badges, evidence-grading, citation sample,
+  encryption-boundary diagram, evidence cards.
+- DROPPED the earlier "trim main to teasers" idea — main never deeply covered
+  the pillars, so there was nothing to move; main stays as the hook.
