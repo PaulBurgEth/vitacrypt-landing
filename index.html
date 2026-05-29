@@ -639,6 +639,52 @@ nav.top .right { display: flex; align-items: center; gap: 8px; }
   .fact:nth-child(1), .fact:nth-child(2) { border-bottom: 1px solid var(--line); }
 }
 
+/* ====================== FOUR PILLARS OVERVIEW (5D) ====================== */
+.pillars-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pillar-card {
+  display: flex; flex-direction: column;
+  padding: 24px 22px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.pillar-card:hover {
+  border-color: color-mix(in srgb, var(--teal) 50%, var(--line));
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -20px rgba(0,0,0,0.5), 0 0 0 1px var(--teal-glow);
+}
+.pillar-card .pc-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.pillar-card .pc-ix { color: var(--ink-faint); }
+.pillar-card .pc-tag { color: var(--teal); }
+.pillar-card h3 {
+  font-size: 18px; font-weight: 500; letter-spacing: -0.02em;
+  margin-bottom: 10px; line-height: 1.2;
+}
+.pillar-card p {
+  font-size: 13.5px; line-height: 1.5; color: var(--ink-mute);
+  margin-bottom: 18px; flex: 1;
+}
+.pillar-card p em { color: var(--ink-2); font-style: italic; }
+.pillar-card .pc-more {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--teal);
+}
+.pillars-cta { margin-top: 32px; }
+@media (max-width: 900px) { .pillars-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .pillars-grid { grid-template-columns: 1fr; } }
+
 /* ====================== SECTIONS ====================== */
 section { padding: 120px 0; position: relative; }
 @media (max-width: 768px) {
@@ -3168,7 +3214,7 @@ body.drawer-open { overflow: hidden; }
       <span class="tag">MVP</span>
     </a>
     <div class="tabs">
-      <a href="#thesis">Thesis</a>
+      <a href="#pillars">Platform</a>
       <a href="#pipeline" class="demo-link"><span class="pulse"></span>Walkthrough</a>
       <a href="litepaper.html">Read paper</a>
       <a href="#case">Case</a>
@@ -3205,6 +3251,7 @@ body.drawer-open { overflow: hidden; }
     </button>
   </header>
   <nav class="drawer-nav" aria-label="Sections">
+    <a href="#pillars" data-drawer-link>The platform · 4 pillars</a>
     <a href="#thesis" data-drawer-link>01 · Thesis</a>
     <a href="#fabric" data-drawer-link>02 · Data fabric</a>
     <a href="#research" data-drawer-link>03 · Live science</a>
@@ -3212,6 +3259,7 @@ body.drawer-open { overflow: hidden; }
     <a href="#case" data-drawer-link>06 · Case study</a>
     <a href="#roadmap" data-drawer-link>08 · Roadmap</a>
     <a href="#why" data-drawer-link>09 · Why now</a>
+    <a href="platform.html" data-drawer-link>The platform →</a>
     <a href="litepaper.html" data-drawer-link>Read litepaper →</a>
   </nav>
   <footer class="drawer-foot">
@@ -3421,6 +3469,49 @@ body.drawer-open { overflow: hidden; }
   <div class="fact"><div class="num">0</div><div class="lbl">Bytes ever decrypted on VitaCrypt infrastructure</div></div>
   <div class="fact"><div class="num">~40M</div><div class="lbl">Records indexed across PubMed &amp; Cochrane · cross-referenced per recommendation</div></div>
 </div>
+
+<!-- ========== FOUR PILLARS OVERVIEW ========== -->
+<section id="pillars">
+  <div class="wrap">
+    <div class="eyebrow">The platform</div>
+    <h2 class="stitle">Four pillars. One encrypted profile.</h2>
+    <p class="lede">Most tools do one of these. The value is in how they compound. Here's the whole platform in one view — open any pillar for the full detail.</p>
+
+    <div class="pillars-grid">
+      <a class="pillar-card" href="platform.html#unified">
+        <div class="pc-head"><span class="pc-ix">01</span><span class="pc-tag">Unified</span></div>
+        <h3>Six streams, one profile</h3>
+        <p>DNA, microbiome, wearables, labs, environment, and self-report — fused on your device into a single queryable profile.</p>
+        <span class="pc-more">Explore →</span>
+      </a>
+      <a class="pillar-card" href="platform.html#evidence">
+        <div class="pc-head"><span class="pc-ix">02</span><span class="pc-tag">Cited</span></div>
+        <h3>Backed by live science</h3>
+        <p>Every recommendation traces to PubMed, Cochrane, GWAS and clinical guidance — re-evaluated as new evidence lands.</p>
+        <span class="pc-more">Explore →</span>
+      </a>
+      <a class="pillar-card" href="platform.html#encrypted">
+        <div class="pc-head"><span class="pc-ix">03</span><span class="pc-tag">Encrypted</span></div>
+        <h3>Computed, never seen</h3>
+        <p>Fully homomorphic encryption: our servers run the analysis on ciphertext. Without your key it's mathematical noise.</p>
+        <span class="pc-more">Explore →</span>
+      </a>
+      <a class="pillar-card" href="platform.html#personalized">
+        <div class="pc-head"><span class="pc-ix">04</span><span class="pc-tag">Personalized</span></div>
+        <h3>Your genes × your world</h3>
+        <p>The same biology reads differently by genotype and local environment. Guidance adapts to <em>you</em>, not the median.</p>
+        <span class="pc-more">Explore →</span>
+      </a>
+    </div>
+
+    <div class="pillars-cta">
+      <a href="platform.html" class="btn btn-glow">
+        Explore the platform
+        <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ========== THESIS ========== -->
 <section id="thesis">
