@@ -2978,6 +2978,8 @@ body.drawer-open { overflow: hidden; }
 .mob-secnav { display: none; }
 .more-btn { display: none; }
 .mob-dots { display: none; }
+.m-toggle { display: none; }
+.fabric-swipe-hint { display: none; }
 
 @media (max-width: 768px) {
   /* M8: top-nav cleanup */
@@ -3106,6 +3108,56 @@ body.drawer-open { overflow: hidden; }
   }
   .more-btn::after { content: ' →'; margin-left: 4px; transition: transform 0.2s; }
   .more-btn.open::after { content: ' ↑'; }
+
+  /* 5C.1: Fabric grid → horizontal swipe carousel (heaviest mobile section) */
+  .fabric-grid {
+    display: flex !important;
+    flex-direction: row;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fabric-grid::-webkit-scrollbar { display: none; }
+  .fabric-card { flex: 0 0 82% !important; scroll-snap-align: center; }
+  .fabric-wrap { position: relative; }
+  .fabric-swipe-hint {
+    display: block;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--ink-mute); text-transform: uppercase;
+    margin: 10px 0 0;
+  }
+
+  /* 5C.1: reusable section-level progressive disclosure */
+  .m-collapse:not(.m-open) { display: none; }
+  .m-collapse.m-open { animation: mFade 0.3s ease; }
+  @keyframes mFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .m-toggle {
+    display: flex; width: 100%;
+    align-items: center; justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px; padding: 13px 0;
+    min-height: 44px;
+    background: none; border: none;
+    border-top: 1px solid var(--line);
+    color: var(--teal);
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+  }
+  .m-toggle .chev { transition: transform 0.3s ease; font-size: 9px; flex-shrink: 0; }
+  .m-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  /* thesis: block-flow so .right collapses cleanly (grid items leak max-height) */
+  #thesis .thesis-grid { display: block; }
+  #thesis .thesis-grid > div:first-child { margin-bottom: 8px; }
+  /* button label replaces the inner h4 to avoid redundancy */
+  #thesis .thesis-grid .right h4 { display: none; }
 
   /* M7: sticky bottom section nav */
   body { padding-bottom: 56px; }
@@ -3444,7 +3496,7 @@ body.drawer-open { overflow: hidden; }
         <p class="clamp-mob">The most valuable signals about your health — your DNA, your microbiome, your bloodwork — are the ones you should trust the fewest companies with. Today the deal is binary: hand over plaintext biology, or live with advice tuned to the median human who doesn't exist.</p>
         <p class="clamp-mob"><strong>Fully Homomorphic Encryption changes the bargain.</strong> Your phone encrypts under a key only you hold (iOS&nbsp;Keychain / Android&nbsp;Keystore). Our compute servers run analysis directly on the ciphertext. Without your key, the data is mathematically indistinguishable from noise.<sup><a href="litepaper.html#crypto">1</a></sup></p>
       </div>
-      <div class="right">
+      <div class="right" data-mcollapse="The four failures we replace">
         <h4>The four failures we replace</h4>
         <div class="item">
           <strong>Fragmentation</strong>
@@ -3472,9 +3524,10 @@ body.drawer-open { overflow: hidden; }
   <div class="wrap">
     <div class="eyebrow">02 · The data fabric</div>
     <h2 class="stitle">Six streams of biology. One queryable profile.</h2>
-    <p class="lede">Encryption is one pillar; the other is the scope of what we unify. Wearable APIs (unified via <strong>Terra API</strong>), open environmental data, lab results, microbiome assays, genetic reports, and NIH-validated <strong>PROMIS</strong> short-forms — all pulled together on the device, in your possession, before anything is encrypted or transmitted.</p>
+    <p class="lede clamp-mob">Encryption is one pillar; the other is the scope of what we unify. Wearable APIs (unified via <strong>Terra API</strong>), open environmental data, lab results, microbiome assays, genetic reports, and NIH-validated <strong>PROMIS</strong> short-forms — all pulled together on the device, in your possession, before anything is encrypted or transmitted.</p>
 
     <div class="fabric-wrap">
+      <span class="fabric-swipe-hint">Swipe all six sources →</span>
       <div class="fabric-grid">
         <div class="fabric-card">
           <div class="hd">
@@ -3597,9 +3650,9 @@ body.drawer-open { overflow: hidden; }
   <div class="wrap">
     <div class="eyebrow">03 · Live science</div>
     <h2 class="stitle">Every recommendation cites its source.</h2>
-    <p class="lede">Most health apps tell you what was true in 2018. We tell you what was published this week. Recommendations re-evaluate every time a new paper, GWAS hit, or regulatory update lands in one of the corpora below.</p>
+    <p class="lede clamp-mob">Most health apps tell you what was true in 2018. We tell you what was published this week. Recommendations re-evaluate every time a new paper, GWAS hit, or regulatory update lands in one of the corpora below.</p>
 
-    <div class="research-corpora">
+    <div class="research-corpora" data-mcollapse="The 8 sources we query live">
       <div class="corpus">
         <div class="nm"><span class="dot"></span>PubMed</div>
         <p class="why">~40M indexed records · NLM open data · queried live</p>
@@ -3804,7 +3857,7 @@ body.drawer-open { overflow: hidden; }
       </div>
     </div>
 
-    <div class="diff-grid">
+    <div class="diff-grid" data-mcollapse="See the three-way comparison">
       <div class="diff-card">
         <div class="ix">01 · ENCRYPTION</div>
         <h3>Decrypt to compute, or don't compute.</h3>
@@ -3876,16 +3929,18 @@ body.drawer-open { overflow: hidden; }
             <div class="body">"Your MTHFR TT plus PM2.5 p97 plus a 22% HRV decline indicates sustained low-grade inflammatory pressure on a vascular system your APOE 3/4 already taxes. Activate home HEPA on forecast windows; supplement <em>methylated</em> folate (5-MTHF) + DHA; shift cardio to the 6–9am low-AQI window."</div>
           </div>
 
-          <h3>The protocol</h3>
-          <div class="protocol">
-            <div class="row"><span class="tag">DIET</span><span class="txt">Methylated folate (5-MTHF), DHA-rich foods, prebiotic fiber for stress-driven dysbiosis.</span></div>
-            <div class="row"><span class="tag">ENV</span><span class="txt">HEPA auto-triggers when forecast AQI &gt; 100. Outdoor cardio reschedules to 6–9am.</span></div>
-            <div class="row"><span class="tag">RECOVERY</span><span class="txt">Replace one HIIT/week with zone-2 cardio until HRV recovers ≥10%.</span></div>
-            <div class="row"><span class="tag">TRACKING</span><span class="txt">Re-evaluate inflammatory markers in 8 weeks — encrypted intake.</span></div>
-          </div>
+          <div data-mcollapse="Show the protocol &amp; privacy guarantee">
+            <h3>The protocol</h3>
+            <div class="protocol">
+              <div class="row"><span class="tag">DIET</span><span class="txt">Methylated folate (5-MTHF), DHA-rich foods, prebiotic fiber for stress-driven dysbiosis.</span></div>
+              <div class="row"><span class="tag">ENV</span><span class="txt">HEPA auto-triggers when forecast AQI &gt; 100. Outdoor cardio reschedules to 6–9am.</span></div>
+              <div class="row"><span class="tag">RECOVERY</span><span class="txt">Replace one HIIT/week with zone-2 cardio until HRV recovers ≥10%.</span></div>
+              <div class="row"><span class="tag">TRACKING</span><span class="txt">Re-evaluate inflammatory markers in 8 weeks — encrypted intake.</span></div>
+            </div>
 
-          <h3>What never happened</h3>
-          <p>At no point did David's genotype, his HRV time series, or his location-bound PM2.5 exposure exist on a VitaCrypt server in a form anyone could read. <strong>The economics of a breach collapse when ciphertext is all that lives on the other side.</strong></p>
+            <h3>What never happened</h3>
+            <p>At no point did David's genotype, his HRV time series, or his location-bound PM2.5 exposure exist on a VitaCrypt server in a form anyone could read. <strong>The economics of a breach collapse when ciphertext is all that lives on the other side.</strong></p>
+          </div>
         </div>
 
         <div class="case-device">
@@ -3935,7 +3990,7 @@ body.drawer-open { overflow: hidden; }
   <div class="wrap">
     <div class="eyebrow">07 · A week in the protocol</div>
     <h2 class="stitle">One person. Three combinations. Three prescriptions.</h2>
-    <p class="lede">A single living profile means the answer changes when the inputs change. Here is David — same biology, same person — across three moments of the same week. Each card is the action VitaCrypt actually puts in front of him.</p>
+    <p class="lede clamp-mob">A single living profile means the answer changes when the inputs change. Here is David — same biology, same person — across three moments of the same week. Each card is the action VitaCrypt actually puts in front of him.</p>
 
     <div class="gallery-banner">
       <div class="left">
@@ -4842,6 +4897,24 @@ if (heroProfile) {
       btn.classList.toggle('open', open);
       btn.textContent = open ? 'less' : 'more';
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    el.insertAdjacentElement('afterend', btn);
+  });
+
+  // 5C.1: section-level progressive disclosure (data-mcollapse="Label")
+  document.querySelectorAll('[data-mcollapse]').forEach(el => {
+    const label = el.getAttribute('data-mcollapse');
+    el.classList.add('m-collapse');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'm-toggle';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="lbl"></span><span class="chev" aria-hidden="true">▾</span>';
+    btn.querySelector('.lbl').textContent = label;
+    btn.addEventListener('click', () => {
+      const open = el.classList.toggle('m-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.querySelector('.lbl').textContent = open ? ('Hide ' + label.replace(/^(Show|See|The) /i, '').toLowerCase()) : label;
     });
     el.insertAdjacentElement('afterend', btn);
   });
