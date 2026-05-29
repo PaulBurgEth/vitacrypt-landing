@@ -3,10 +3,53 @@
 //   TG_BOT_TOKEN — bot token from BotFather (e.g. @paulburgcom_request_bot)
 //   TG_CHAT_ID   — chat id to receive submissions (personal chat id)
 
+const ALLOWED_ORIGINS = [
+  'https://vitacrypt.xyz',
+  'https://www.vitacrypt.xyz'
+];
+
+// Best-effort in-memory rate limit. Persists only on a warm instance and is
+// not shared across regions/instances — it raises the bar against a single
+// attacker hitting one warm function, not a distributed flood. For hard
+// guarantees use Vercel KV / Upstash. Telegram's own 30 msg/s also caps blast.
+const RL_WINDOW_MS = 10 * 60 * 1000; // 10 min
+const RL_MAX = 5;                    // 5 submissions / window / IP
+const hits = new Map();              // ip -> number[] timestamps
+
+function rateLimited(ip, now) {
+  const arr = (hits.get(ip) || []).filter(t => now - t < RL_WINDOW_MS);
+  arr.push(now);
+  hits.set(ip, arr);
+  if (hits.size > 5000) {            // crude memory cap
+    for (const [k, v] of hits) { if (!v.length || now - v[v.length - 1] > RL_WINDOW_MS) hits.delete(k); }
+  }
+  return arr.length > RL_MAX;
+}
+
+function setCors(req, res) {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
 export default async function handler(req, res) {
+  setCors(req, res);
+
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'POST, OPTIONS');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Rate limit by client IP
+  const now = Date.now();
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  if (rateLimited(ip, now)) {
+    return res.status(429).json({ error: 'Too many requests. Try again later or email marketing@vitacrypt.xyz' });
   }
 
   const body = req.body || {};
@@ -36,7 +79,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Consent required' });
   }
 
-  // Escape Markdown V1 special chars (_, *, [, ], `)
+  // Escape Markdown V1 special chars (_, *, [, ], `, \)
   const esc = (s) => String(s).replace(/[_*[\]`\\]/g, '\\$&');
 
   const audienceLabel = {
