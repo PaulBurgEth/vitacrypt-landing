@@ -140,7 +140,7 @@
   --ink: #F5F3EE;
   --ink-2: #D9D6CD;
   --ink-mute: #95A0CC;
-  --ink-faint: #515A86;
+  --ink-faint: #7A85B5;
   --teal: #6B8AFF;
   --teal-deep: #3B5BFF;
   --teal-glow: rgba(107, 138, 255, 0.20);
@@ -161,7 +161,7 @@ html[data-theme="light"] {
   --ink: #0C0C0A;
   --ink-2: #2A2A26;
   --ink-mute: #5C5A50;
-  --ink-faint: #8E8B7E;
+  --ink-faint: #6E6B5E;
   --teal: #3B5BFF;
   --teal-deep: #1E3AFF;
   --teal-glow: rgba(59, 91, 255, 0.10);
@@ -191,6 +191,10 @@ body {
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
+
+/* A11y: visible keyboard focus (mouse focus stays clean via :focus-visible) */
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 2px; }
+:focus:not(:focus-visible) { outline: none; }
 
 .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; }
 .wrap-tight { max-width: 980px; margin: 0 auto; padding: 0 32px; position: relative; }
@@ -4304,15 +4308,15 @@ body.drawer-open { overflow: hidden; }
 
 <!-- ========== MOBILE STICKY SECTION NAV ========== -->
 <nav class="mob-secnav" aria-label="Sections">
-  <button data-target="thesis">01</button>
-  <button data-target="fabric">02</button>
-  <button data-target="research">03</button>
-  <button data-target="pipeline">04</button>
-  <button data-target="diff">05</button>
-  <button data-target="case">06</button>
-  <button data-target="insights">07</button>
-  <button data-target="roadmap">08</button>
-  <button data-target="why">09</button>
+  <button data-target="thesis" aria-label="Thesis">01</button>
+  <button data-target="fabric" aria-label="The data fabric">02</button>
+  <button data-target="research" aria-label="Live science">03</button>
+  <button data-target="pipeline" aria-label="The architecture">04</button>
+  <button data-target="diff" aria-label="Versus the field">05</button>
+  <button data-target="case" aria-label="Case study">06</button>
+  <button data-target="insights" aria-label="A week in the protocol">07</button>
+  <button data-target="roadmap" aria-label="Trajectory">08</button>
+  <button data-target="why" aria-label="Why now">09</button>
   <button class="mob-secnav-menu" data-action="open-drawer" aria-label="Open menu">
     <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
       <line x1="0" y1="1" x2="16" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -4557,6 +4561,7 @@ pipeButtons.forEach((b, i) => b.addEventListener('click', () => {
 let cur = 0;
 let autoplay = null;
 function startAutoplay() {
+  if (RM) return;  // honor prefers-reduced-motion (manual tab control only)
   autoplay = setInterval(() => {
     cur = (cur + 1) % stages.length;
     applyStage(cur);
@@ -4615,6 +4620,7 @@ if (heroProfile) {
 
 // HERO CIPHER — live mutate hex chars, paused when offscreen or tab hidden (perf)
 (function cipherLoop(){
+  if (RM) return;  // honor prefers-reduced-motion (no text churn)
   const stream = document.getElementById('cipherStream');
   if (!stream) return;
   const cipherCard = stream.closest('.hero-card.cipher') || stream;
