@@ -88,3 +88,56 @@ navbar. Rebuilt 5E as genuine раскрытие:
   encryption-boundary diagram, evidence cards.
 - DROPPED the earlier "trim main to teasers" idea — main never deeply covered
   the pillars, so there was nothing to move; main stays as the hook.
+
+## Round 5F — platform nav → litepaper-style TOC
+
+Founder preferred the litepaper nav pattern (jump to exact section + return to
+landing). Adopted on platform, executed cleaner than litepaper:
+- Top tabs = the 4 pillars as IN-PAGE anchors (#unified/#evidence/#encrypted/
+  #personalized) + "Read paper", in platform's pill-tab style (brand-consistent).
+- Added an explicit "← Landing" back button (litepaper's `.back` affordance).
+- Scroll-spy: active pillar highlights teal as you scroll — reuses the existing
+  IntersectionObserver that drives the bottom mob-secnav; now also toggles the
+  matching top tab (litepaper has no active state — this is the improvement).
+- Moved `id="encrypted"` from a 0-height anchor span onto the section itself so
+  the spy intersects reliably.
+
+## Round 5G — honest status labels + clean drawer + system theme
+
+Founder mobile review:
+- **Theme follows the device now.** First visit with no stored choice reads
+  `prefers-color-scheme`; manual toggle still wins + persists (index + platform).
+  Litepaper is dark-only by design.
+- **Mobile drawer (index) cleaned.** It had a duplicate "Platform" entry and
+  gapped numbers (01,02,03,04,06,08,09 — 05/07 missing). Rebuilt as clean named
+  links mirroring the top nav + a divider before the cross-page links. No numbers.
+- **"Live" status labels removed** (solo builder, pre-MVP, nothing shipped):
+  litepaper spec tables 9× "Live"→"MVP"; index fabric legend "Live API
+  integration"→"Direct API · at MVP launch"; hero mock card "Live"→"Preview";
+  roadmap "engine live"→"engine ships". (Small "· live" data-freshness strings
+  remain inside the hero demo card, now labelled "Preview" — left intentionally.)
+- **Duplicate-content scan** (index/platform/litepaper): no substantive
+  duplication. Only shared markup is the waitlist form, footer, and JS (which
+  should be identical). Platform pillar content is all net-new vs the landing.
+
+## Session close — final state (2026-05-30)
+
+Live: https://www.vitacrypt.xyz · /platform.html · /litepaper.html (all 200).
+- Pages: `index.html` (hook landing + 4-pillar overview), `platform.html` (deep
+  dive of the 4 pillars), `litepaper.html` (technical spec). `api/waitlist.js`
+  serverless → Telegram.
+- Waitlist form verified end-to-end in production (delivers to @paul_burg).
+- Vercel env vars `TG_BOT_TOKEN` / `TG_CHAT_ID` set for **Production only** —
+  Preview/Dev deployments will 500 on the form until those scopes are added.
+
+### Updated known issues / debt (additions to the list above)
+- **Env vars are Production-scope only.** Form works on the prod domain; a Vercel
+  preview URL won't deliver until the vars are added to Preview/Dev.
+- **Shared CSS/JS is duplicated across index/platform** (each page is
+  self-contained, matching the litepaper pattern). A future shared `assets/
+  shared.css` + `assets/app.js` extraction would remove the 3-way upkeep — the
+  natural time is when the next big change touches all pages.
+- **Litepaper `--ink-faint` (#515A86) still fails WCAG AA** (the 5C contrast fix
+  only touched index/platform). Low traffic page; fix when convenient.
+- Dead CSS remains on platform for components removed in 5E (`.pipe-tabs`,
+  `.fabric-card`, etc.) — inert, kept in sync with index's stylesheet.
