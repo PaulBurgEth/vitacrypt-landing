@@ -2927,6 +2927,10 @@ footer .bottom {
   background: var(--bg-2);
   border-left-color: var(--teal);
 }
+.mobile-drawer .drawer-nav .drawer-sep {
+  display: block; height: 1px; margin: 10px 22px;
+  background: var(--line);
+}
 .mobile-drawer .drawer-foot {
   padding: 16px 22px 22px;
   border-top: 1px solid var(--line);
@@ -3251,15 +3255,13 @@ body.drawer-open { overflow: hidden; }
     </button>
   </header>
   <nav class="drawer-nav" aria-label="Sections">
-    <a href="#pillars" data-drawer-link>The platform · 4 pillars</a>
-    <a href="#thesis" data-drawer-link>01 · Thesis</a>
-    <a href="#fabric" data-drawer-link>02 · Data fabric</a>
-    <a href="#research" data-drawer-link>03 · Live science</a>
-    <a href="#pipeline" data-drawer-link>04 · Walkthrough</a>
-    <a href="#case" data-drawer-link>06 · Case study</a>
-    <a href="#roadmap" data-drawer-link>08 · Roadmap</a>
-    <a href="#why" data-drawer-link>09 · Why now</a>
-    <a href="platform.html" data-drawer-link>The platform →</a>
+    <a href="#pillars" data-drawer-link>Four pillars overview</a>
+    <a href="#pipeline" data-drawer-link>Walkthrough</a>
+    <a href="#case" data-drawer-link>Case study</a>
+    <a href="#roadmap" data-drawer-link>Roadmap</a>
+    <a href="#why" data-drawer-link>Why now</a>
+    <span class="drawer-sep" aria-hidden="true"></span>
+    <a href="platform.html" data-drawer-link>The platform — deep dive →</a>
     <a href="litepaper.html" data-drawer-link>Read litepaper →</a>
   </nav>
   <footer class="drawer-foot">
@@ -3316,7 +3318,7 @@ body.drawer-open { overflow: hidden; }
         <div class="hero-card profile" id="heroProfile">
         <div class="hc-head">
           <span>Unified profile · on device</span>
-          <span class="live-dot">Live</span>
+          <span class="live-dot">Preview</span>
         </div>
         <div class="completion">
           <div class="pct">94<span class="of">/ 100</span></div>
@@ -3665,8 +3667,8 @@ body.drawer-open { overflow: hidden; }
       <div class="fabric-foot">
         <div class="l">All six streams resolve into <strong>one unified profile</strong> on your device · then encrypted under your key before any byte leaves.</div>
         <div class="legend">
-          <span><span class="dot"></span>Live API integration</span>
-          <span><span class="dot q"></span>Upload or partner</span>
+          <span><span class="dot"></span>Direct API · at MVP launch</span>
+          <span><span class="dot q"></span>Upload / partner</span>
         </div>
       </div>
     </div>
@@ -4216,7 +4218,7 @@ body.drawer-open { overflow: hidden; }
         <div class="pip"></div>
         <div class="when">Q4 2026</div>
         <h5>Private beta</h5>
-        <p>FHE recommendations engine live. Microbiome integration. Invite-only waitlist activated.</p>
+        <p>FHE recommendations engine ships. Microbiome integration. Invite-only waitlist activated.</p>
       </div>
       <div class="r-node">
         <div class="pip"></div>
@@ -4416,6 +4418,7 @@ const root = document.documentElement;
 const tBtn = document.getElementById('themeToggle');
 const stored = localStorage.getItem('vc-theme-d');
 if (stored) { root.setAttribute('data-theme', stored); }
+else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) { root.setAttribute('data-theme', 'light'); }
 let themeOverlay = null;
 function setTheme(next){ root.setAttribute('data-theme', next); localStorage.setItem('vc-theme-d', next); }
 function toggleTheme(){

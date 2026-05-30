@@ -3632,6 +3632,7 @@ const root = document.documentElement;
 const tBtn = document.getElementById('themeToggle');
 const stored = localStorage.getItem('vc-theme-d');
 if (stored) { root.setAttribute('data-theme', stored); }
+else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) { root.setAttribute('data-theme', 'light'); }
 let themeOverlay = null;
 function setTheme(next){ root.setAttribute('data-theme', next); localStorage.setItem('vc-theme-d', next); }
 function toggleTheme(){
