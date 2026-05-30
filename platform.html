@@ -3237,6 +3237,17 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
   .vc-table th:nth-child(2), .vc-table td:nth-child(2) { display: none; }
   .pillar-links { gap: 14px; }
 }
+
+/* platform TOC nav: in-page pillar jumps + scroll-spy + "← Landing" back */
+#platformToc a.active { color: var(--teal); background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); }
+.back-home {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink-mute); transition: all 0.2s;
+}
+.back-home:hover { color: var(--ink); border-color: var(--ink-faint); }
+@media (max-width: 768px) { .back-home { display: none; } }
 </style>
 </head>
 <body>
@@ -3252,14 +3263,15 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
       <span class="word">VitaCrypt</span>
       <span class="tag">MVP</span>
     </a>
-    <div class="tabs">
-      <a href="index.html#pillars">Platform</a>
-      <a href="index.html#pipeline" class="demo-link"><span class="pulse"></span>Walkthrough</a>
+    <div class="tabs" id="platformToc">
+      <a href="#unified">Unified</a>
+      <a href="#evidence">Cited</a>
+      <a href="#encrypted">Encrypted</a>
+      <a href="#personalized">Personalized</a>
       <a href="litepaper.html">Read paper</a>
-      <a href="index.html#case">Case</a>
-      <a href="index.html#roadmap">Roadmap</a>
     </div>
     <div class="right">
+      <a class="back-home" href="index.html">← Landing</a>
       <button class="t-toggle" id="themeToggle" aria-label="toggle theme">
         <svg id="themeIcon" width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M11.5 8.5a4.5 4.5 0 0 1-6-6 4.5 4.5 0 1 0 6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3398,8 +3410,7 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
 </section>
 
 <!-- ========== PILLAR 03 — ENCRYPTED ========== -->
-<span id="encrypted" class="pillar-anchor" aria-hidden="true"></span>
-<section>
+<section id="encrypted">
   <div class="wrap">
     <div class="eyebrow">Pillar 03 · Encrypted compute</div>
     <h2 class="stitle">We compute on your biology without ever decrypting it.</h2>
@@ -3973,10 +3984,14 @@ if (heroProfile) {
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+    // scroll-spy: highlight active pillar in both the bottom mob-secnav AND the top TOC tabs
+    const tocLinks = document.querySelectorAll('#platformToc a[href^="#"]');
     const secObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          secNavBtns.forEach(b => b.classList.toggle('active', b.dataset.target === e.target.id));
+          const id = e.target.id;
+          secNavBtns.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+          tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
         }
       });
     }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
