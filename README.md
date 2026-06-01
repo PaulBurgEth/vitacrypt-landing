@@ -26,5 +26,5 @@ Static HTML · deployed on Vercel.
 ## Links
 
 - Product: [vitacrypt.xyz](https://vitacrypt.xyz)
-- Litepaper: [VitaCrypt-Litepaper](https://github.com/PaulBurgEth/VitaCrypt-Litepaper)
+- Litepaper: [VitaCrypt-Litepaper](https://github.com/VitaCrypt-Labs/VitaCrypt-Litepaper)
 - Join waitlist: see the site
