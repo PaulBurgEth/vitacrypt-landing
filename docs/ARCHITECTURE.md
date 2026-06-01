@@ -44,7 +44,7 @@ If the function ever fails, the form shows a fallback: "email marketing@vitacryp
 - **Telegram Bot API** — receives waitlist submissions (no database needed).
 - **Google Fonts** — Geist, Geist Mono, Instrument Serif (loaded non-blocking).
 - **Google Analytics 4** (`G-NGT34ZL8HV`) — traffic stats, IP anonymized.
-- **GitHub** (`PaulBurgEth/vitacrypt-landing`) — source. Push to `main` is
+- **GitHub** (`VitaCrypt-Labs/vitacrypt-landing`) — source. Push to `main` is
   production-intent; Vercel is deployed manually (no auto-sync).
 
 ## 5. Non-obvious decisions (so future-you doesn't undo them)

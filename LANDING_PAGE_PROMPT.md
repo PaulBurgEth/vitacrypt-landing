@@ -357,7 +357,7 @@ Present the challenges users face:
 ---
 
 ## Links & Resources
-- **Litepaper**: https://github.com/PaulBurgEth/VitaCrypt-Litepaper
+- **Litepaper**: https://github.com/VitaCrypt-Labs/VitaCrypt-Litepaper
 - **Zama (FHE Technology)**: https://www.zama.ai/
 - **Nillion (Blind Computing)**: https://www.nillion.com/
 
