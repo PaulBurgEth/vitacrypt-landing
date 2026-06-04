@@ -1,5 +1,58 @@
 # Decisions
 
+## 2026-06-04 — Investor page added (investor.html) + site-wide integration
+
+**What/where:** New public page `investor.html`, plus integration edits in `index.html`,
+`platform.html`, `litepaper.html`, `sitemap.xml`. Backups of the four touched-or-cloned
+sources in `docs/round-6/*.bak`.
+
+**Why:** The owner believed an investor page already existed (research had been done "on
+that topic"). It did not — only scattered traces (a `mailto:investors@` footer link, a form
+dropdown option, a schema ContactPoint, one CTA line). The prior research
+(`docs/research/RESEARCH_RESPONSE.md`, `docs/round-5/RESEARCH_FINDINGS.md`) was about
+*investor-grade messaging for the landing copy*, not a standalone page. So we built one.
+
+**Approach — clone, don't re-author:** `investor.html` is a clone of `platform.html`'s full
+shell (head boilerplate, the entire inline `<style>`, nav, mobile drawer, footer, mob-secnav,
+waitlist modal, all `<script>` logic); only the body content between drawer and footer was
+replaced. Guarantees pixel-identical design + theme/drawer/modal behavior with zero CSS
+duplication risk. Verified the cloned script is null-guarded for the hero-specific bits it no
+longer has (`#heroProfile`, `#cipherStream`, `.side-stack`), so nothing throws.
+
+**Page structure (public teaser, gated deck):** hero thesis → `#thesis` opportunity →
+`#why` market/why-now (reuses the `kpi-grid`: Zama 96% benchmark, Superpower $30M, 23andMe
+fallout, HIPRA) → `#moat` four differentiators (`grade-row`) → `#traction` honest pre-MVP
+table (`vc-table` + `badge` labels) → `#founder` → `#raise` → `#contact` final CTA.
+
+**Honest framing decisions (owner is a solo founder, no formal round):**
+- No empty "Team" section. `#founder` reframes solo-build as capital efficiency and names the
+  first hires the raise unlocks (FHE/crypto eng, data engineering, data analysis/science) —
+  turns "no team" into a signal that the founder knows what the money buys.
+- `#raise` is deliberately soft: no amount, no valuation, no cap table, no term sheet. "Round
+  shape is flexible; the deck/data room is shared on request." Matches the owner's reality.
+- Kept the site honesty rules: no "Live" status (litepaper labelled "Published"), no
+  "compliant", Zama named as a *target*. New copy avoids em dashes per owner's writing rule.
+
+**Integration:** "Investors" added to the desktop nav + mobile drawer on index + platform;
+nav link on litepaper (its dark shell has no column footer). "For investors" added to the
+Resources footer column on index + platform (investor.html links out to platform instead).
+New `#investors` block on the homepage between `#why` and the final CTA (reuses `kpi-grid`,
+links to investor.html). The shared `openForm()` gained a ~3-line audience-preselect: a CTA
+with `data-audience="investor"` opens the waitlist modal pre-set to the Investor role (added
+to investor.html's own script copy only; index/platform homepage CTAs route to investor.html
+instead of opening the modal, so they don't need it).
+
+**Verified (local preview, port 3000):** no console errors; all 7 investor sections render;
+no broken in-page anchors; scrollspy highlights correctly; light+dark theme parity; the hero
+"Request the deck" CTA opens the modal with audience pre-set to "investor"; homepage block
+renders with 3 KPIs + 2 CTAs; investor.html linked from index (5×), platform (3×), litepaper
+(1×), sitemap (1×). Not deployed — `vercel --prod` left to the owner.
+
+**Fragile / future:** `#founder` and `#raise` are placeholders for real numbers the owner may
+later want (still no public figures by design). If section `id`s on investor.html are renamed,
+update its nav/drawer/mob-secnav/footer anchors together. Em-dash-free copy on the new page is
+a slight punctuation departure from the older pages (which use em dashes) — intentional.
+
 ## 2026-05-30 — Theme consistency round 2: "how it works" diagram + polish
 
 Extends the inversion work to the `#pipeline` "How VitaCrypt works" diagram and two small polishes.

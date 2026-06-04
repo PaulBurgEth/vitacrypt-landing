@@ -590,7 +590,6 @@ footer {
       <a href="#open">§08</a>
       <a href="#refs">§09</a>
     </div>
-    <a class="back" href="investor.html">Investors</a>
     <a class="back" href="index.html">← Landing</a>
   </div>
 </nav>

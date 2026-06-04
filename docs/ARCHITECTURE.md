@@ -17,6 +17,7 @@ and JavaScript inline) — there is no shared stylesheet file yet.
 |---|---|
 | `index.html` | The landing page — the hook. Hero, a **4-pillar overview** block, the data-fabric/research/pipeline/case sections, roadmap, "why now", CTA. |
 | `platform.html` | The deep-dive page — explains the **4 pillars** in depth (how each works, evidence, honest MVP-vs-roadmap scope). Links back to the landing for the live demo + case; links into the litepaper for specs. |
+| `investor.html` | The **investor page** — public teaser that gates the deck. Opportunity, why-now (market + tailwinds), the moat, honest pre-MVP traction, founder + hiring plan, a soft "the raise" (no amount/valuation/terms), CTA to request the deck. Cloned from `platform.html`'s shell (same CSS/nav/footer/modal), body swapped. |
 | `litepaper.html` | The technical brief — cryptography, threat model, integration spec, validation plan. Dark-only by design. |
 | `api/waitlist.js` | Serverless function: receives the waitlist form and forwards it to Telegram. |
 | `sitemap.xml`, `robots.txt`, `llms.txt`, `vercel.json` | SEO + hosting config. |
@@ -24,6 +25,10 @@ and JavaScript inline) — there is no shared stylesheet file yet.
 | `docs/` | Internal notes (research findings, decisions, backups). **Excluded from deploy** via `.vercelignore` — not public. |
 
 Navigation funnel: **landing (what it is) → platform (how it works) → litepaper (proof)**.
+Side funnel for capital: **landing → investor.html (the case for backing it) → request the deck**.
+"Investors" sits in every nav + mobile drawer; the landing also has a dedicated `#investors`
+block. Self-contained pages still mean the nav/footer/drawer/form are duplicated across all
+four — change all four to stay consistent.
 
 ## 3. How the waitlist form works (the one moving part)
 1. Visitor clicks "Join waitlist" → a modal form opens (name, email, audience,

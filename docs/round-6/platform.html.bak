@@ -3311,7 +3311,6 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
       <a href="#encrypted">Encrypted</a>
       <a href="#personalized">Personalized</a>
       <a href="litepaper.html">Read paper</a>
-      <a href="investor.html">Investors</a>
     </div>
     <div class="right">
       <a class="back-home" href="index.html">← Landing</a>
@@ -3350,7 +3349,6 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
     <a href="#evidence" data-drawer-link>02 · Cited to live science</a>
     <a href="#encrypted" data-drawer-link>03 · Encrypted compute</a>
     <a href="#personalized" data-drawer-link>04 · Personalized</a>
-    <a href="investor.html" data-drawer-link>For investors →</a>
     <a href="litepaper.html" data-drawer-link>Read litepaper →</a>
   </nav>
   <footer class="drawer-foot">
@@ -3573,7 +3571,6 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
       <div>
         <h5>Resources</h5>
         <ul>
-          <li><a href="investor.html">For investors</a></li>
           <li><a href="litepaper.html">Litepaper</a></li>
           <li><a href="mailto:marketing@vitacrypt.xyz" data-action="open-waitlist">Waitlist</a></li>
           <li><a href="https://x.com/vita_crypt">X / Twitter</a></li>

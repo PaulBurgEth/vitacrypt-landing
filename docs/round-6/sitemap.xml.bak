@@ -22,16 +22,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://vitacrypt.xyz/investor.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://vitacrypt.xyz/img/og-preview.jpg</image:loc>
-      <image:title>For Investors — VitaCrypt</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://vitacrypt.xyz/litepaper.html</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
