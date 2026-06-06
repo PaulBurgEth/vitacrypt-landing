@@ -271,3 +271,16 @@ public ones:
 - **ENHANCED_LANDING_PROMPT.md, LANDING_PAGE_PROMPT.md, docs/research/** — internal historical
   spec/prompt docs, not user-facing; intentionally not edited.
 - "blind computing (Nillion)" references in litepaper/platform are a legitimate roadmap mention, kept.
+
+### Shipped to production (same day)
+- Deployed `vitacrypt-landing` to Vercel production via `vercel --prod`; aliased to vitacrypt.xyz.
+  Verified live: all four titles unified-first, "read by no one"/"0 bytes"/stale contacts gone,
+  platform pillars 01 Unified / 02 Cited / 03 Personalized / 04 Private by design, sitemap titles updated.
+- **OG image regenerated**: headless-Chrome render of the updated og-preview-template.html at 1200x630
+  → img/og-preview.jpg (now "Your whole health, in one intelligent profile" + Unified/Evidence-checked/
+  Private-by-design badges). Live at origin+CDN (102,685 bytes, replacing the old FHE-first 65,943-byte card).
+  NOTE: social platforms (X/LinkedIn/Telegram/FB) cache OG images their side; existing previews need a
+  re-scrape via each platform's debugger to refresh.
+- Committed to branch investor-page (3c63411). Not pushed to main/remote (local rollback point).
+- placeholder/index.html telegram fixed in-repo but the separate `vitacrypt-placeholder` project was NOT
+  redeployed (unknown live domain) — deploy it separately if it is in use.
