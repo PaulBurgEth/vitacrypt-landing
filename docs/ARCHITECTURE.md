@@ -3,11 +3,14 @@
 _Written for the owner. No deep coding knowledge assumed._
 
 ## 1. What this is
-A marketing/investor website for **VitaCrypt** — a privacy-first personal health
-platform that analyzes your biology under Fully Homomorphic Encryption (FHE), so
-the server never sees your raw data. The site is **static HTML** (no framework,
-no database) hosted on **Vercel**, with one small serverless function for the
-waitlist form. Stage: pre-MVP, private beta targeted Q4 2026.
+A marketing/investor website for **VitaCrypt** — which unifies a person's whole
+health (genetics, wearables, labs, microbiome, environment, lifestyle) into one
+profile that returns actionable, evidence-checked guidance, **private by design**.
+Positioning leads with the **unified profile + evidence-checked guidance**;
+privacy/FHE is the *trust layer*, not the headline (see the honesty rule in §5).
+The site is **static HTML** (no framework, no database) hosted on **Vercel**, with
+one small serverless function for the waitlist form. Stage: pre-MVP, private beta
+targeted Q4 2026.
 
 ## 2. The pages (file map)
 Everything lives at the repo root. Each page is **self-contained** (its own CSS
@@ -64,6 +67,20 @@ If the function ever fails, the form shows a fallback: "email marketing@vitacryp
   change next touches all pages.
 - **`docs/` is deploy-excluded** — it holds internal positioning notes
   (`RESEARCH_FINDINGS.md`) that must not be public.
+- **Positioning + honesty (Jun 2026 — do not regress).** Every page leads with the
+  *unified health profile + evidence-checked guidance*; privacy/FHE is the trust
+  layer, written in **design/target tense** ("by design", "built to", "target"),
+  never as a present-tense whole-system claim. The hard line: the platform is **not
+  end-to-end blind today** (master key is server-side; LLM/OCR run on plaintext);
+  blind compute is *proven on one genetic slice on staging (~0.5s, client holds the
+  key)*; the FHE model is a *synthetic demo, not a validated PRS*; Zama bounty #95
+  (96%) is *external evidence only*. Banned as present fact: "blind server", "0 bytes
+  ever decrypted", "we can't read it", "read by no one", "server never sees your
+  plaintext", "FHE end-to-end", "computed never seen". No em-dashes in visible copy.
+- **Verified contacts — only these.** `investors@vitacrypt.xyz` + `t.me/paul_burg`
+  (plus `marketing@vitacrypt.xyz` as the waitlist-form fallback, and the X / `@vita_crypt`
+  social link). `hello@`, `press@`, and `t.me/vita_crypt` were retired site-wide — do
+  not reintroduce. Schema `contactPoint` = investors@ only.
 
 ## 6. Fragile areas (touch with care)
 - **Waitlist rate-limiting is best-effort** (in-memory, per Vercel instance). It
@@ -81,5 +98,18 @@ If the function ever fails, the form shows a fallback: "email marketing@vitacryp
 ## 7. Day-to-day
 - Edit an `.html` file → `git add` + `git commit` + `git push origin main` →
   `vercel --prod` to deploy → check `https://www.vitacrypt.xyz`.
-- Backups of `index.html`/`litepaper.html` before this round's big changes are in
-  `docs/round-5/*.bak`.
+- Backups of `index.html`/`litepaper.html` before earlier changes are in
+  `docs/round-5/*.bak`; the Jun-2026 repositioning backups (all four pages +
+  the old OG image) are in `docs/round-7/*.bak`.
+
+### Regenerating the social card (`img/og-preview.jpg`)
+It is a **pre-rendered 1200×630 binary** — editing `img/og-preview-template.html`
+alone changes nothing until the JPG is re-rendered. To regenerate:
+```
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  --window-size=1200,630 --force-device-scale-factor=1 --virtual-time-budget=8000 \
+  --screenshot=/tmp/og.png "file://$(pwd)/img/og-preview-template.html"
+sips -s format jpeg -s formatOptions 82 /tmp/og.png --out img/og-preview.jpg
+```
+Then `vercel --prod`, and re-scrape OG caches (X / LinkedIn / Telegram / Facebook
+debuggers) since those platforms cache the image on their side.
