@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark light">
 
 <!-- Primary SEO -->
-<title>VitaCrypt Litepaper · FHE Architecture & Threat Model</title>
+<title>VitaCrypt Litepaper — FHE Architecture & Threat Model</title>
 <meta name="description" content="VitaCrypt technical brief: cryptographic primitives (TFHE / Zama Concrete ML), threat model, performance budget, and integration spec for a privacy-native health stack.">
 <meta name="keywords" content="VitaCrypt litepaper, FHE, TFHE, Zama Concrete ML, blind computing, encrypted health data, threat model, cryptographic primitives, PubMed, GWAS, ClinVar">
 <meta name="author" content="VitaCrypt">
@@ -613,7 +613,7 @@ footer {
     <div class="byline">
       <span>FILED BY <strong>VITACRYPT LABS</strong></span>
       <span>·</span>
-      <span><a href="mailto:investors@vitacrypt.xyz">investors@vitacrypt.xyz</a></span>
+      <span><a href="mailto:hello@vitacrypt.xyz">hello@vitacrypt.xyz</a></span>
       <span>·</span>
       <span><a href="index.html">← back to landing</a></span>
     </div>
@@ -983,7 +983,7 @@ footer {
     <div class="cta-block">
       <h3>Talk to us about the architecture.</h3>
       <p>We are looking for technically-fluent design partners and investors who want to interrogate the stack — not be marketed at. If that is you, please reach out.</p>
-      <a class="cta-btn" href="mailto:investors@vitacrypt.xyz">investors@vitacrypt.xyz →</a>
+      <a class="cta-btn" href="mailto:hello@vitacrypt.xyz">hello@vitacrypt.xyz →</a>
     </div>
   </div>
 </section>
