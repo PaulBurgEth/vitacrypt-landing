@@ -8,7 +8,7 @@
 
 <!-- Primary SEO -->
 <title>The Platform · VitaCrypt's four pillars (Unified, Cited, Personalized, Private)</title>
-<meta name="description" content="How VitaCrypt works: any health signal unified into one profile, every recommendation cited to live science, personalized to your genes and environment, and private by design.">
+<meta name="description" content="How VitaCrypt works: six biological streams unified into one profile, every recommendation cited to live science, personalized to your genes and environment, and private by design.">
 <meta name="keywords" content="VitaCrypt platform, unified health profile, evidence-checked guidance, live science, PubMed, Cochrane, personalized health, gene environment, MTHFR, APOE, private by design, fully homomorphic encryption, Zama Concrete ML">
 <meta name="author" content="VitaCrypt">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://vitacrypt.xyz/platform.html">
 <meta property="og:title" content="The Platform · VitaCrypt's four pillars">
-<meta property="og:description" content="Any health signal unified into one profile, every recommendation cited to live science, personalized to your genes and environment, and private by design.">
+<meta property="og:description" content="Six biological streams unified into one profile, every recommendation cited to live science, personalized to your genes and environment, and private by design.">
 <meta property="og:image" content="https://vitacrypt.xyz/img/og-preview.jpg">
 <meta property="og:image:secure_url" content="https://vitacrypt.xyz/img/og-preview.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -43,7 +43,7 @@
 <meta name="twitter:creator" content="@vita_crypt">
 <meta name="twitter:url" content="https://vitacrypt.xyz/platform.html">
 <meta name="twitter:title" content="The Platform · VitaCrypt's four pillars">
-<meta name="twitter:description" content="Unified, Cited, Personalized, Private: how VitaCrypt turns any health signal into one profile with actionable, evidence-checked guidance.">
+<meta name="twitter:description" content="Unified, Cited, Personalized, Private: how VitaCrypt turns six biological streams into one profile with actionable, evidence-checked guidance.">
 <meta name="twitter:image" content="https://vitacrypt.xyz/img/og-preview.jpg">
 <meta name="twitter:image:alt" content="VitaCrypt · Your whole health in one intelligent profile">
 
@@ -87,7 +87,7 @@
       "isPartOf": {"@id": "https://vitacrypt.xyz/#website"},
       "about": {"@id": "https://vitacrypt.xyz/#organization"},
       "primaryImageOfPage": "https://vitacrypt.xyz/img/og-preview.jpg",
-      "description": "How VitaCrypt works across four pillars: a unified data fabric across any health signal, live-cited science, fully homomorphic encryption, and gene-environment personalization.",
+      "description": "How VitaCrypt works across four pillars: a unified six-stream data fabric, live-cited science, fully homomorphic encryption, and gene-environment personalization.",
       "inLanguage": "en-US"
     },
     {
@@ -3371,7 +3371,7 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
     </div>
     <h1>Four pillars. <span class="accent">One unified profile.</span></h1>
     <p class="lead lead-punch">Most health tools do one of these. VitaCrypt does all four, and the value is in how they compound.</p>
-    <p class="lead">A unified data fabric built to ingest any health signal; every recommendation cited to live science; personalization down to your genotype and local environment; and privacy built in by design, so centralizing this data never means exposing it. Here is how each one works.</p>
+    <p class="lead">A unified six-stream data fabric; every recommendation cited to live science; personalization down to your genotype and local environment; and privacy built in by design, so centralizing this data never means exposing it. Here is how each one works.</p>
     <div class="hero-quick" role="navigation" aria-label="Jump to pillar">
       <span><a href="#unified">Unified</a></span>
       <span><a href="#evidence">Cited</a></span>
@@ -3385,8 +3385,8 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
 <section id="unified">
   <div class="wrap">
     <div class="eyebrow">Pillar 01 · Unified</div>
-    <h2 class="stitle">Every health signal, fused into one profile.</h2>
-    <p class="lede">VitaCrypt pulls each source and normalizes it into one schema, so scattered data becomes a single queryable profile, built to fold in any health signal and grow over time. The privacy pillar is built so that profile is encrypted under your key and the server works with one ciphertext, not a separate plaintext feed per source.</p>
+    <h2 class="stitle">Six streams, fused into one profile.</h2>
+    <p class="lede">VitaCrypt pulls each source and normalizes it into one schema, so scattered data becomes a single queryable profile. The privacy pillar is built so that profile is encrypted under your key and the server works with one ciphertext, not six plaintext feeds.</p>
 
     <ol class="vc-steps">
       <li><span class="n">1</span><div><strong>Connect or upload</strong><p>Wearables stream through Terra API; DNA, microbiome and lab files are uploaded; environment is pulled from your location.</p></div></li>
@@ -3408,7 +3408,7 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
     </table>
 
     <p class="pillar-links">
-      <a href="index.html#fabric">See the sources on the home page →</a>
+      <a href="index.html#fabric">See the six sources on the home page →</a>
       <a href="litepaper.html#integ">Integration spec in the litepaper →</a>
     </p>
   </div>

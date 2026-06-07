@@ -284,3 +284,34 @@ public ones:
 - Committed to branch investor-page (3c63411). Not pushed to main/remote (local rollback point).
 - placeholder/index.html telegram fixed in-repo but the separate `vitacrypt-placeholder` project was NOT
   redeployed (unknown live domain) — deploy it separately if it is in use.
+
+## 2026-06-07 — Source framing: drop the fixed count, "more is better / any health signal"
+
+**What & why:** approach update — removed the numbers that cap how many health-data sources exist.
+New principle: the unified profile is built to ingest **any** health signal and **grows over time**
+(the more it holds, the better it reads the person), not a fixed set. Per re-sent investor + litepaper
+briefs (Pillar 1 now adds "and more / any health signal, not a fixed set"; litepaper adds a "Source
+framing (principle, not a fixed count)" note).
+
+**Edits (copy/emphasis only, all 4 pages + llms.txt):**
+- Removed every count-as-ceiling: "six streams / Six biological streams / 6 in 1 / 6 data layers /
+  spans six streams / 4 of 6 / all 6 / Four of six / six layers / six plaintext feeds / six sources".
+  Replaced with "any health signal / every signal / more is better / grows over time", keeping the
+  plain factual source lists (genetics, wearables, labs, microbiome, environment, lifestyle, and more).
+- KPI tile `UNIFICATION 6 in 1` → `All in 1` (index + investor); facts tile `6` → `All-in-1`;
+  hero badge `6 data layers unified` → `Any signal, unified`; data-fabric H2 → "Every health signal.
+  One queryable profile."; litepaper §04 H2 → "Health signals, unified into one profile." (+ table
+  header Stream→Signal); both now-vs-target "Unified profile" rows → "core streams live / more
+  signals, deeper coverage, any health data".
+- Softened absolutes: "Nothing on the market / no current product unifies it" → "We have not found a
+  product that unifies it this way".
+- Demo-UI snapshot numbers (a demo profile's "6 sources synced", "Engineer · 6 sources", "+6" cites)
+  left intact — they are factual demo state, not ceiling claims.
+
+**Verified (local):** count-ceiling grep empty across all pages + llms.txt; source lists intact;
+absolutes gone; KPI/facts values render with no overflow ("All-in-1" fits); em-dash visible copy 0;
+contacts unchanged; tags balanced; JSON-LD valid; no console errors. Backups in docs/round-8/.
+
+**NOT yet deployed.** Production (vitacrypt.xyz) still serves the prior "6 in 1 / six streams" copy
+until a `vercel --prod` redeploy (pending explicit go). One-pager PDF reconciliation flagged: if the
+public PDF still shows "6 in 1", align it to the same principle.

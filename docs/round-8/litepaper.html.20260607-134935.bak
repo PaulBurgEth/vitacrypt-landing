@@ -711,7 +711,7 @@ footer {
         <tr><th>Capability</th><th>Now (MVP)</th><th>Target (this round → beyond)</th></tr>
       </thead>
       <tbody>
-        <tr><td class="c1">Unified profile</td><td>Live: core streams (genetics, environment, surveys, lifestyle)</td><td>More signals, deeper coverage, any health data</td></tr>
+        <tr><td class="c1">Unified profile</td><td>Live: 4 of 6 streams populated</td><td>All 6 streams populated</td></tr>
         <tr><td class="c1">Evidence citations</td><td>Live: real PMIDs, no invented cites</td><td>Broader corpus coverage</td></tr>
         <tr><td class="c1">Actionable insights</td><td>Live: whole-profile, tiny-habit</td><td>Deeper personalization</td></tr>
         <tr><td class="c1">Blind compute (FHE)</td><td>Proven on one genetic slice (staging)</td><td>Production-wide blind pipeline</td></tr>
@@ -764,12 +764,12 @@ footer {
 <section id="integ">
   <div class="wrap">
     <div class="section-id"><span class="num">§04</span><span>Integration spec</span></div>
-    <h2>Health signals, unified into one profile.</h2>
-    <p>The profile is built to ingest any health signal; the current set is below. Each row reflects MVP status, not aspirational endpoint. Live = production-ready integration today. Planned = on the 2026 roadmap. Partner = requires explicit partnership we have not yet signed.</p>
+    <h2>Six streams of biology.</h2>
+    <p>Each row below reflects MVP status, not aspirational endpoint. Live = production-ready integration today. Planned = on the 2026 roadmap. Partner = requires explicit partnership we have not yet signed.</p>
 
     <table class="spec-table">
       <thead>
-        <tr><th>Signal</th><th>Sources (MVP)</th><th>Format</th><th>Status</th></tr>
+        <tr><th>Stream</th><th>Sources (MVP)</th><th>Format</th><th>Status</th></tr>
       </thead>
       <tbody>
         <tr><td class="c1">Genetics</td><td>23andMe, AncestryDNA raw exports</td><td><code>.txt</code> SNP table</td><td><span class="badge live">MVP</span></td></tr>
