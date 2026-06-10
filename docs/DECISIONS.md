@@ -362,5 +362,11 @@ zero-knowledge, fully encrypted, FHE / cryptography engineer); 0.1.1 count 0, 0.
 AI-driven present on all 4 pages + llms.txt + README; all 4 pages render via local serve with zero
 console errors; pipeline walkthrough buttons work after the JS-string edits.
 
-**NOT yet deployed** — pending explicit `vercel --prod` go. After deploy: re-scrape link previews
-(og:description text changed; the OG image itself did not, no regeneration needed).
+**Deployed to production 2026-06-10** (explicit go from Paul): `vercel --prod` →
+`vitacrypt-landing-82y28u8nl` (dpl_2efNEGGSTfwnRqxTFbDsS6294FGM). Post-deploy verification via curl
+against vitacrypt.xyz: banned-wording sweep empty on all 4 pages; "Private-compute engineering" +
+8× "AI-driven" on /investor.html; litepaper serves v0.1.2 + "Working MVP, pre-launch"; meta
+descriptions 148/148/158/168 chars; JSON-LD on all 4 pages parses as valid JSON. The OG image
+binary did not change (no regeneration needed); og:description text did — link-preview re-scrape
+per platform still pending (tracked in KNOWN_ISSUES.md). ARCHITECTURE.md synced (stage wording +
+status-label guardrail updated from the retired "No Live status / pre-MVP" rule).

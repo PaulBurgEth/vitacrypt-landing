@@ -9,8 +9,8 @@ profile that returns actionable, evidence-checked guidance, **private by design*
 Positioning leads with the **unified profile + evidence-checked guidance**;
 privacy/FHE is the *trust layer*, not the headline (see the honesty rule in §5).
 The site is **static HTML** (no framework, no database) hosted on **Vercel**, with
-one small serverless function for the waitlist form. Stage: pre-MVP, private beta
-targeted Q4 2026.
+one small serverless function for the waitlist form. Stage: working product,
+pre-launch; first design-partner cohort targeted Q4 2026.
 
 ## 2. The pages (file map)
 Everything lives at the repo root. Each page is **self-contained** (its own CSS
@@ -20,7 +20,7 @@ and JavaScript inline) — there is no shared stylesheet file yet.
 |---|---|
 | `index.html` | The landing page — the hook. Hero, a **4-pillar overview** block, the data-fabric/research/pipeline/case sections, roadmap, "why now", CTA. |
 | `platform.html` | The deep-dive page — explains the **4 pillars** in depth (how each works, evidence, honest MVP-vs-roadmap scope). Links back to the landing for the live demo + case; links into the litepaper for specs. |
-| `investor.html` | The **investor page** — public teaser that gates the deck. Opportunity, why-now (market + tailwinds), the moat, honest pre-MVP traction, founder + hiring plan, a soft "the raise" (no amount/valuation/terms), CTA to request the deck. Cloned from `platform.html`'s shell (same CSS/nav/footer/modal), body swapped. |
+| `investor.html` | The **investor page** — public teaser that gates the deck. Opportunity, why-now (market + tailwinds), the moat, honest pre-launch traction, founder + hiring plan, a soft "the raise" (no amount/valuation/terms), CTA to request the deck. Cloned from `platform.html`'s shell (same CSS/nav/footer/modal), body swapped. |
 | `litepaper.html` | The technical brief — cryptography, threat model, integration spec, validation plan. Dark-only by design. |
 | `api/waitlist.js` | Serverless function: receives the waitlist form and forwards it to Telegram. |
 | `sitemap.xml`, `robots.txt`, `llms.txt`, `vercel.json` | SEO + hosting config. |
@@ -59,8 +59,13 @@ If the function ever fails, the form shows a fallback: "email marketing@vitacryp
 - **Theme** = dark by default; on a visitor's first load it matches their
   device's light/dark setting (`prefers-color-scheme`); the toggle overrides and
   remembers the choice. Litepaper stays dark.
-- **No "Live" status anywhere** — the product is pre-MVP. Data sources are labelled
-  "MVP" / "Direct API at MVP launch" / "2027", never "Live". Keep it honest.
+- **Status labels stay honest** — "Live" only for capabilities genuinely live in the
+  working product (genetics, environment, surveys/lifestyle, recommendations,
+  health-score trend); "Wired" / "Partial" / "Demonstrated" elsewhere; never "Live"
+  for FHE-wide claims or unconnected integrations. Stage wording everywhere:
+  "working product, pre-launch" (litepaper: "Working MVP, pre-launch") — never
+  "pre-MVP" standalone, never "launched" or "beta live". The only public date is
+  "first design-partner cohort, Q4 2026" (roadmap 2027 milestones stay).
 - **Self-contained pages** (CSS/JS duplicated per page) — chosen for simplicity
   and to match the existing litepaper. The cost is 3-way upkeep for shared bits
   (nav, footer, form). Extract to `assets/shared.css` + `assets/app.js` when a

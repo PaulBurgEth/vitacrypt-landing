@@ -1,10 +1,8 @@
 # Known Issues / Open Follow-ups
 
-_Last updated: 2026-06-10 (v2 brief pass: stage wording, AI-driven, founder bio v2)._
+_Last updated: 2026-06-10 (v2 brief pass deployed to production)._
 
 ## Open — needs a human / external action
-- **v2 brief pass NOT deployed.** The 2026-06-10 edits (see DECISIONS.md) are committed on
-  `investor-page` but production still serves the prior copy until `vercel --prod` (explicit go).
 - **OG social-card cache.** `img/og-preview.jpg` was regenerated and is live (origin + CDN),
   but X / LinkedIn / Telegram / Facebook cache OG images on their side. Existing share previews
   keep showing the old "Powered by FHE" card until each is re-scraped via its debugger
@@ -19,9 +17,10 @@ _Last updated: 2026-06-10 (v2 brief pass: stage wording, AI-driven, founder bio 
   Telegram fixed in-repo (`t.me/paul_burg`), but the project was **not** redeployed (unknown live
   domain). It also posts the form to `formsubmit.co/waitlist@vitacrypt.xyz` (a contact outside the
   verified set). If the placeholder is still in use, deploy it separately and decide on that email.
-- **Git not pushed to remote/main.** This round is committed on branch `investor-page`
-  (`3c63411`, `a7a09b6`, + the docs commit) but not pushed. Production is live via `vercel --prod`
-  (CLI deploy), so deploy state is decoupled from the git remote until someone pushes/merges.
+- **Git not pushed to remote/main.** All rounds are committed on branch `investor-page`
+  (`3c63411`, `a7a09b6`, `e2d4e26`, `61a2dbc` v2-brief pass, + docs commits) but not pushed.
+  Production is live via `vercel --prod` (CLI deploy, latest: `vitacrypt-landing-82y28u8nl`,
+  2026-06-10), so deploy state is decoupled from the git remote until someone pushes/merges.
 
 ## Accepted / out of scope (intentional)
 - **litepaper.html body em-dashes (~50).** Not converted — it's a dense technical DD document;
