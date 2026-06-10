@@ -1,13 +1,20 @@
 # Known Issues / Open Follow-ups
 
-_Last updated: 2026-06-07 (site repositioning + production deploy)._
+_Last updated: 2026-06-10 (v2 brief pass: stage wording, AI-driven, founder bio v2)._
 
 ## Open — needs a human / external action
+- **v2 brief pass NOT deployed.** The 2026-06-10 edits (see DECISIONS.md) are committed on
+  `investor-page` but production still serves the prior copy until `vercel --prod` (explicit go).
 - **OG social-card cache.** `img/og-preview.jpg` was regenerated and is live (origin + CDN),
   but X / LinkedIn / Telegram / Facebook cache OG images on their side. Existing share previews
   keep showing the old "Powered by FHE" card until each is re-scraped via its debugger
   (LinkedIn Post Inspector, FB Sharing Debugger, X Card Validator, Telegram @WebpageBot).
-  New shares pick up the new card automatically.
+  New shares pick up the new card automatically. The 2026-06-10 pass also changed og:description
+  text on all pages (added "AI-driven", litepaper de-overclaimed), so a re-scrape after the next
+  deploy refreshes both image and text; the image itself did not change this round.
+- **Litepaper §04 status badges vs investor traction table.** §04 marks Wearables / Labs /
+  Microbiome as "MVP" while the investor page says Partial / Wired. The v2 litepaper brief did not
+  cover §04, so it was left as-is — align in the next litepaper iteration.
 - **`vitacrypt-placeholder` is a separate Vercel project.** `placeholder/index.html` had its
   Telegram fixed in-repo (`t.me/paul_burg`), but the project was **not** redeployed (unknown live
   domain). It also posts the form to `formsubmit.co/waitlist@vitacrypt.xyz` (a contact outside the

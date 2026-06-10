@@ -315,3 +315,52 @@ contacts unchanged; tags balanced; JSON-LD valid; no console errors. Backups in 
 **NOT yet deployed.** Production (vitacrypt.xyz) still serves the prior "6 in 1 / six streams" copy
 until a `vercel --prod` redeploy (pending explicit go). One-pager PDF reconciliation flagged: if the
 public PDF still shows "6 in 1", align it to the same principle.
+
+## 2026-06-10 — v2 brief pass: stage wording, AI-driven, private-compute hire, founder bio v2
+
+**What & why:** applied the three v2 briefs (Investor Page Update Brief v2, Litepaper Patch Brief v2,
+Sitewide Coherence Brief). The v1 work (unified-first repositioning, now/target blocks) was already
+in place from 2026-06-07; this pass delivers the v2 deltas and residual cleanups.
+
+**Edits:**
+- Stage wording site-wide: every "pre-MVP" / "MVP in development" → "working product, pre-launch"
+  (litepaper status: "Working MVP, pre-launch"). Hero badges, KPI tiles, footers, llms.txt,
+  placeholder. The Q4 2026 date is now phrased "first design-partner cohort" everywhere
+  (index roadmap node "Private beta" → "First design-partner cohort"). 2027 roadmap dates kept
+  (Paul's call, consistent with litepaper §07).
+- "AI-driven" added to pillar 2 / canonical one-liner across all meta descriptions, OG/Twitter
+  tags, JSON-LD, hero lead-punches, investor moat card (now also names PubMed / Europe PMC /
+  OpenAlex, publication-type grading, ClinVar / dbSNP / GWAS Catalog), llms.txt, README.
+- Investor §05: hire /01 relabeled "Private-compute engineering" (old "FHE / cryptography engineer"
+  label retired per v2) with senior-crypto-review + independent-audit wording; hire /02 dropped
+  "on-device". Founder lede rewritten per v2 (SF 2019 origin, revived when FHE matured, tRWI,
+  public goods, environmental engineering five-year specialist degree, postgraduate ecology
+  research, longevity throughline, LinkedIn link). §06 milestone card gained the one allowed GTM
+  sentence (biohacker/longevity communities, founding-member pricing).
+- Residual overclaims cleaned on index: "You hold the only key" card → "Your data, your key, by
+  design" with target-custody framing; data-fabric "pulled together on the device... before
+  anything is encrypted" → target-architecture framing; hero lead + thesis retensed ("built to
+  encrypt / built so"); privacy-moat footnote → demonstrated-on-one-slice pattern; walkthrough
+  stage 02 strings prefixed "In the target design / Target design:". Hero profile card label
+  "Unified profile · on device" → "Unified profile".
+- investor §03 proof: "the server never seeing it" → "the server never holding it" (ciphertext is
+  visible to the server; the key is not).
+- Litepaper bumped v0.1.1 → v0.1.2 (7 spots), dateModified 2026-06-10; og/twitter descriptions
+  de-overclaimed ("encrypted ... stack" → "privacy-first ... targeting Zama Concrete ML / TFHE").
+- README: "Six streams" → "Any health signal"; "The only consumer app" → "We have not found
+  another product"; em-dashes removed. placeholder: fabricated "10,000+ waitlist" + "Fully
+  encrypted" dropped.
+- Kept per decision: marketing@vitacrypt.xyz as the waitlist contact (Paul confirmed; Rule 6's ban
+  targets paulburg.com branding); demo-UI snapshot numbers; Nillion roadmap mentions.
+
+**Flagged, not changed:** litepaper §04 badges mark Wearables/Labs/Microbiome "MVP" while the
+investor traction table says Partial/Wired — possible incoherence for the next litepaper iteration
+(the v2 litepaper brief's edit list did not cover §04).
+
+**Verified (local):** banned-phrase greps empty (pre-MVP, MVP in development, you hold the only key,
+zero-knowledge, fully encrypted, FHE / cryptography engineer); 0.1.1 count 0, 0.1.2 count 7;
+AI-driven present on all 4 pages + llms.txt + README; all 4 pages render via local serve with zero
+console errors; pipeline walkthrough buttons work after the JS-string edits.
+
+**NOT yet deployed** — pending explicit `vercel --prod` go. After deploy: re-scrape link previews
+(og:description text changed; the OG image itself did not, no regeneration needed).
