@@ -1,11 +1,8 @@
 # Known Issues / Open Follow-ups
 
-_Last updated: 2026-06-11 (delta pass: clinical framing + revenue levers)._
+_Last updated: 2026-06-11 (delta pass deployed: clinical framing + revenue levers)._
 
 ## Open — needs a human / external action
-- **2026-06-11 delta pass NOT deployed.** The clinical-framing / revenue-lever edits (see
-  DECISIONS.md) are committed on `investor-page`; production serves the 2026-06-10 copy until
-  the next `vercel --prod` (explicit go).
 - **OG social-card cache.** `img/og-preview.jpg` was regenerated and is live (origin + CDN),
   but X / LinkedIn / Telegram / Facebook cache OG images on their side. Existing share previews
   keep showing the old "Powered by FHE" card until each is re-scraped via its debugger

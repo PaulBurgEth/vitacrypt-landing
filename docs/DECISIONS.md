@@ -400,4 +400,9 @@ litepaper brief was issued and the sitewide brief excludes /litepaper — next l
 full banlist regression grep empty; both pages render with zero console errors ("re-personalizes
 daily" confirmed in DOM; hidden-by-default pill, hence checked via innerHTML).
 
-**NOT yet deployed** — pending explicit `vercel --prod` go.
+**Deployed to production 2026-06-11** (explicit go from Paul): `vercel --prod` →
+`vitacrypt-landing-rdw32mmly`. Post-deploy curl verification against vitacrypt.xyz: clinical-advisor
+line present on index (1×) and investor (1×); resell/prescri greps empty; "Three protocols",
+"re-personalizes daily" and "Bring your own results from Quest" all serving. Meta/OG tags were not
+touched in this pass, so no link-preview re-scrape is needed for it (the 2026-06-10 re-scrape item
+in KNOWN_ISSUES still stands on its own).
