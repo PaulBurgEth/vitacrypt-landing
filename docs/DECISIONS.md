@@ -370,3 +370,34 @@ descriptions 148/148/158/168 chars; JSON-LD on all 4 pages parses as valid JSON.
 binary did not change (no regeneration needed); og:description text did — link-preview re-scrape
 per platform still pending (tracked in KNOWN_ISSUES.md). ARCHITECTURE.md synced (stage wording +
 status-label guardrail updated from the retired "No Live status / pre-MVP" rule).
+
+## 2026-06-11 — Delta pass: clinical framing (v2.2 / Rule 7) + revenue levers (v2.3)
+
+**What & why:** Paul re-sent the investor-page and sitewide briefs; a formal diff confirmed the only
+additions are the clinical-framing rule (roadmap framing only; "a clinical advisor joins ahead of
+the IRB validation study planned for 2027"; no defensive wording) and the revenue-levers rule
+(guided-data-acquisition / test-partnership / supplement commerce stay investor-material only;
+the public site speaks only of the subscription).
+
+**Edits (6):**
+- index Labs & hormones: dropped "We don't resell tests." (Paul's call: the sentence actively
+  foreclosed the test-partnership lever that now lives in the investor memo; the site stays silent
+  instead) → "Bring your own results from Quest, Labcorp, Function, Superpower."
+- index case study de-medicalized: "Three prescriptions" → "Three protocols";
+  "re-prescribes daily" → "re-personalizes daily"; "changes the prescription" → "changes the
+  protocol" (an unvalidated app must not imply it prescribes).
+- Clinical-advisor roadmap line added where IRB framing is carried: index roadmap Q1 2027 node
+  ("; a clinical advisor joins ahead of the study") and investor §04 honest-scope foot-note
+  ("A clinical advisor joins ahead of the IRB validation study planned for 2027.").
+- No defensive wording existed anywhere (verified); supplements appear only as product guidance /
+  demo-UI (supplement log, 5-MTHF in the case study), not commerce — left intact. litepaper FDA
+  mentions are factual (Apple Watch ECG cleared; OpenFDA API) — left intact.
+
+**Out of scope, flagged:** litepaper §07 could carry the clinical-advisor line too, but no new
+litepaper brief was issued and the sitewide brief excludes /litepaper — next litepaper iteration.
+
+**Verified (local):** "clinical advisor" present on index + investor; resell/prescri greps empty;
+full banlist regression grep empty; both pages render with zero console errors ("re-personalizes
+daily" confirmed in DOM; hidden-by-default pill, hence checked via innerHTML).
+
+**NOT yet deployed** — pending explicit `vercel --prod` go.

@@ -1,8 +1,11 @@
 # Known Issues / Open Follow-ups
 
-_Last updated: 2026-06-10 (v2 brief pass deployed to production)._
+_Last updated: 2026-06-11 (delta pass: clinical framing + revenue levers)._
 
 ## Open — needs a human / external action
+- **2026-06-11 delta pass NOT deployed.** The clinical-framing / revenue-lever edits (see
+  DECISIONS.md) are committed on `investor-page`; production serves the 2026-06-10 copy until
+  the next `vercel --prod` (explicit go).
 - **OG social-card cache.** `img/og-preview.jpg` was regenerated and is live (origin + CDN),
   but X / LinkedIn / Telegram / Facebook cache OG images on their side. Existing share previews
   keep showing the old "Powered by FHE" card until each is re-scraped via its debugger
@@ -13,6 +16,10 @@ _Last updated: 2026-06-10 (v2 brief pass deployed to production)._
 - **Litepaper §04 status badges vs investor traction table.** §04 marks Wearables / Labs /
   Microbiome as "MVP" while the investor page says Partial / Wired. The v2 litepaper brief did not
   cover §04, so it was left as-is — align in the next litepaper iteration.
+- **Litepaper §07 lacks the clinical-advisor line.** The 2026-06-11 clinical-framing rule added
+  "a clinical advisor joins ahead of the IRB validation study (2027)" to index + investor; no new
+  litepaper brief was issued and the sitewide brief excludes /litepaper, so §07 was left as-is —
+  add the advisor line in the next litepaper iteration (and bump the version when touched).
 - **`vitacrypt-placeholder` is a separate Vercel project.** `placeholder/index.html` had its
   Telegram fixed in-repo (`t.me/paul_burg`), but the project was **not** redeployed (unknown live
   domain). It also posts the form to `formsubmit.co/waitlist@vitacrypt.xyz` (a contact outside the
