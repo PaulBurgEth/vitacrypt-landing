@@ -3444,6 +3444,12 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
       <div class="cite-src">Cited · PubMed PMC6068673 · meta-analysis</div>
     </div>
 
+    <div class="cite-sample" style="border-left-color:var(--amber);margin-top:12px">
+      <div class="cite-h">When the evidence isn't there</div>
+      <div class="cite-b">A claim with no strong support is shown and labelled, not asserted, and fabricated citations are stripped automatically, so a recommendation never rests on a source that does not exist.</div>
+      <div class="cite-src" style="color:var(--amber)">No strong evidence yet · shown, not asserted</div>
+    </div>
+
     <p class="pillar-links">
       <a href="index.html#research">See the full corpus list →</a>
       <a href="litepaper.html#engine">Matching protocol in the litepaper →</a>
@@ -3491,32 +3497,32 @@ section[id], .pillar-anchor { scroll-margin-top: 80px; }
 <section id="encrypted">
   <div class="wrap">
     <div class="eyebrow">Pillar 04 · Private by design</div>
-    <h2 class="stitle">Built to compute on your biology without decrypting it.</h2>
-    <p class="lede">Fully Homomorphic Encryption (FHE) lets a server run analysis on data that stays encrypted the whole time: the result comes back encrypted and only your key opens it, like a sealed box a mathematician can still do arithmetic inside. That is the architecture VitaCrypt is built toward.</p>
+    <h2 class="stitle">Private by design, on what is true today.</h2>
+    <p class="lede">Privacy here is concrete and present-day: your data is encrypted at rest under per-user keys, retention is minimal, and VitaCrypt is independent, not a feature of any single AI giant and built so the underlying model can be swapped rather than welded in. Fully private blind compute (FHE), where a server analyzes without ever decrypting, is the ceiling we are building toward.</p>
 
     <h3 class="pillar-sub">Where the line is, honestly</h3>
     <div class="boundary">
       <div class="b-col device">
-        <div class="b-h">Your device</div>
+        <div class="b-h">Today</div>
         <ul>
-          <li>Holds the key (Keychain / Keystore)</li>
-          <li>Encrypts the unified profile</li>
-          <li>Decrypts results locally</li>
+          <li>Encrypted at rest, with per-user keys rolling out</li>
+          <li>Independent: not tied to any single AI giant; the model can be swapped</li>
+          <li>External AI / OCR providers clearly disclosed</li>
         </ul>
-        <div class="b-note">Target: plaintext never leaves here.</div>
+        <div class="b-note">Encrypted at rest, least-privilege access, minimal retention.</div>
       </div>
-      <div class="b-flow"><span>ciphertext →</span><span>← ciphertext</span></div>
+      <div class="b-flow"><span>now</span><span>next →</span></div>
       <div class="b-col server">
-        <div class="b-h">VitaCrypt server</div>
+        <div class="b-h">Roadmap</div>
         <ul>
-          <li>Runs FHE compute on ciphertext (proven on one slice)</li>
-          <li>Holds reference data in clear (1000 Genomes panels, literature)</li>
-          <li>Target: never holds a decryption key</li>
+          <li>Tighter identifier minimization before any external inference</li>
+          <li>Client-held keys (iOS Keychain / Android Keystore)</li>
+          <li>Blind compute (FHE): the server analyzes without decrypting</li>
         </ul>
-        <div class="b-note">Built so a breach yields mathematical noise.</div>
+        <div class="b-note">On our funded R&amp;D roadmap, not yet live.</div>
       </div>
     </div>
-    <p class="pillar-body">Encryption and decryption run client-side, the pattern Zama shipped in its iOS FHE SDK (2025). The heavy compute is centralized FHE on our servers, not on your phone. We're <strong>targeting the Zama Concrete ML / TFHE stack</strong>; multi-party blind computing (Nillion) is on the roadmap as defense-in-depth, not in the MVP.</p>
+    <p class="pillar-body">On the roadmap, encryption and decryption run client-side, the pattern Zama shipped in its iOS FHE SDK (2025), with the heavy compute as centralized FHE on our servers. We're <strong>targeting the Zama Concrete ML / TFHE stack</strong>; multi-party blind computing (Nillion) is defense-in-depth, not in the MVP.</p>
 
     <h3 class="pillar-sub">Is this real yet? The honest status</h3>
     <p class="pillar-body">Blind compute is demonstrated end to end on one encrypted genetic vector on staging: the client holds the key, the server computes on ciphertext in about half a second and never holds the secret key. That FHE model is a synthetic-data tech demo, not a validated polygenic risk score; production-wide blind compute and device-bound key custody are the roadmap, not shipped. Today the master key is server-side and the platform is not yet end-to-end blind. As external corroboration, Zama's published encrypted-DNA work (<a href="https://github.com/zama-ai/bounty-program/issues/95">bounty&nbsp;#95</a>, 2024) reached <strong>96% accuracy on encrypted DNA ancestry classification</strong> (chromosome 22, 1000 Genomes), evidence the primitive works.</p>

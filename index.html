@@ -3407,22 +3407,22 @@ body.drawer-open { overflow: hidden; }
         </div>
       </div>
 
-      <!-- WHAT SERVERS SEE — stacked below profile -->
-      <div class="hero-card cipher">
+      <!-- EVIDENCE ENGINE — stacked below profile -->
+      <div class="hero-card evidence">
         <div class="hc-head">
-          <span>Server view, by design</span>
-          <span class="live-dot danger-tag">TFHE</span>
+          <span>Evidence engine</span>
+          <span class="live-dot">Live</span>
         </div>
-        <div class="cipher-stream" id="cipherStream">
-          <div class="row">9F3B C24E 7AD1 8802 F15C B43E AA90</div>
-          <div class="row">E14A 6B2D 0C81 9F77 33EE 2B0A C5D1</div>
-          <div class="row dim">7E22 D198 4F0B AC73 5601 E88A 12FD</div>
-          <div class="row">B6C0 4D29 71F4 8E32 0A95 C8B7 5E2D</div>
-          <div class="row dim">3F71 EA08 95BC 6D40 22CF 49A1 D830</div>
+        <div style="border-left:2px solid var(--teal);padding:1px 0 1px 10px;margin:2px 0 9px">
+          <div style="font-size:12.5px;color:var(--ink);line-height:1.4;margin-bottom:7px">Shift cardio to the 6&ndash;9am low-AQI window <span style="font-size:9px;color:var(--teal);background:var(--teal-glow);border:1px solid color-mix(in srgb, var(--teal) 35%, transparent);border-radius:4px;padding:1px 6px;white-space:nowrap">Strong</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;font-family:'Geist Mono',monospace;font-size:9.5px;letter-spacing:.02em">
+            <span style="color:var(--teal);border:1px solid var(--line);border-radius:5px;padding:2px 6px">PubMed PMC6068673 &middot; meta-analysis</span>
+            <span style="color:var(--teal);border:1px solid var(--line);border-radius:5px;padding:2px 6px">PubMed &middot; cohort +3</span>
+          </div>
         </div>
-        <div class="cipher-foot">
-          <span>Mathematical noise</span>
-          <span class="zero">ciphertext only</span>
+        <div style="border-top:1px dashed var(--line);padding-top:8px">
+          <div style="font-size:11.5px;color:var(--ink-2);line-height:1.4">Cold plunge for deep sleep <span style="font-size:9px;color:var(--amber);background:rgba(255,197,138,.12);border:1px solid rgba(255,197,138,.28);border-radius:4px;padding:1px 6px;white-space:nowrap">No strong evidence yet</span></div>
+          <div style="font-size:10.5px;color:var(--ink-faint);margin-top:3px">Shown, not asserted. The engine says no when the science isn&rsquo;t there.</div>
         </div>
       </div>
 
@@ -3511,8 +3511,8 @@ body.drawer-open { overflow: hidden; }
 <div class="facts">
   <div class="fact"><div class="num">All-in-1</div><div class="lbl">Health signals unified · DNA · microbiome · wearable · lab · environment · lifestyle · and more</div></div>
   <div class="fact"><div class="num">~40M</div><div class="lbl">Records indexed across PubMed &amp; Europe PMC · cross-referenced per recommendation</div></div>
-  <div class="fact"><div class="num">~0.5s</div><div class="lbl">Blind compute on an encrypted genetic vector · staging proof, server never holds the key</div></div>
-  <div class="fact"><div class="num">TFHE</div><div class="lbl">Compute on ciphertext · Zama Concrete ML target stack</div></div>
+  <div class="fact"><div class="num">5</div><div class="lbl">Live evidence corpora · PubMed, Europe PMC, OpenAlex, ClinVar/dbSNP, GWAS Catalog</div></div>
+  <div class="fact"><div class="num">0</div><div class="lbl">Fabricated citations · every PMID verified, invented ones stripped automatically</div></div>
 </div>
 
 <!-- ========== FOUR PILLARS OVERVIEW ========== -->
@@ -3780,16 +3780,16 @@ body.drawer-open { overflow: hidden; }
 <section id="pipeline">
   <div class="wrap">
     <div class="eyebrow">04 · The architecture</div>
-    <h2 class="stitle">How VitaCrypt is built to work.</h2>
-    <p class="lede">Click any stage. The architecture, the encryption state, and the phone respond together. Auto-plays on first scroll. This walkthrough shows the target design; blind compute is proven today on one encrypted genetic vector (~0.5s, the server never holds the key) and the round scales it across the full pipeline.</p>
+    <h2 class="stitle">How VitaCrypt works.</h2>
+    <p class="lede">Click any stage. The flow, the evidence, and the phone respond together. Auto-plays on first scroll. Every recommendation is matched to real research, graded by strength, and cited before it reaches you.</p>
 
     <div class="pipe-wrap">
       <div class="pipe-head">
         <div class="ttl"><span id="pipeHeadLabel">STAGE 01 / COLLECT</span></div>
         <div class="pipe-tabs">
           <button class="active" data-step="0">01 COLLECT</button>
-          <button data-step="1">02 ENCRYPT</button>
-          <button data-step="2">03 COMPUTE</button>
+          <button data-step="1">02 UNIFY</button>
+          <button data-step="2">03 CHECK</button>
           <button data-step="3">04 ACT</button>
         </div>
       </div>
@@ -3815,9 +3815,9 @@ body.drawer-open { overflow: hidden; }
         <!-- MIDDLE: visual architecture -->
         <div class="pipe-arch">
           <div class="arch-stage">
-            <div class="arch-key left" id="archKeyLeft">🔑 KEY · ON DEVICE</div>
-            <div class="arch-key middle" id="archKeyMiddle">CIPHERTEXT ONLY</div>
-            <div class="arch-key right" id="archKeyRight">🔑 KEY · ON DEVICE</div>
+            <div class="arch-key left" id="archKeyLeft">YOUR PROFILE</div>
+            <div class="arch-key middle" id="archKeyMiddle">EVIDENCE ENGINE</div>
+            <div class="arch-key right" id="archKeyRight">CITED GUIDANCE</div>
 
             <div class="arch-node left" id="archLeft">
               <div class="frame active">
@@ -3831,18 +3831,18 @@ body.drawer-open { overflow: hidden; }
                   <div class="bar short"></div>
                 </div>
               </div>
-              <div class="label">Your device<span class="sub">Raw biology</span></div>
+              <div class="label">Your profile<span class="sub">Unified signals</span></div>
             </div>
 
             <div class="arch-node server center" id="archCenter">
               <div class="frame">
                 <div class="content">
-                  <div class="lat">VITACRYPT COMPUTE</div>
+                  <div class="lat">VITACRYPT ENGINE</div>
                   <div class="ct"></div>
-                  <div class="lat">// no decryption</div>
+                  <div class="lat">// retrieve · grade · cite</div>
                 </div>
               </div>
-              <div class="label">FHE compute<span class="sub">On ciphertext</span></div>
+              <div class="label">Evidence engine<span class="sub">Retrieve · grade · cite</span></div>
             </div>
 
             <div class="arch-node right" id="archRight">
@@ -3857,13 +3857,13 @@ body.drawer-open { overflow: hidden; }
                   <div class="bar"></div>
                 </div>
               </div>
-              <div class="label">Your device<span class="sub">Insight, decrypted</span></div>
+              <div class="label">You<span class="sub">Cited guidance</span></div>
             </div>
 
             <div class="arch-flow">
               <div class="arch-spacer"></div>
               <div class="arch-arrow" id="archArrow1">
-                <span class="lbl">encrypt →</span>
+                <span class="lbl">your profile →</span>
                 <svg viewBox="0 0 100 28" preserveAspectRatio="none">
                   <line class="line" x1="2" y1="14" x2="92" y2="14"/>
                   <polygon class="arrowhead" points="92,9 100,14 92,19"/>
@@ -3871,7 +3871,7 @@ body.drawer-open { overflow: hidden; }
               </div>
               <div class="arch-spacer wide"></div>
               <div class="arch-arrow" id="archArrow2">
-                <span class="lbl">return ciphertext →</span>
+                <span class="lbl">cited actions →</span>
                 <svg viewBox="0 0 100 28" preserveAspectRatio="none">
                   <line class="line" x1="2" y1="14" x2="92" y2="14"/>
                   <polygon class="arrowhead" points="92,9 100,14 92,19"/>
@@ -3880,7 +3880,7 @@ body.drawer-open { overflow: hidden; }
               <div class="arch-spacer"></div>
             </div>
 
-            <div class="arch-foot">KEYS NEVER LEAVE THE TWO DEVICES</div>
+            <div class="arch-foot">ENCRYPTED AT REST · BLIND COMPUTE ON THE ROADMAP</div>
           </div>
         </div>
 
@@ -4531,16 +4531,16 @@ const stages = [
     headLabel: 'STAGE 01 / COLLECT',
     tagBox: '01', tagText: 'COLLECT',
     title: 'A unified profile, drawn from every source.',
-    summary: 'Wearables (via Terra API), DNA, microbiome, labs, environment, and PROMIS surveys ingest on-device into a single living profile. <strong>Nothing has left the device yet.</strong>',
+    summary: 'Wearables (via Terra API), DNA, microbiome, labs, environment, and surveys flow into one place. <strong>Your whole biology, in a single living profile.</strong>',
     what: [
       'Upload 23andMe / AncestryDNA reports',
       'Connect Apple Watch or Oura ring',
       'Pull air quality + UV from your location'
     ],
     arch: { left: 'active', center: '', right: '', arrow1: '', arrow2: '' },
-    archKeys: { left: '🔑 KEY · ON DEVICE', mid: 'LOCAL · NOT TRANSMITTED', right: '🔑 KEY · ON DEVICE' },
-    phoneStage: '01 · Collect · Local',
-    phoneCaption: 'Sources sync locally. Nothing has been transmitted.',
+    archKeys: { left: 'SIGNALS IN', mid: 'EVIDENCE ENGINE', right: 'CITED GUIDANCE' },
+    phoneStage: '01 · Collect · Your sources',
+    phoneCaption: 'Bring every signal you have into one place.',
     phoneCards: [
       { lbl: 'DNA · MTHFR C677T', v: 'TT', cls: '' },
       { lbl: 'WEARABLE · HRV 3d', v: '38 ms', cls: '' },
@@ -4549,61 +4549,61 @@ const stages = [
     ]
   },
   {
-    headLabel: 'STAGE 02 / ENCRYPT',
-    tagBox: '02', tagText: 'ENCRYPT',
-    title: 'Your phone encrypts it.',
-    summary: 'Signals are encrypted with your key into TFHE ciphertext. In the target design, the <strong>key never leaves your device</strong>, and the encrypted form is what travels.',
+    headLabel: 'STAGE 02 / UNIFY',
+    tagBox: '02', tagText: 'UNIFY',
+    title: 'Your signals fuse into one profile.',
+    summary: 'The streams are normalized and fused into a single queryable profile, so the value lives in the <strong>connections between signals</strong>, not any one number, and in how they move over time.',
     what: [
-      'TFHE encryption on-device with your key',
-      'Encrypted payload uploaded to compute',
-      'Built so plaintext is never retained server-side'
+      'Normalize each source into one schema',
+      'Fuse genetics × environment × labs',
+      'Track how your signals move over time'
     ],
     arch: { left: 'active', center: '', right: '', arrow1: 'active', arrow2: '' },
-    archKeys: { left: '🔑 KEY · ON DEVICE', mid: 'CIPHERTEXT IN FLIGHT', right: '🔑 KEY · ON DEVICE' },
-    phoneStage: '02 · Encrypt · On device',
-    phoneCaption: 'Each signal converts to ciphertext. Target design: your key stays here.',
+    archKeys: { left: 'ONE PROFILE', mid: 'EVIDENCE ENGINE', right: 'CITED GUIDANCE' },
+    phoneStage: '02 · Unify · One profile',
+    phoneCaption: 'Six streams fuse into a single living profile.',
     phoneCards: [
-      { lbl: 'DNA · encrypted', v: 'enc("0x9af3…7e88")', cls: 'encrypted' },
-      { lbl: 'WEARABLE · encrypted', v: 'enc("0xf270…b91d")', cls: 'encrypted' },
-      { lbl: 'ENVIRONMENT · encrypted', v: 'enc("0x1c44…2009")', cls: 'encrypted' },
-      { lbl: 'LABS · encrypted', v: 'enc("0x8b1e…4a02")', cls: 'encrypted' }
+      { lbl: 'PROFILE', v: '6 sources linked', cls: '' },
+      { lbl: 'GENETICS × ENV', v: 'MTHFR × PM2.5', cls: '' },
+      { lbl: 'TREND · HRV 3d', v: '↓ 22%', cls: '' },
+      { lbl: 'COMPLETENESS', v: '94 / 100', cls: '' }
     ]
   },
   {
-    headLabel: 'STAGE 03 / COMPUTE',
-    tagBox: '03', tagText: 'COMPUTE',
-    title: 'The server runs models on ciphertext.',
-    summary: 'AI models on Zama Concrete ML are built to run <strong>directly on encrypted data</strong>, surfacing patterns without seeing inputs. Proven today on one encrypted genetic vector; scaling across the pipeline.',
+    headLabel: 'STAGE 03 / CHECK',
+    tagBox: '03', tagText: 'CHECK',
+    title: 'Every claim is checked against real science.',
+    summary: 'For each recommendation, VitaCrypt retrieves matching research across live corpora, grades it by strength, and anchors it to a <strong>real PubMed citation</strong>. No strong support? It says so, rather than inventing one.',
     what: [
-      'Concrete ML inference on TFHE ciphertext',
-      'Target: no decryption at any compute step',
-      'Server computes on ciphertext, not plaintext'
+      'Retrieve across PubMed, Europe PMC, OpenAlex, GWAS',
+      'Grade by publication strength',
+      'Strip any fabricated citation automatically'
     ],
     arch: { left: '', center: 'active', right: '', arrow1: '', arrow2: '' },
-    archKeys: { left: '🔑 KEY · ON DEVICE', mid: 'COMPUTING ON CIPHERTEXT', right: '🔑 KEY · ON DEVICE' },
-    phoneStage: '03 · Compute · Remote',
-    phoneCaption: 'The server computes on ciphertext, by design.',
+    archKeys: { left: 'YOUR PROFILE', mid: 'RETRIEVE · GRADE · CITE', right: 'CITED GUIDANCE' },
+    phoneStage: '03 · Check · Evidence',
+    phoneCaption: 'Each claim is matched to research, graded, and cited.',
     phoneCards: [
-      { lbl: 'STATE', v: 'Running FHE inference…', cls: 'encrypted' },
-      { lbl: 'LATENCY', v: '~5 minutes', cls: 'encrypted' },
-      { lbl: 'OPS', v: '4,812 enc gates', cls: 'encrypted' },
-      { lbl: 'SERVER VIEW', v: 'enc("0x????…????")', cls: 'encrypted' }
+      { lbl: 'CLAIM', v: 'Low-AQI cardio window', cls: '' },
+      { lbl: 'MATCHED', v: 'PubMed +4 · meta-analysis', cls: '' },
+      { lbl: 'GRADE', v: 'Strong', cls: 'glow' },
+      { lbl: 'GUARDRAIL', v: '0 fabricated cites', cls: '' }
     ]
   },
   {
     headLabel: 'STAGE 04 / ACT',
     tagBox: '04', tagText: 'ACT',
-    title: 'Your phone decrypts and tells you what to do.',
-    summary: 'Encrypted output returns to your device. Only your key can open it. The output is not a dashboard, it is <strong>a small, ordered list of actions</strong>, cited to peer-reviewed literature.',
+    title: 'Personalized actions, each with its source.',
+    summary: 'You get a short, ordered list of actions, each with the <strong>why and the source attached</strong>, and you can watch it adapt as your profile changes.',
     what: [
-      'Encrypted result returned to your phone',
-      'Decrypted locally with your key',
-      'Cross-referenced to PubMed'
+      'A few concrete, time-bound steps',
+      'Each with its evidence attached',
+      'Re-evaluated as new science lands'
     ],
     arch: { left: '', center: '', right: 'active', arrow1: '', arrow2: 'active' },
-    archKeys: { left: '🔑 KEY · ON DEVICE', mid: 'CIPHERTEXT RETURN', right: '🔑 KEY · DECRYPTS' },
-    phoneStage: '04 · Act · On device',
-    phoneCaption: 'You see plain language. By design, the server worked on ciphertext.',
+    archKeys: { left: 'YOUR PROFILE', mid: 'EVIDENCE ENGINE', right: 'ACTIONS · CITED' },
+    phoneStage: '04 · Act · Cited guidance',
+    phoneCaption: 'A short, ordered list of actions, each with its source.',
     phoneCards: [
       { lbl: 'INSIGHT', v: 'Inflammatory pressure detected', cls: 'glow', t: 'Inflammatory pressure detected', b: 'Your MTHFR × PM2.5 × HRV decline indicates sustained low-grade inflammation. <span class="em-teal">Methylated folate + HEPA + zone-2 cardio.</span>' },
       { lbl: 'ACTION', v: '3 today · 4 weekly', cls: '' },
@@ -4746,49 +4746,6 @@ if (heroProfile) {
 }
 
 // HERO CIPHER — live mutate hex chars, paused when offscreen or tab hidden (perf)
-(function cipherLoop(){
-  if (RM) return;  // honor prefers-reduced-motion (no text churn)
-  const stream = document.getElementById('cipherStream');
-  if (!stream) return;
-  const cipherCard = stream.closest('.hero-card.cipher') || stream;
-  const HEX = '0123456789ABCDEF';
-  const rows = Array.from(stream.querySelectorAll('.row'));
-  let timer = null;
-  let inView = false;
-
-  function mutate(){
-    const row = rows[Math.floor(Math.random() * rows.length)];
-    if (!row) return;
-    const text = row.textContent.split('');
-    const targets = new Set();
-    let safety = 0;
-    while (targets.size < 3 && safety++ < 30) {
-      const i = Math.floor(Math.random() * text.length);
-      if (/[0-9A-Fa-f]/.test(text[i])) targets.add(i);
-    }
-    targets.forEach(i => { text[i] = HEX[Math.floor(Math.random()*16)]; });
-    row.textContent = text.join('');
-    rows.forEach(r => r.classList.remove('flash'));
-    row.classList.add('flash');
-  }
-  function start(){
-    if (timer || !inView || document.hidden) return;
-    cipherCard.classList.add('cs-active');
-    timer = setInterval(mutate, 320);
-  }
-  function stop(){
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-    cipherCard.classList.remove('cs-active');
-  }
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { inView = e.isIntersecting; inView ? start() : stop(); });
-  }, { threshold: 0.1 });
-  obs.observe(cipherCard);
-  document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
-})();
-
 // ====================== MOBILE UI (commit 4B) ======================
 (function mobileUI(){
   const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
