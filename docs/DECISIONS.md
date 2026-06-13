@@ -406,3 +406,26 @@ line present on index (1×) and investor (1×); resell/prescri greps empty; "Thr
 "re-personalizes daily" and "Bring your own results from Quest" all serving. Meta/OG tags were not
 touched in this pass, so no link-preview re-scrape is needed for it (the 2026-06-10 re-scrape item
 in KNOWN_ISSUES still stands on its own).
+
+## 2026-06-13 — Pivot honesty cleanup shipped (surgical + site-audit) + production deploys
+
+**Context:** Two honesty briefs landed post-pivot (Surgical D4, then a full Site Audit). Goal: remove the last present-tense FHE/blind overclaims and market absolutes so the landing is investor-ready. Four pillars (Unified · Cited · Personalized · Private) preserved; no restructure.
+
+**Repo note (important, avoids a real trap):** the live site deploys from THIS repo (`VItaCrypt_landing`, branch `investor-page`, via `vercel --prod`). A near-identically-named stale duplicate `vitacrypt-landing/` (lowercase-hyphen) exists locally and deploys nowhere; earlier cleanup that landed there was discarded. Edit only `VItaCrypt_landing`.
+
+**Pass 1 — Surgical D4 (commit 33a386a):**
+- index: dropped the absolute "the only one in this category" from the privacy-moat footnote → "Built so exposure is off the table by design".
+- index: David "What never happened" reframed to target design ("In the target design, … never exist on a VitaCrypt server …").
+- index + platform footers: `HIPRA-AWARE` → `HIPAA-AWARE` (litepaper's "HIPRA" bill name retained: it is the Health Information Privacy Reform Act, not the typo).
+- Deployed `vercel --prod` → `vitacrypt-landing-34gswgtel` (dpl_BQxpnzWvEomquHiynZ4p6VaeVfRB), aliased vitacrypt.xyz. Curl-verified.
+
+**Pass 2 — Site audit (commit 0188e6d):**
+- investor.html: 3 absolute market claims softened to the hedged "We have not found …" form; "Where the first hires go" rewritten to evidence-engine-first (Backend/ML core → Data engineering → Data science), a fractional security audit replacing the senior-cryptographer hire, FHE as R&D roadmap, "central risk" framing removed; footer HIPAA.
+- index + platform: corpora presented as Live today (PubMed, Europe PMC, OpenAlex, ClinVar/dbSNP, GWAS Catalog) vs Roadmap (USPSTF, NICE, WHO, Cochrane); dropped "8 sources we query live" / "all eight corpora"; ~40M fact cites Europe PMC not Cochrane.
+- Consistency: hedged homepage absolutes ("No one reads it as a whole", "No single app sees both"); scrubbed Cochrane from illustrative citation counts + the walkthrough (PubMed-only).
+- Findings 1 (stale /index.html) and 5 (litepaper) were already resolved/hedged before this pass.
+- Deployed `vercel --prod` → `vitacrypt-landing-o774jbiut` (dpl_Fi2ZhQfXQ1hcC9abysozvFPELHyg), aliased vitacrypt.xyz. Curl-verified across index/investor/platform/litepaper.
+
+**Verified (production, cache-busted curl):** all overclaim/absolute markers at 0; corpora live-vs-roadmap serving; HIPAA-aware footers; honest-status block intact on platform + litepaper.
+
+**Flagged, not changed (out of brief scope):** litepaper §engine "the model has no access to … user data" (accurate for the research-watch agent; revisit if that section is ever tightened).
