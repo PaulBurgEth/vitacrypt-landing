@@ -3510,7 +3510,7 @@ body.drawer-open { overflow: hidden; }
 <!-- ========== FACTS ========== -->
 <div class="facts">
   <div class="fact"><div class="num">All-in-1</div><div class="lbl">Health signals unified · DNA · microbiome · wearable · lab · environment · lifestyle · and more</div></div>
-  <div class="fact"><div class="num">~40M</div><div class="lbl">Records indexed across PubMed &amp; Cochrane · cross-referenced per recommendation</div></div>
+  <div class="fact"><div class="num">~40M</div><div class="lbl">Records indexed across PubMed &amp; Europe PMC · cross-referenced per recommendation</div></div>
   <div class="fact"><div class="num">~0.5s</div><div class="lbl">Blind compute on an encrypted genetic vector · staging proof, server never holds the key</div></div>
   <div class="fact"><div class="num">TFHE</div><div class="lbl">Compute on ciphertext · Zama Concrete ML target stack</div></div>
 </div>
@@ -3562,7 +3562,7 @@ body.drawer-open { overflow: hidden; }
 <section id="thesis">
   <div class="wrap">
     <div class="eyebrow">01 · Thesis</div>
-    <h2 class="stitle">Your health lives in a dozen apps. No one reads it as a whole.</h2>
+    <h2 class="stitle">Your health lives in a dozen apps. We have not found one that reads it as a whole.</h2>
 
     <div class="thesis-grid">
       <div>
@@ -3725,45 +3725,51 @@ body.drawer-open { overflow: hidden; }
     <h2 class="stitle">Every recommendation cites its source.</h2>
     <p class="lede clamp-mob">Most health apps tell you what was true in 2018. We tell you what was published this week. Recommendations re-evaluate every time a new paper, GWAS hit, or regulatory update lands in one of the corpora below.</p>
 
-    <div class="research-corpora" data-mcollapse="The 8 sources we query live">
+    <p class="lede clamp-mob"><strong>Live today:</strong> PubMed, Europe PMC, OpenAlex, ClinVar/dbSNP, GWAS Catalog. <strong>On the roadmap:</strong> USPSTF, NICE, WHO, Cochrane.</p>
+
+    <div class="research-corpora" data-mcollapse="Sources, live and roadmap">
       <div class="corpus">
         <div class="nm"><span class="dot"></span>PubMed</div>
         <p class="why">~40M indexed records · NLM open data · queried live</p>
       </div>
       <div class="corpus">
+        <div class="nm"><span class="dot"></span>Europe PMC</div>
+        <p class="why">Life-science literature · EMBL-EBI · queried live</p>
+      </div>
+      <div class="corpus">
         <div class="nm"><span class="dot"></span>OpenAlex</div>
-        <p class="why">~250M scholarly works · open-access first ranking · full text where licensed</p>
+        <p class="why">~250M scholarly works · open-access first ranking · queried live</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>GWAS Catalog</div>
-        <p class="why">Variant-trait associations · curated genome-wide hits · EBI/NHGRI</p>
+        <p class="why">Variant-trait associations · curated genome-wide hits · EBI/NHGRI · queried live</p>
       </div>
       <div class="corpus">
-        <div class="nm"><span class="dot"></span>ClinVar</div>
-        <p class="why">Variant-clinical-significance mapping · NCBI · daily updates</p>
+        <div class="nm"><span class="dot"></span>ClinVar/dbSNP</div>
+        <p class="why">Variant-clinical-significance mapping · NCBI · queried live</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>USPSTF</div>
-        <p class="why">US Preventive Services Task Force · grade A/B recommendations</p>
+        <p class="why">Roadmap, not yet wired · preventive grade A/B recommendations</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>WHO</div>
-        <p class="why">Global clinical guidance · WHO Guidelines · cohort & trial data</p>
+        <p class="why">Roadmap, not yet wired · global clinical guidance</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>NICE</div>
-        <p class="why">UK National Institute for Health and Care Excellence · clinical pathways</p>
+        <p class="why">Roadmap, not yet wired · UK NICE clinical pathways</p>
       </div>
       <div class="corpus">
         <div class="nm"><span class="dot"></span>Cochrane</div>
-        <p class="why">~4,500 systematic reviews · evidence weighting · meta-analysis</p>
+        <p class="why">Roadmap, not yet wired · systematic reviews &amp; meta-analysis</p>
       </div>
     </div>
 
     <div class="research-arch">
       <div class="k">Architecture</div>
       <div>
-        <p>An agent watches the public science for you, across all eight corpora above. <strong>The model only reads public papers.</strong> The architecture is built so the match between a paper's findings and your profile happens <strong>under FHE, cryptographically, rather than by sending your data anywhere</strong>; moving the full matching pipeline behind that guarantee is the current build.</p>
+        <p>An agent watches the public science for you, across the public corpora above. <strong>The model only reads public papers.</strong> The architecture is built so the match between a paper's findings and your profile happens <strong>under FHE, cryptographically, rather than by sending your data anywhere</strong>; moving the full matching pipeline behind that guarantee is the current build.</p>
         <div class="out">Full source menu, model layer, and matching protocol in the <a href="litepaper.html#engine">litepaper →</a></div>
       </div>
     </div>
@@ -3995,7 +4001,7 @@ body.drawer-open { overflow: hidden; }
 
         <div class="case-narrative">
           <h3>Healthy on paper, until you connect the signals.</h3>
-          <p class="clamp-mob">David sleeps seven hours, exercises four times a week, eats well. He also lives where ambient PM2.5 routinely exceeds the WHO guideline by 5×, carries an <strong>MTHFR C677T (TT)</strong> variant that blunts folate-to-5MTHF conversion (his homocysteine runs high on a "normal" diet), and an <strong>APOE ε3/ε4</strong> that makes him cardiovascularly sensitive to the air his commute pipes into his lungs. No single app sees both. VitaCrypt does.</p>
+          <p class="clamp-mob">David sleeps seven hours, exercises four times a week, eats well. He also lives where ambient PM2.5 routinely exceeds the WHO guideline by 5×, carries an <strong>MTHFR C677T (TT)</strong> variant that blunts folate-to-5MTHF conversion (his homocysteine runs high on a "normal" diet), and an <strong>APOE ε3/ε4</strong> that makes him cardiovascularly sensitive to the air his commute pipes into his lungs. We have not found a single app that sees both. VitaCrypt does.</p>
 
           <div class="insight-box">
             <div class="lbl">VitaCrypt insight</div>
@@ -4145,7 +4151,7 @@ body.drawer-open { overflow: hidden; }
 
         <div class="outcome">
           <span class="metric"><strong>Predicted</strong> · 25% lower inflammation pressure / 8 wk</span>
-          <span class="cited">PubMed +4 · Cochrane +1</span>
+          <span class="cited">PubMed +5</span>
         </div>
       </div>
 
@@ -4231,7 +4237,7 @@ body.drawer-open { overflow: hidden; }
 
         <div class="outcome">
           <span class="metric"><strong>Predicted</strong> · ApoB ≤80 in 10 weeks</span>
-          <span class="cited">PubMed +6 · Cochrane +2</span>
+          <span class="cited">PubMed +8</span>
         </div>
       </div>
     </div>
@@ -4592,7 +4598,7 @@ const stages = [
     what: [
       'Encrypted result returned to your phone',
       'Decrypted locally with your key',
-      'Cross-referenced to PubMed + Cochrane'
+      'Cross-referenced to PubMed'
     ],
     arch: { left: '', center: '', right: 'active', arrow1: '', arrow2: 'active' },
     archKeys: { left: '🔑 KEY · ON DEVICE', mid: 'CIPHERTEXT RETURN', right: '🔑 KEY · DECRYPTS' },
@@ -4601,7 +4607,7 @@ const stages = [
     phoneCards: [
       { lbl: 'INSIGHT', v: 'Inflammatory pressure detected', cls: 'glow', t: 'Inflammatory pressure detected', b: 'Your MTHFR × PM2.5 × HRV decline indicates sustained low-grade inflammation. <span class="em-teal">Methylated folate + HEPA + zone-2 cardio.</span>' },
       { lbl: 'ACTION', v: '3 today · 4 weekly', cls: '' },
-      { lbl: 'CITES', v: 'PubMed +4 · Cochrane +1', cls: '' }
+      { lbl: 'CITES', v: 'PubMed +5', cls: '' }
     ]
   }
 ];
