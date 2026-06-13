@@ -458,3 +458,16 @@ in KNOWN_ISSUES still stands on its own).
 **Deployed to production 2026-06-13** (explicit "go" from Paul): `vercel --prod` → `vitacrypt-landing-ptquvvjh9` (READY, aliased vitacrypt.xyz). Post-deploy curl: independence-led hero copy serving; "analyze them as ciphertext" / "encrypt your signals under your own key" both 0; `phone-mini-grid` HTML gone; David insight card intact; accent `nowrap` removed. `investor-page` pushed (dc99123..cd79c90).
 
 **Open (offered):** the preview tool's viewport scaling was flaky this session, so a full pixel-level mobile/tablet sweep across all sections is still available on request.
+
+## 2026-06-13 (pm-3) — investor.html + index follow-up
+
+**Context:** Targeted follow-up brief after the evidence-first reframe.
+
+**Changes (commit 7bebb4d, deployed `vitacrypt-landing-d786nxdru`, live):**
+- investor.html hiring item 1 reworded to name the three-tier evidence router + anti-fabrication guards and the source integrations that fuse signals into one profile (matches investor Brief/Memo). Hiring order (Backend/ML core -> Data eng -> Data science + fractional audit, no "central risk" on private compute) was already in place from the site-audit pass.
+- investor.html last absolute softened ("all of a person's health" -> "all of your health"); the other two were already hedged.
+- index + investor meta keywords trimmed of "fully homomorphic encryption / Zama Concrete ML / TFHE".
+- index "Exposed plaintext / at-rest encryption is marketing" reframed to a target we are built to solve ("Exposed in the clear"); residual fixed count "Six streams" in a walkthrough caption -> "Your signals".
+- Fix 3 (stale /index.html) confirmed already resolved: `/index.html` is byte-identical to the root and serves the current honest build (all old FHE markers 0).
+
+**Verified (post-deploy curl):** investor three-tier-router wording + hedged absolutes + no FHE keywords; /index.html == root (180,716 bytes), old markers all 0. `investor-page` pushed (523ec56..7bebb4d).
