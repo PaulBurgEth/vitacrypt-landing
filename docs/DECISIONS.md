@@ -443,3 +443,18 @@ in KNOWN_ISSUES still stands on its own).
 **Honesty divergence (noted):** the brief listed identifier minimization as present-day Private substance, but the build only does partial PII-labeling today, so minimization was placed in the Roadmap lane, not claimed as live (per the brief's own flag-don't-overclaim rule).
 
 **Verified:** local preview — no console errors on index or platform, walkthrough renderer works with the new evidence stages, hero carousel intact. **Deployed to production 2026-06-13** (explicit go from Paul): `vercel --prod` → `vitacrypt-landing-n0gw878sr` (dpl_64UTHjCj214X1RUzq4StpNcNzbf1), aliased vitacrypt.xyz. Post-deploy curl: evidence card + Unify/Check tabs + Today/Roadmap lanes serving; cipher card / Server view / TFHE / FHE compute / Encrypt-Compute tabs all 0; four pillars intact. `investor-page` pushed to GitHub.
+
+## 2026-06-13 (pm-2) — Hero phone-mock repair + hero subhead de-FHE'd
+
+**Context:** Paul flagged the hero's David phone mock rendering crushed/clipped (a tiny pill with a clipped "ENCR" label, no insight card).
+
+**Root cause:** `.hero h1 .accent` carried `white-space: nowrap`, forcing "in one intelligent profile." onto one unbreakable ~790px line at up to 96px. That line dictated the hero `.inner` text-column min-width, collapsing the `.hero-stage` column to ~346px and the phone-wrap to ~106px; the phone's tall content then overflowed and clipped.
+
+**Fix (commit cd79c90):**
+- Removed `white-space: nowrap` from the H1 accent → the headline wraps to its column, the stage regains its width, and the phone renders at its intended ~307–310px. Verified at 1440 (stage 547 / phone 307) and 860 (stage 600 / phone 310): content fits exactly, no overflow, no console errors.
+- Trimmed the hero phone to the cited-insight card (removed the secondary 4-tile `phone-mini-grid`); kept header → headline → PM2.5 insight ("Cited · PubMed +4 / Confidence 92%") → tab bar. (The `.phone-mini-grid` CSS rule is now unused/dead but harmless.)
+- Reframed the hero "Private by design" paragraph off FHE/ciphertext ("built to encrypt your signals under your own key and analyze them as ciphertext / blind compute proven today") to lead with independence + encrypted-at-rest, with blind compute demoted to a roadmap line + staging-proof marker. This closes the last spot where FHE was a verbal hero headline, and removes a present-tense overclaim (client-held keys are roadmap).
+
+**Deployed to production 2026-06-13** (explicit "go" from Paul): `vercel --prod` → `vitacrypt-landing-ptquvvjh9` (READY, aliased vitacrypt.xyz). Post-deploy curl: independence-led hero copy serving; "analyze them as ciphertext" / "encrypt your signals under your own key" both 0; `phone-mini-grid` HTML gone; David insight card intact; accent `nowrap` removed. `investor-page` pushed (dc99123..cd79c90).
+
+**Open (offered):** the preview tool's viewport scaling was flaky this session, so a full pixel-level mobile/tablet sweep across all sections is still available on request.
