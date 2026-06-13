@@ -429,3 +429,17 @@ in KNOWN_ISSUES still stands on its own).
 **Verified (production, cache-busted curl):** all overclaim/absolute markers at 0; corpora live-vs-roadmap serving; HIPAA-aware footers; honest-status block intact on platform + litepaper.
 
 **Flagged, not changed (out of brief scope):** litepaper §engine "the model has no access to … user data" (accurate for the research-watch agent; revisit if that section is ever tightened).
+
+## 2026-06-13 (pm) — Evidence-first visual reframe shipped (definitive brief)
+
+**Context:** A fourth brief (Evidence-First Reframe) declared itself the single source of truth, superseding WP-1 / Surgical D4 / Site Audit, and resolved their FHE contradiction: keep all four pillars, but FHE leaves the visual/verbal headline (it provides no privacy today, master key is server-side, live FHE is a synthetic demo). Evidence + unified profile lead; FHE becomes one roadmap line + a small staging-proof marker.
+
+**What changed (commit 2aa7fdd):**
+- index hero: the "Server view / ciphertext / mathematical noise" card swapped for an **Evidence-engine card** (claim → real PubMed citations → grade → honest "no strong evidence yet"). Dead `cipherLoop` JS removed; hero stays a 2-card mobile carousel (profile + evidence), so `heroDots` untouched.
+- index stat row: dropped "~0.5s blind compute" and "TFHE / Compute on ciphertext"; added "5 live evidence corpora" and "0 fabricated citations"; kept ~40M. The ~0.5s staging proof survives only as a demoted footnote in the privacy-moat line.
+- index walkthrough: spine COLLECT/ENCRYPT/COMPUTE/ACT → **COLLECT/UNIFY/CHECK/ACT**; `stages[]` data + arch diagram reframed from ciphertext to retrieve/grade/cite; encryption reduced to one annotation ("encrypted at rest; blind compute on the roadmap"). Renderer (`applyStage`) untouched; only string values changed.
+- platform pillar 04 boundary → **Today / Roadmap** lanes (today: encrypted at rest, per-user keys rolling out, independence, disclosed providers; roadmap: tighter identifier minimization, client-held keys, blind compute). Honest-status block kept. Pillar 02 gained an honest "no strong evidence" example.
+
+**Honesty divergence (noted):** the brief listed identifier minimization as present-day Private substance, but the build only does partial PII-labeling today, so minimization was placed in the Roadmap lane, not claimed as live (per the brief's own flag-don't-overclaim rule).
+
+**Verified:** local preview — no console errors on index or platform, walkthrough renderer works with the new evidence stages, hero carousel intact. **Deployed to production 2026-06-13** (explicit go from Paul): `vercel --prod` → `vitacrypt-landing-n0gw878sr` (dpl_64UTHjCj214X1RUzq4StpNcNzbf1), aliased vitacrypt.xyz. Post-deploy curl: evidence card + Unify/Check tabs + Today/Roadmap lanes serving; cipher card / Server view / TFHE / FHE compute / Encrypt-Compute tabs all 0; four pillars intact. `investor-page` pushed to GitHub.
