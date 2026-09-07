@@ -1,23 +1,30 @@
 # VitaCrypt Landing
 
-Landing page for **[VitaCrypt](https://vitacrypt.xyz)** — Personal Health Intelligence with Blind Computing (FHE).
+Landing page for **[VitaCrypt](https://vitacrypt.xyz)** — Personal Health Intelligence, private by design.
 
 **Live:** [vitacrypt.xyz](https://vitacrypt.xyz)
 
 ## About VitaCrypt
 
-The only consumer app creating your unified health personal profile by securely integrating real-time environmental data, genetics, wearables, and lifestyle — powered by **Fully Homomorphic Encryption (FHE)** and **Blind Computing**.
+VitaCrypt builds a unified health profile from environmental data, genetics, wearables, labs and self-reports, and answers questions against it.
 
-Your data stays encrypted, even during computation. Even we can't see it.
+Data is encrypted at rest under per-user keys. The master key is still server-side, so the platform is not blind today. A standalone blind-compute proof runs on Zama Concrete ML (client-held key, server computes on ciphertext alone); production blind compute is on the roadmap.
 
 ### What makes it different
 
 | | Traditional Apps | VitaCrypt |
 |---|---|---|
-| Encryption | At rest only | FHE + Blind Computing |
+| Encryption | At rest, vendor-held keys | At rest, per-user keys |
 | Personalization | Generic segments | Unified Profile, hyper-personalized |
 | Data Ownership | Company owned | User-controlled |
 | Intelligence | Siloed analysis | Real-time bio-environmental |
+
+## Status of this repository
+
+⚠️ This repository is the **June 2026 snapshot** of the landing page and no longer
+matches the live site at vitacrypt.xyz. The HTML here still carries the old
+present-tense FHE copy; the live site does not. Treat the site as the source of
+truth until this repository is resynced.
 
 ## Stack
 
